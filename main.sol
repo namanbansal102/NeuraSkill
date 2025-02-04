@@ -54,7 +54,28 @@ contract compete {
     // now build created successfully
     }
     function submitbuild (uint _hack_id,uint _project_id) public {
+        // for submitting build in my hacakthon project
         hack_map[_hack_id].push(_project_id);
     }
+
+    function getallbuilds() public view returns(build[] memory ) {
+        // for getting all builds
+        uint len=userbuilds_map[msg.sender].length;
+        build[] memory my_builds=new build[](len);
+        for (uint i = 0; i <len; i++) {
+            my_builds[i]=build_arr[userbuilds_map[msg.sender][i]];// push
+        }
+        return my_builds;
+    }
+
+    function get_hack_builds(uint _hack_id)public view  returns (build[] memory) {
+        uint len=hack_map[_hack_id].length;
+        build[] memory my_builds=new build[](len);
+        for (uint i = 0; i < len; i++) {
+            my_builds[i]=build_arr[hack_map[_hack_id][i]];
+        }
+        return my_builds;
+    }
+    public view 
     // we also have to store the login timehistory
 }
