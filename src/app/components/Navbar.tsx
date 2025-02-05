@@ -36,7 +36,7 @@ export default function Navbar() {
               height={40}
               className="rounded-full"
             />
-            <span className="text-white text-xl font-semibold">OpenSea</span>
+            <span className="text-white text-xl font-semibold">NeuraSkill</span>
           </div>
 
           {/* Navigation Items */}

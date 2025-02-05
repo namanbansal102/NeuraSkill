@@ -134,6 +134,14 @@ export default function NFTDetails() {
           >
             Submit Build
           </motion.button>
+          <motion.button
+            {...glowEffect}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full py-4 bg-gradient-to-r from-blue-600  to-purple-600 rounded-xl font-bold text-lg shadow-lg"
+          >
+            Create Build
+          </motion.button>
         </motion.div>
       </div>
       <center>

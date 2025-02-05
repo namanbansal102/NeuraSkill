@@ -3,7 +3,7 @@
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    domains: ['res.cloudinary.com','cdn.dorahacks.io'],
+    domains: ['res.cloudinary.com','cdn.dorahacks.io','aceternity.com'],
     
   },
 };
