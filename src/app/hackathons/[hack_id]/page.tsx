@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { Heart, Eye, Share2, MoreHorizontal } from "lucide-react"
 import { useState } from "react"
+import { CarouselDemo } from "./carouse."
 
 export default function NFTDetails() {
   const [isFavorited, setIsFavorited] = useState(false)
@@ -36,7 +37,7 @@ export default function NFTDetails() {
         <motion.div {...fadeIn} className="rounded-2xl overflow-hidden border border-gray-800">
           <img
             src="https://i.seadn.io/gae/WzLu2XrkTLS1yZU_AcYp0HHDWYPUhc7lGhwa8Ho39WP2RfJrV0GtaNrmPWK0o5mYbPnV-60VSoYIEYrf9cHS77Vnd_3dYm0h2bW5GA?auto=format&dpr=1&w=1000"
-            alt="Lunic Moon Gang #14"
+            alt="Clash Of Codes 2.0"
             className="w-full h-auto"
           />
         </motion.div>
@@ -128,12 +129,13 @@ export default function NFTDetails() {
             {...glowEffect}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="w-full py-4 bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 rounded-xl font-bold text-lg shadow-lg"
+            className="w-full py-4 bg-gradient-to-r from-blue-600  to-purple-600 rounded-xl font-bold text-lg shadow-lg"
           >
             Submit Build
           </motion.button>
         </motion.div>
       </div>
+      <CarouselDemo></CarouselDemo>
     </div>
   )
 }
