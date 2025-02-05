@@ -19,7 +19,6 @@
         string st_date;
         string end_date;
         string mode; 
-        uint funding;
     }
     struct build {
         address payable build_owner;
@@ -45,8 +44,9 @@
     mapping (uint=> uint[]) hack_map;// this contains the hackathon id
     build[] public build_arr;
 
-        function registerHackathon(string memory _title,string memory _img_url,string memory _desc,uint  _prizePool,string memory _st_date,string memory _end_date,string memory _mode,uint _nAwards,uint[] memory _prizePoolArray)  public {
-            hackathons_arr.push(hacakthon(hack_id,msg.sender,_title,_img_url,_desc,_prizePool,_nAwards,_prizePoolArray,_st_date,_end_date,_mode,0));
+        function registerHackathon(string memory _title,string memory _img_url,string memory _desc,uint  _prizePool,string memory _st_date,string memory _end_date,string memory _mode,uint _nAwards,uint[] memory _prizePoolArray)  external payable {
+            require(msg.value>=_prizePool,"Must Provide a Prize Pool");
+            hackathons_arr.push(hacakthon(hack_id,msg.sender,_title,_img_url,_desc,_prizePool,_nAwards,_prizePoolArray,_st_date,_end_date,_mode));
             hack_id++;
         }
 
@@ -55,7 +55,7 @@
         }
 
         function createBuild(string memory _name,string memory _techStack,string memory _desc,string memory _video_url,string  memory _github_id,address[] memory _addresses) public  {
-            build_arr[project_id]=build(
+            build_arr.push(build(
                 payable(msg.sender),
             project_id,
             0,
@@ -65,7 +65,7 @@
             _video_url,
             _github_id,
             _addresses
-        );
+        ));
         userbuilds_map[msg.sender].push(project_id);
         project_id++;
         // now build created successfully
@@ -100,14 +100,13 @@
             for (uint256 i = 0; i < pairs_array.length; i++) {
                 if (pairs_array[i].project_id==_project_id) {
                 require(msg.value>=2,"Must Send Ether 1");
-                    pairs_array[i].upvotes++;
+                    hack_upvotes_map[_hack_id][i].upvotes++;
                     emit deposit(msg.sender, msg.value);
                     pairs_array[i].upvoters.push(payable(msg.sender));
                     break;
                 }
             }// update my array globally
-            build memory my_build=build_arr[_project_id];
-            my_build.upvotes++;
+            build_arr[_project_id].upvotes++;
         }
         function getAllWinners(uint _hack_id) public view returns(pair[] memory) {
             uint nAwards=hackathons_arr[_hack_id].nAwards;
@@ -116,7 +115,7 @@
             // we have to find top nAwards of my project
             for (uint i = 0; i < my_pairs_array.length-1; i++) {
                 for (uint j = i+1; j < my_pairs_array.length; j++) {
-                    if(my_pairs_array[i].upvotes>my_pairs_array[j].upvotes){
+                    if(my_pairs_array[i].upvotes<my_pairs_array[j].upvotes){
                         // then swap them
                         pair memory temp_pair=my_pairs_array[i];
                         my_pairs_array[i]=my_pairs_array[j];
@@ -169,7 +168,9 @@
                 }
             }
     // now marking the hacakthon end as true
+            hackathons_arr[_hack_id].mode="ENDED";
 
-
+        // now my function has ended
+        // we should also add the prize pool function
         }
     }
