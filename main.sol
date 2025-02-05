@@ -4,6 +4,7 @@
     contract compete {
         struct pair{
             uint project_id;
+            address[] upvoters;// this are the address of upvoters 
             uint upvotes;
         }
     struct build {
@@ -17,6 +18,7 @@
         address[] team;// first is the owner of the team
     }
     mapping (address => uint[]) userbuilds_map;
+    // mapping(hack_id=>address[]) 
     event deposit(address sender,uint amount);
     struct hacakthon {
         uint hack_id;
@@ -65,7 +67,7 @@
         function submitbuild (uint _hack_id,uint _project_id) public {
             // for submitting build in my hacakthon project
             hack_map[_hack_id].push(_project_id);
-            hack_upvotes_map[_hack_id].push(pair(_project_id,0));
+            hack_upvotes_map[_hack_id].push(pair(_project_id,new address,0));
         }
 
         function getallbuilds() public view returns(build[] memory ) {
@@ -93,6 +95,7 @@
                 require(msg.value>=2,"Must Send Ether 1");
                     pairs_array[i].upvotes++;
                     emit deposit(msg.sender, msg.value);
+                    pairs_array[i].upvoters.push(msg.sender);
                     break;
                 }
             }
