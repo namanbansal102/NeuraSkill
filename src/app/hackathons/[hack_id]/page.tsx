@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { Heart, Eye, Share2, MoreHorizontal } from "lucide-react"
 import { useState } from "react"
 import { CarouselDemo } from "./carouse."
+import { CardHoverEffectDemo } from "./CardHoverEffectDemo"
 
 export default function NFTDetails() {
   const [isFavorited, setIsFavorited] = useState(false)
@@ -135,6 +136,15 @@ export default function NFTDetails() {
           </motion.button>
         </motion.div>
       </div>
+      <center>
+      <h1 className="text-white text-5xl mt-10 font-bold">Our Latest 
+        <span className="text-blue-600">
+            
+            {" "}Builds
+            </span> 
+            </h1>
+      </center>
+      <CardHoverEffectDemo></CardHoverEffectDemo>
       <CarouselDemo></CarouselDemo>
     </div>
   )
