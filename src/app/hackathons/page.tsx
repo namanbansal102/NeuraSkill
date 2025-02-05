@@ -8,7 +8,7 @@ const drops = [
   {
     id: 1,
     title: "Felly - Sweet Unknowns",
-    image: "/placeholder.svg?height=400&width=400",
+    image: "https://cdn.dorahacks.io/static/files/1941788c833a4d3a8cad9ca4c7695823.png",
     minting: "Now",
     price: "0.25 ETH",
     isOnchain: true,
@@ -85,7 +85,7 @@ export default function DropsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             whileHover={{ scale: 1.02 }}
-            className="group relative bg-gray-900 rounded-xl overflow-hidden cursor-pointer border-2 border-white"
+            className="group relative bg-gray-900 rounded-xl overflow-hidden cursor-pointer "
           >
             {/* Image */}
             <div className="aspect-[4/3] relative overflow-hidden">

@@ -10,7 +10,7 @@ import { TypewriterEffectSmoothDemo } from "./effect"
 import toast from "react-hot-toast"
 
 const web3 = new Web3(window.ethereum)
-const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD
+const contractAdd = "0xB3145Ee03D204379d02ed6AdB7d675F3dE7f0f03"
 const contract = new web3.eth.Contract(ABI, contractAdd)
 
 interface Trait {
@@ -112,18 +112,19 @@ export default function CreateNFT() {
         method: "eth_requestAccounts",
       })
       const userAddress = accounts[0]
-
+      console.log("My User Address is::::"+userAddress);
+      
       // Convert prize amounts to wei
       const prizePoolWei = web3.utils.toWei(formData.prizePool, "ether")
       const prizePoolArray = prizes.map((prize) => web3.utils.toWei(prize.amount, "ether"))
 
       // Calculate total prize pool
-      const totalPrizePool = prizePoolArray.reduce((a, b) => web3.utils.toBN(a).add(web3.utils.toBN(b)), web3.utils.toBN(0))
+      // const totalPrizePool = prizePoolArray.reduce((a, b) => web3.utils.toBN(a).add(web3.utils.toBN(b)), web3.utils.toBN(0))
 
-      // Verify total matches prize pool
-      if (totalPrizePool.toString() !== web3.utils.toBN(prizePoolWei).toString()) {
-        throw new Error("Total of individual prizes must equal the prize pool")
-      }
+      // // Verify total matches prize pool
+      // if (totalPrizePool.toString() !== web3.utils.toBN(prizePoolWei).toString()) {
+      //   throw new Error("Total of individual prizes must equal the prize pool")
+      // }
 
       const imageUrl = URL.createObjectURL(file)
 
