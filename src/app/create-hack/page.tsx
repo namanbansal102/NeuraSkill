@@ -125,10 +125,6 @@ export default function CreateNFT() {
       console.log(prizePoolWei);
       console.log(prizePoolArray);
       console.log(typeof formData.totalPrizes);
-      
-      
-      
-      
       // Calculate total prize pool
       // const totalPrizePool = prizePoolArray.reduce((a, b) => web3.utils.toBN(a).add(web3.utils.toBN(b)), web3.utils.toBN(0))
 
