@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import Web3 from "web3"
+import { PinataSDK } from "pinata";
 import { FileUpload } from "../components/file-upload"
 import { TraitInput } from "../components/trait-input"
 import ABI from "../ABI.json"
@@ -10,7 +11,10 @@ import { TypewriterEffectSmoothDemo } from "./effect"
 import toast from "react-hot-toast"
 import { FaGithub, FaEthereum } from "react-icons/fa"
 import Image from "next/image"
-
+const pinata = new PinataSDK({
+  pinataJwt: process.env.NEXT_PUBLIC_PINATA_KEY,
+  pinataGateway: "example-gateway.mypinata.cloud",
+});
 const web3 = new Web3(window.ethereum)
 const contractAdd = "0x704a1a668207407E5667AFfC402641F1aE2196da"
 
@@ -110,11 +114,11 @@ export default function CreateNFT() {
       const userAddress = accounts[0]
       
       const imageUrl = URL.createObjectURL(file)
-
+      const pinataHash=await pinata.upload.file(file);
       const tx = await contract.methods
         .createBuild(
           formData.name,
-          "",
+          pinataHash.cid,
           formData.techStack,
           formData.description,
           formData.mode,
