@@ -26,11 +26,11 @@ const page = () => {
   return (
     <div className='mt-16 pt-5'>
       <TypewriterEffectSmoothDemo></TypewriterEffectSmoothDemo>
-      {build_data.length==0 &&
+      {build_data.length!=0 &&
       <BentoGridDemo props={build_data}></BentoGridDemo>
       }
       {
-        build_data.length!=0 && 
+        build_data.length==0 && 
         <div>
           <center className='text-4xl mt-24'>
             There Are No Builds To Show

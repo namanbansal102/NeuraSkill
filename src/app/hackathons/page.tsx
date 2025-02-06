@@ -7,6 +7,7 @@ import ABI from "../ABI.json";
 import Image from "next/image"
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import fetchImageUrl from "../components/fetchImageUrl";
 const web3 = new Web3(window.ethereum)
 const contractAdd = "0x704a1a668207407E5667AFfC402641F1aE2196da"
 
@@ -80,7 +81,7 @@ export default function DropsPage() {
             {/* Image */}
             <div className="aspect-[4/3] relative overflow-hidden">
               <Image
-                src={img_url || "/placeholder.svg"}
+                src={fetchImageUrl(img_url) || "/placeholder.svg"}
                 alt={title}
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-110"

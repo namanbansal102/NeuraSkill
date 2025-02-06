@@ -2,18 +2,94 @@
 
 import { motion } from "framer-motion"
 import { Heart, Eye, Share2, MoreHorizontal } from "lucide-react"
-import { useState } from "react"
+import { use, useState } from "react"
 import Web3 from "web3"
 import { CarouselDemo } from "./carouse."
 import { CardHoverEffectDemo } from "./CardHoverEffectDemo"
-import ABI from "../../ABI.json"
+import ABI from "../../../../ABI.json"
+import { useParams, useRouter, useSearchParams } from "next/navigation"
+import toast from "react-hot-toast"
 const web3 = new Web3(window.ethereum)
 const contractAdd = "0x704a1a668207407E5667AFfC402641F1aE2196da"
 const contract = new web3.eth.Contract(ABI, contractAdd)
+interface build_details {
+  upvotes:number,
+  name:string,
+  techStack:string,
+  desc:string,
+  video_url:string,
+  github_id:string,
+  team:[string]
+}
 export default function NFTDetails() {
-  const upvoteProject=async ()=>{
-    console.log("UpVote Project is Running ");
-    // const tx=await contract.
+  const searchParams=useParams();
+  const [hack_details, setHack_details] = useState<build_details>({
+    upvotes:0,
+    name:"",
+    techStack:"",
+    desc:"",
+    video_url:"",
+    github_id:"",
+    team:[""]
+  })
+  console.log("My Params are::::",searchParams);
+  const fetchBuild=async ()=>{
+    try{
+      const project_id=Number(searchParams.project_id);
+      const build_data=await contract.methods.fetch_build(project_id).call()
+    }
+    catch(error){
+      toast.error(error)
+    }
+  }
+  const upvoteProjects=async ()=>{
+    try {
+      console.log("UpVote Projects is Running");
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      })
+      const userAddress = accounts[0]
+      const hack_id=Number(searchParams.hack_id);
+      const project_id=Number(searchParams.project_id);
+      const tx=await contract.methods.upvoteProject(hack_id,project_id).send({
+        from:userAddress,
+        value: 2,
+        gasLimit: 3000000,
+
+      })
+      console.log("My Transaction is::::::",tx);
+      
+    
+    } catch (error) {
+      toast.error(error);
+    }
+    
+    
+  }
+  const handleSubmitBuild=async ()=>{
+    try{
+
+      console.log("UpVote Project is Running ");
+      const hack_id=Number(searchParams.hack_id);
+      const project_id=Number(searchParams.project_id);
+      const tx=await contract.methods.submitbuild(hack_id,project_id).send(
+        {
+          from:userAddress
+        }
+      )
+      console.log("My Transaction is::::::::::",tx);
+      
+      // const router=useRouter();
+      toast.success("Build Registered Successfully.")
+    }
+
+    catch(err){
+      console.log("Error is:::",err);
+      toast.error(err)
+      
+    }
+  
+    
     
   }
   const [isFavorited, setIsFavorited] = useState(false)
@@ -108,6 +184,7 @@ export default function NFTDetails() {
                 {...glowEffect}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
+                onClick={upvoteProjects}
                 className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-semibold"
               >
                 Upvote
@@ -149,9 +226,10 @@ export default function NFTDetails() {
             {...glowEffect}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
+            onClick={handleSubmitBuild}
             className="w-full py-4 bg-gradient-to-r from-blue-600  to-purple-600 rounded-xl font-bold text-lg shadow-lg"
           >
-           Upvote Project
+           Submit Build
           </motion.button>
       
         </motion.div>

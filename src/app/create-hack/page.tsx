@@ -2,13 +2,17 @@
 
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
+import { PinataSDK } from "pinata";
 import Web3 from "web3"
 import { FileUpload } from "../components/file-upload"
 import { TraitInput } from "../components/trait-input"
 import ABI from "../ABI.json";
 import { TypewriterEffectSmoothDemo } from "./effect"
 import toast from "react-hot-toast"
-
+const pinata = new PinataSDK({
+  pinataJwt: process.env.NEXT_PUBLIC_PINATA_KEY,
+  pinataGateway: "example-gateway.mypinata.cloud",
+});
 const web3 = new Web3(window.ethereum)
 const contractAdd = "0x704a1a668207407E5667AFfC402641F1aE2196da"
 
@@ -58,7 +62,8 @@ export default function CreateNFT() {
   const [prizes, setPrizes] = useState<Prize[]>([{ id: "0", amount: "0" }])
   const [formData, setFormData] = useState<FormData>(initialFormData)
   const [isSubmitting, setIsSubmitting] = useState(false)
-
+  
+  
   useEffect(() => {
     const totalPrizes = formData.totalPrizes
     setPrizes((prevPrizes) => {
@@ -97,6 +102,8 @@ export default function CreateNFT() {
   
 
   const handleSubmit = async () => {
+    
+    
     if (typeof window.ethereum === "undefined") {
       toast.error("Please install MetaMask to continue")
       return
@@ -136,7 +143,9 @@ export default function CreateNFT() {
       console.log("My Prize pool wei is:::",prizePoolArray);
       
       const imageUrl = URL.createObjectURL(file)
-
+      // const pinataHash=await pinata.upload.file(file);
+      // console.log("My Pinata hash is:::::::",pinataHash.cid);
+      
       // Call contract function
       const tx = await contract.methods
         .registerHackathon(
@@ -152,8 +161,7 @@ export default function CreateNFT() {
         )
         .send({
           from: userAddress,
-          value: prizePoolWei,
-          gasLimit: 3000000,
+           
         })
 
       toast.success("Hackathon registered successfully!")
@@ -169,6 +177,9 @@ export default function CreateNFT() {
   return (
     <div className="flex bg-[#04111d]">
       <div className="w-[50vw] mt-40 px-6">
+        <button className="bg-white" onClick={()=>{
+          console.log("My pinata hash key::::",process.env.NEXT_PUBLIC_PINATA_KEY);
+        }}>fdfdfdfd</button>
         <TypewriterEffectSmoothDemo />
         <FileUpload onFileSelect={setFile} />
       </div>
@@ -191,11 +202,7 @@ export default function CreateNFT() {
                   <span className="text-lg">+</span>
                   Create a new collection
                 </motion.button>
-              </div>
-    <button className="bg-white" onClick={()=>{
-    }}>
-      Get Prize pool
-    </button>
+              </div>......
               {/* Form Fields */}
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
                 <label className="block mb-2">

@@ -56,7 +56,7 @@
 
         function createBuild(string memory _name,string memory _techStack,string memory _desc,string memory _video_url,string  memory _github_id,address[] memory _addresses) public  {
             build_arr.push(build(
-                payable(msg.sender),
+            payable(msg.sender),
             project_id,
             0,
             _name,
@@ -71,7 +71,16 @@
         // now build created successfully
         }
         function submitbuild (uint _hack_id,uint _project_id) public {
-            // for submitting build in my hacakthon project
+            bool isOwner=false;
+            for (uint i = 0; i < userbuilds_map[msg.sender].length; i++) {
+                if (userbuilds_map[msg.sender][i]==_project_id) {
+                    isOwner=true;
+                }
+            }
+            require(isOwner==true,"Not The Owner Of Project");
+
+            // also check if it is already submitted Project
+            // build[] memory builds_fetch=get_hack_builds(_hack_id);
             address payable[] memory my_add;
             hack_map[_hack_id].push(_project_id);
             hack_upvotes_map[_hack_id].push(pair(_project_id,my_add,0));
@@ -86,6 +95,13 @@
             }
             return my_builds;
         }
+        function fetch_build(uint _project_id)public view returns(build memory){
+            return build_arr[_project_id];
+        }
+
+        function fetch_hackathon(uint _hack_id) public view returns(hacakthon memory){
+            return hackathons_arr[_hack_id];
+        }
 
         function get_hack_builds(uint _hack_id)public view  returns (build[] memory) {
             uint len=hack_map[_hack_id].length;
@@ -99,10 +115,10 @@
             pair[] storage pairs_array=hack_upvotes_map[_hack_id];
             for (uint256 i = 0; i < pairs_array.length; i++) {
                 if (pairs_array[i].project_id==_project_id) {
-                require(msg.value>=2,"Must Send Ether 1");
+                require(msg.value>=1,"Must Send Ether 1");
                     hack_upvotes_map[_hack_id][i].upvotes++;
                     emit deposit(msg.sender, msg.value);
-                    pairs_array[i].upvoters.push(payable(msg.sender));
+                    hack_upvotes_map[_hack_id][i].upvoters.push(payable(msg.sender));
                     break;
                 }
             }// update my array globally
