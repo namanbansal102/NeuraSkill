@@ -5,13 +5,15 @@ import { motion } from "framer-motion"
 import Web3 from "web3"
 import { FileUpload } from "../components/file-upload"
 import { TraitInput } from "../components/trait-input"
-import ABI from "../ABI.json"
+import ABI from "../ABI.json";
 import { TypewriterEffectSmoothDemo } from "./effect"
 import toast from "react-hot-toast"
 
 const web3 = new Web3(window.ethereum)
-const contractAdd = "0xB3145Ee03D204379d02ed6AdB7d675F3dE7f0f03"
-const contract = new web3.eth.Contract(ABI, contractAdd)
+const contractAdd = "0x704a1a668207407E5667AFfC402641F1aE2196da"
+
+const contract = new web3.eth.Contract(ABI , contractAdd)
+console.log("My Contract is::::::::0",contract);
 
 interface Trait {
   id: string
@@ -47,7 +49,7 @@ const initialFormData: FormData = {
   endDate: "",
   mode: "online",
   prizePool: "0",
-  totalPrizes: 1,
+  totalPrizes: 0,
 }
 
 export default function CreateNFT() {
@@ -100,10 +102,10 @@ export default function CreateNFT() {
       return
     }
 
-    if (!formData.name || !formData.description || !file) {
-      toast.error("Please fill in all required fields")
-      return
-    }
+    // if (!formData.name || !formData.description || !file) {
+    //   toast.error("Please fill in all required fields")
+    //   return
+    // }
 
     setIsSubmitting(true)
 
@@ -115,9 +117,18 @@ export default function CreateNFT() {
       console.log("My User Address is::::"+userAddress);
       
       // Convert prize amounts to wei
-      const prizePoolWei = web3.utils.toWei(formData.prizePool, "ether")
-      const prizePoolArray = prizes.map((prize) => web3.utils.toWei(prize.amount, "ether"))
-
+      console.log("My formdata prize pool is::::",formData.prizePool);
+      
+      const prizePoolWei = Number(web3.utils.toWei(formData.prizePool, "ether"))
+      const prizePoolArray = prizes.map((prize) =>Number(web3.utils.toWei(prize.amount, "ether")))
+      console.log("My FormData is::::::",formData);
+      console.log(prizePoolWei);
+      console.log(prizePoolArray);
+      console.log(typeof formData.totalPrizes);
+      
+      
+      
+      
       // Calculate total prize pool
       // const totalPrizePool = prizePoolArray.reduce((a, b) => web3.utils.toBN(a).add(web3.utils.toBN(b)), web3.utils.toBN(0))
 
@@ -125,7 +136,9 @@ export default function CreateNFT() {
       // if (totalPrizePool.toString() !== web3.utils.toBN(prizePoolWei).toString()) {
       //   throw new Error("Total of individual prizes must equal the prize pool")
       // }
-
+      console.log("My Prize pool wei is:::",prizePoolWei);
+      console.log("My Prize pool wei is:::",prizePoolArray);
+      
       const imageUrl = URL.createObjectURL(file)
 
       // Call contract function
@@ -183,7 +196,10 @@ export default function CreateNFT() {
                   Create a new collection
                 </motion.button>
               </div>
-
+    <button className="bg-white" onClick={()=>{
+    }}>
+      Get Prize pool
+    </button>
               {/* Form Fields */}
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
                 <label className="block mb-2">
@@ -200,7 +216,7 @@ export default function CreateNFT() {
 
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
                 <label className="block mb-2">
-                  Prize Pool (ETH) <span className="text-red-500">*</span>
+                  Prize Pool (We have to pass value in ether) <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -269,8 +285,8 @@ export default function CreateNFT() {
                 <input
                   type="number"
                   value={formData.totalPrizes}
-                  onChange={(e) => handleInputChange("totalPrizes", Math.max(1, parseInt(e.target.value) || 1))}
-                  min="1"
+                  onChange={(e) => handleInputChange("totalPrizes", Math.max(0, parseInt(e.target.value) || 0))}
+                  min="0"
                   className="w-full bg-white/5 border border-gray-800 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </motion.div>
