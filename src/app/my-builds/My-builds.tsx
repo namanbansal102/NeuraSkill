@@ -11,16 +11,18 @@ import {
   IconTableColumn,
 } from "@tabler/icons-react";
 
-export function BentoGridDemo() {
+export function BentoGridDemo({props}:any) {
+    console.log("my Props are::::",props);
+    
   return (
     <BentoGrid className="max-w-4xl mx-auto bg-black">
-      {items.map((item, i) => (
+      {props.map(({name,project_id,desc,github_id,video_url,techStack}:any) => (
         <BentoGridItem
-          key={i}
-          title={item.title}
-          description={item.description}
-          header={item.header}
-          icon={item.icon}
+          key={project_id}
+          title={name}
+          description={desc}
+          header={github_id}
+          icon={techStack}
         />
       ))}
     </BentoGrid>
