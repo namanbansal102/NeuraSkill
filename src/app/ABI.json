@@ -324,6 +324,148 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
+				"name": "_project_id",
+				"type": "uint256"
+			}
+		],
+		"name": "fetch_build",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address payable",
+						"name": "build_owner",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "project_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "upvotes",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "techStack",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "desc",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "video_url",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "github_id",
+						"type": "string"
+					},
+					{
+						"internalType": "address[]",
+						"name": "team",
+						"type": "address[]"
+					}
+				],
+				"internalType": "struct compete.build",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_hack_id",
+				"type": "uint256"
+			}
+		],
+		"name": "fetch_hackathon",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "hack_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "hack_owner",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "img_url",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "desc",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "prizePool",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "nAwards",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "prize_pool_array",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "string",
+						"name": "st_date",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "end_date",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "mode",
+						"type": "string"
+					}
+				],
+				"internalType": "struct compete.hacakthon",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
 				"name": "_hack_id",
 				"type": "uint256"
 			}

@@ -15,7 +15,7 @@ export function BentoGridDemo({props}:any) {
     console.log("my Props are::::",props);
     
   return (
-    <BentoGrid className="max-w-4xl mx-auto bg-black">
+    <BentoGrid className="max-w-4xl mx-auto bg-[#04111d] mb-10">
       {props.map(({name,project_id,desc,github_id,video_url,techStack}:any) => (
         <BentoGridItem
           key={project_id}

@@ -14,7 +14,7 @@ const pinata = new PinataSDK({
   pinataGateway: "example-gateway.mypinata.cloud",
 });
 const web3 = new Web3(window.ethereum)
-const contractAdd = "0x704a1a668207407E5667AFfC402641F1aE2196da"
+const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD;
 
 const contract = new web3.eth.Contract(ABI , contractAdd)
 console.log("My Contract is::::::::0",contract);
@@ -162,6 +162,8 @@ export default function CreateNFT() {
         .send({
           from: userAddress,
            
+          value: prizePoolWei,
+          gasLimit: 3000000,
         })
 
       toast.success("Hackathon registered successfully!")
@@ -177,9 +179,6 @@ export default function CreateNFT() {
   return (
     <div className="flex bg-[#04111d]">
       <div className="w-[50vw] mt-40 px-6">
-        <button className="bg-white" onClick={()=>{
-          console.log("My pinata hash key::::",process.env.NEXT_PUBLIC_PINATA_KEY);
-        }}>fdfdfdfd</button>
         <TypewriterEffectSmoothDemo />
         <FileUpload onFileSelect={setFile} />
       </div>

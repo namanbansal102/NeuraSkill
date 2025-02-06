@@ -10,7 +10,7 @@ import ABI from "../../../../ABI.json"
 import { useParams, useRouter, useSearchParams } from "next/navigation"
 import toast from "react-hot-toast"
 const web3 = new Web3(window.ethereum)
-const contractAdd = "0x704a1a668207407E5667AFfC402641F1aE2196da"
+const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD;
 const contract = new web3.eth.Contract(ABI, contractAdd)
 interface build_details {
   upvotes:number,

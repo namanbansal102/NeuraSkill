@@ -16,7 +16,7 @@ const pinata = new PinataSDK({
   pinataGateway: "example-gateway.mypinata.cloud",
 });
 const web3 = new Web3(window.ethereum)
-const contractAdd = "0x704a1a668207407E5667AFfC402641F1aE2196da"
+const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD;
 
 const contract = new web3.eth.Contract(ABI, contractAdd)
 
@@ -118,10 +118,10 @@ export default function CreateNFT() {
       const tx = await contract.methods
         .createBuild(
           formData.name,
-          pinataHash.cid,
           formData.techStack,
           formData.description,
-          formData.mode,
+          pinataHash.cid,
+          formData.projectGithub,
           teamMembers.map(member => member.address)
         )
         .send({

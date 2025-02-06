@@ -7,7 +7,7 @@ const fetchImageUrl=async(cid:any)=>{
     try {
   
       const url = await pinata.gateways.createSignedURL({
-         gateway:"jade-added-egret-280.mypinata.cloud",
+        gateway:"violet-wrong-herring-709.mypinata.cloud",
          cid: cid,
           expires: 1800000000000,
       })

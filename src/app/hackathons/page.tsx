@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import fetchImageUrl from "../components/fetchImageUrl";
 const web3 = new Web3(window.ethereum)
-const contractAdd = "0x704a1a668207407E5667AFfC402641F1aE2196da"
+const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD;
 
 const contract = new web3.eth.Contract(ABI , contractAdd)
 console.log("My Contract is::::",contract);
