@@ -143,14 +143,14 @@ export default function CreateNFT() {
       console.log("My Prize pool wei is:::",prizePoolArray);
       
       const imageUrl = URL.createObjectURL(file)
-      // const pinataHash=await pinata.upload.file(file);
+      const pinataHash=await pinata.upload.file(file);
       // console.log("My Pinata hash is:::::::",pinataHash.cid);
       
       // Call contract function
       const tx = await contract.methods
         .registerHackathon(
           formData.name,
-          "",
+          pinataHash.cid,
           formData.description,
           prizePoolWei,
           formData.startDate,

@@ -23,12 +23,31 @@ export default function DropsPage() {
     try{
       console.log("Fetch hacakthons calling");
 
-      const fetch_hackathon=await contract.methods.allHackathons().call();
-      console.log("My Hackathons Fetched Are::::",fetch_hackathon);
-      setHackathons_arr(fetch_hackathon)
+      let fetch_hackathon=await contract.methods.allHackathons().call();
+      // console.log("my fetch hacakthon is::::",fetch_hackathon[0])  ;
       
+      let arr:any=[];
+      console.log("My Hackathons Fetched Are::::",fetch_hackathon);
+      for (let i = 0; i < fetch_hackathon.length; i++) {
+        let element = fetch_hackathon[i];
+        // let url=await fetchImageUrl(fetch_hackathon[i].img_url);;
+        let obj={
+          hack_id:element[0],
+          title:element[2],
+          imgUrl:element[3],
+          prizePool:element[5],
+          st_date:element[8],
+          desc:element[4],
+          end_date:element[9]
+        }
+        console.log("My Element is:::",obj);
+        
+        arr.push(obj);
+      }
+      setHackathons_arr(arr);
     }
     catch(error){
+      console.log(error);
       
       toast.error("Error Fetching Hackathons");
     }
@@ -80,7 +99,7 @@ export default function DropsPage() {
             {/* Image */}
             <div className="aspect-[4/3] relative overflow-hidden">
               <Image
-                src={fetchImageUrl(img_url) || "/placeholder.svg"}
+                src={ "/placeholder.svg"}
                 alt={title}
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-110"
@@ -120,7 +139,7 @@ export default function DropsPage() {
                   router.push(`/hackathons/${hack_id}`)
                 }}
               >
-                View Drop
+                View
               </motion.button>
             </div>
           </motion.div>

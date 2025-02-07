@@ -1,47 +1,46 @@
 import { HoverEffect } from "../../components/ui/card-hover-effect";
-
+import Web3 from "web3"
+import ABI from "../../ABI.json"
+import { useRouter } from "next/router";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+const web3 = new Web3(window.ethereum)
+const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD
+const contract = new web3.eth.Contract(ABI, contractAdd)
 export function CardHoverEffectDemo() {
+  const params=useParams();
+  const [projects, setProjects] = useState([])
+  const fetch_builds=async()=>{
+    const accounts = await window.ethereum.request({
+      method: "eth_requestAccounts",
+    })
+    const userAddress = accounts[0]
+    const tx=await contract.methods.getallbuilds().call({
+      from:userAddress
+    })
+    let arr:any=[];
+    for (let i = 0; i < tx.length; i++) {
+      const elem = tx[i];
+      arr.push({
+        build_id:elem.project_id,
+        title:elem.name,
+        desc:elem.desc
+      })
+    }
+    console.log("my Tx is::::::",tx);
+    setProjects(arr);
+    
+  }
+  useEffect(() => {
+    console.log("My Use Effect is Running");
+    
+    fetch_builds();
+  
+  }, [])
+  
   return (
     <div className="max-w-5xl mx-auto px-8">
       <HoverEffect items={projects} />
     </div>
   );
 }
-export const projects = [
-  {
-    title: "Stripe",
-    description:
-      "A technology company that builds economic infrastructure for the internet.",
-    link: "https://stripe.com",
-  },
-  {
-    title: "Netflix",
-    description:
-      "A streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more on thousands of internet-connected devices.",
-    link: "https://netflix.com",
-  },
-  {
-    title: "Google",
-    description:
-      "A multinational technology company that specializes in Internet-related services and products.",
-    link: "https://google.com",
-  },
-  {
-    title: "Meta",
-    description:
-      "A technology company that focuses on building products that advance Facebook's mission of bringing the world closer together.",
-    link: "https://meta.com",
-  },
-  {
-    title: "Amazon",
-    description:
-      "A multinational technology company focusing on e-commerce, cloud computing, digital streaming, and artificial intelligence.",
-    link: "https://amazon.com",
-  },
-  {
-    title: "Microsoft",
-    description:
-      "A multinational technology company that develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers, and related services.",
-    link: "https://microsoft.com",
-  },
-];

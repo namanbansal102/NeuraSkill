@@ -1,75 +1,80 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Heart, Eye, Share2, MoreHorizontal } from "lucide-react"
+import { Share2, MoreHorizontal, Calendar, MapPin, Trophy, User } from "lucide-react"
 import { useEffect, useState } from "react"
 import Web3 from "web3"
 import ABI from "../../ABI.json"
 import { CarouselDemo } from "./carouse."
 import { CardHoverEffectDemo } from "./CardHoverEffectDemo"
-import { useParams, useRouter, useSearchParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import fetchImageUrl from "@/app/components/fetchImageUrl"
 import toast from "react-hot-toast"
+import Image from "next/image"
 const web3 = new Web3(window.ethereum)
-const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD;
+const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD
 const contract = new web3.eth.Contract(ABI, contractAdd)
 interface hack_details {
-  title:string,
-  img_url:string,
-  desc:string,
-  prizePool:number,
-  nAwards:number,
-  st_date:string,
-  end_date:string,
-  mode:string,
-  prize_pool_array:[number]
+  hack_id: string
+  hack_owner: string
+  title: string
+  img_url: string
+  desc: string
+  prizePool: string
+  nAwards: string
+  prize_pool_array: string[]
+  st_date: string
+  end_date: string
+  mode: string
 }
 export default function NFTDetails() {
   const [isFavorited, setIsFavorited] = useState(false)
-  const router=useRouter();
+  const router = useRouter()
   const [hack_details, setHack_details] = useState<hack_details>({
-    title:"",
-    img_url:"",
-    desc:"",
-    prizePool:0,
-    nAwards:0,
-    st_date:"",
-    end_date:"",
-    mode:"Online",
-    prize_pool_array:[0]
+    hack_id: "",
+    hack_owner: "",
+    title: "",
+    img_url: "",
+    desc: "",
+    prizePool: "",
+    nAwards: "",
+    prize_pool_array: [],
+    st_date: "",
+    end_date: "",
+    mode: "",
   })
-  const query=useParams();
-  const fetch_hack=async()=>{
-    try{
-      console.log("Fetch Build is Running");
+  const query = useParams()
+  const fetch_hack = async () => {
+    try {
+      console.log("Fetch Build is Running")
 
-      const hack_info=await contract.methods.fetch_hackathon(Number(query.hack_id)).call();
-      console.log("my Build Info is::::",hack_info);
-      const img_videoUrl=await fetchImageUrl(hack_info.img_url);
-      console.log("My Img Video Url is::::",img_videoUrl);
-      
+      const hack_info = await contract.methods.fetch_hackathon(Number(query.hack_id)).call()
+      console.log("my Build Info is::::", hack_info)
+      const img_videoUrl = await fetchImageUrl(hack_info.img_url)
+      console.log("My Img Video Url is::::", img_videoUrl)
+
       setHack_details({
-        title:hack_info.title,
-        img_url:img_videoUrl,
-        desc:hack_info.desc,
-        prizePool:hack_info.prizePool,
-        nAwards:hack_info.nAwards,
-        st_date:hack_info.st_date,
-        end_date:hack_info.end_date,
-        mode:hack_info.mode,
-        prize_pool_array:hack_info.prize_pool_array
+        hack_id: hack_info[0],
+        hack_owner: hack_info[1],
+        title: hack_info[2],
+        img_url: img_videoUrl || hack_info[3],
+        desc: hack_info[4],
+        prizePool: hack_info[5],
+        nAwards: hack_info[6],
+        prize_pool_array: hack_info[7],
+        st_date: hack_info[8],
+        end_date: hack_info[9],
+        mode: hack_info[10],
       })
-    }
-    catch(error){
+    } catch (error) {
       toast.error("Error Fetching Build")
-      console.log("My Error is::::",error);
-      
+      console.log("My Error is::::", error)
     }
   }
   useEffect(() => {
-    fetch_hack();
-  }, [])
-  
+    fetch_hack()
+  }, [query.hack_id, contract])
+
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -97,10 +102,13 @@ export default function NFTDetails() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Left Column - Image */}
         <motion.div {...fadeIn} className="rounded-2xl overflow-hidden border border-gray-800">
-          <img
-            src="https://i.seadn.io/gae/WzLu2XrkTLS1yZU_AcYp0HHDWYPUhc7lGhwa8Ho39WP2RfJrV0GtaNrmPWK0o5mYbPnV-60VSoYIEYrf9cHS77Vnd_3dYm0h2bW5GA?auto=format&dpr=1&w=1000"
-            alt="Clash Of Codes 2.0"
-            className="w-full h-auto"
+          <Image
+            src={hack_details.img_url || "/placeholder.svg"}
+            alt={hack_details.title}
+            width={1000}
+            height={1000}
+            className="w-full h-auto object-cover"
+            style={{ aspectRatio: "1 / 1" }}
           />
         </motion.div>
 
@@ -109,15 +117,21 @@ export default function NFTDetails() {
           {/* Header */}
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold">{hack_details.title}</h1>
-              <span>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi aut harum laborum nam perspiciatis voluptatem, assumenda voluptas unde recusandae amet pariatur aspernatur ullam fugit consectetur nisi molestias aperiam deleniti vel. Ducimus, at!</span>
-              <div className="flex items-center gap-4 text-gray-400 mt-2">
+              <h1 className="text-3xl font-bold mt-3">{hack_details.title}</h1>
+              <p className="text-gray-400 mt-2">{hack_details.desc}</p>
+              <div className="flex items-center gap-4 text-gray-400 mt-4">
                 <span className="flex items-center gap-1">
-                  <Eye size={16} />
-                  72 views
+                  <User size={16} />
+                  {hack_details.hack_owner.slice(0, 6)}...{hack_details.hack_owner.slice(-4)}
                 </span>
                 <span className="flex items-center gap-1">
-                  <Heart size={16} />8 favorites
+                  <Calendar size={16} />
+                  {new Date(hack_details.st_date).toLocaleDateString()} -{" "}
+                  {new Date(hack_details.end_date).toLocaleDateString()}
+                </span>
+                <span className="flex items-center gap-1">
+                  <MapPin size={16} />
+                  {hack_details.mode}
                 </span>
               </div>
             </div>
@@ -139,95 +153,80 @@ export default function NFTDetails() {
             </div>
           </div>
 
-          {/* Best Offer Section */}
+          {/* Prize Pool Section */}
           <motion.div className="bg-gray-900 rounded-xl p-6 border border-gray-800" {...fadeIn}>
-            <h2 className="text-sm text-gray-400 mb-2">Best offer</h2>
-            <div className="flex items-end justify-between">
-              <div>
-                <p className="text-3xl font-bold">0.002 WETH</p>
-                <p className="text-gray-400">≈ $5.49</p>
-              </div>
-              <motion.button
-                {...glowEffect}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-semibold"
-              >
-                Make offer
-              </motion.button>
-            </div>
-          </motion.div>
-
-          {/* Listings Section */}
-          <motion.div className="bg-gray-900 rounded-xl p-6 border border-gray-800" {...fadeIn}>
-            <h2 className="text-xl font-bold mb-4">Listings</h2>
+            <h2 className="text-xl font-bold mb-4">Prize Pool</h2>
             <table className="w-full">
               <thead>
                 <tr className="text-gray-400 text-sm">
-                  <th className="text-left pb-4">Price</th>
-                  <th className="text-left pb-4">USD Price</th>
-                  <th className="text-left pb-4">Quantity</th>
-                  <th className="text-left pb-4">Expiration</th>
+                  <th className="text-left pb-4">Position</th>
+                  <th className="text-left pb-4">Prize</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className="py-2">0.002 WETH</td>
-                  <td className="py-2">$5.49</td>
-                  <td className="py-2">2</td>
-                  <td className="py-2">in 5 hours</td>
-                </tr>
-                <tr>
-                  <td className="py-2">0.0018 WETH</td>
-                  <td className="py-2">$4.94</td>
-                  <td className="py-2">1</td>
-                  <td className="py-2">in 27 days</td>
-                </tr>
+                {hack_details.prize_pool_array.map((prize, index) => (
+                  <tr key={index}>
+                    <td className="py-2 flex items-center">
+                      <Trophy size={16} className="mr-2" />
+                      {index === 0 ? "1st" : index === 1 ? "2nd" : `${index + 1}th`} Prize
+                    </td>
+                    <td className="py-2">{Web3.utils.fromWei(prize, "ether")} ETH</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
+            <div className="mt-4 text-right">
+              <p className="text-lg font-semibold">
+                Total Prize Pool: {Web3.utils.fromWei(hack_details.prizePool, "ether")} ETH
+              </p>
+            </div>
           </motion.div>
 
-          {/* Submit Build Button */}
-          <motion.button
-            {...glowEffect}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-           
-            className="w-full py-4 bg-gradient-to-r from-blue-600  to-purple-600 rounded-xl font-bold text-lg shadow-lg"
-          >
-            Submit Build
-          </motion.button>
-          <motion.button
-            {...glowEffect}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={()=>{
-              router.push('/create-build')
-            }}
-            className="w-full py-4 bg-gradient-to-r from-blue-600  to-purple-600 rounded-xl font-bold text-lg shadow-lg"
-          >
-            Create Build
-          </motion.button>
-          <motion.button
-            {...glowEffect}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full py-4 bg-gradient-to-r from-red-600  to-purple-800 rounded-xl font-bold text-lg shadow-lg"
-          >
-            End Hackathon
-          </motion.button>
+          {/* Action Buttons */}
+          <div className="space-y-4">
+            <motion.button
+              {...glowEffect}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl font-bold text-lg shadow-lg"
+            >
+              Submit Build
+            </motion.button>
+            <motion.button
+              {...glowEffect}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => {
+                router.push("/create-build")
+              }}
+              className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl font-bold text-lg shadow-lg"
+            >
+              Create Build
+            </motion.button>
+            <motion.button
+              {...glowEffect}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full py-4 bg-gradient-to-r from-red-600 to-purple-800 rounded-xl font-bold text-lg shadow-lg"
+            >
+              End Hackathon
+            </motion.button>
+          </div>
         </motion.div>
       </div>
-      <center>
-      <h1 className="text-white text-5xl mt-10 font-bold">Our Latest 
-        <span className="text-blue-600">
-            
-            {" "}Builds
-            </span> 
-            </h1>
-      </center>
-      <CardHoverEffectDemo></CardHoverEffectDemo>
-      <CarouselDemo></CarouselDemo>
+
+      {/* Latest Builds Section */}
+      <div className="mt-16">
+        <h2 className="text-4xl font-bold text-center mb-8">
+          Submit Your <span className="text-blue-600">Build...</span>
+        </h2>
+        <CardHoverEffectDemo />
+      </div>
+
+      {/* Carousel Demo */}
+      <div className="mt-16">
+        <CarouselDemo />
+      </div>
     </div>
   )
 }
