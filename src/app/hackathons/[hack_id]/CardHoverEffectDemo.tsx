@@ -40,7 +40,20 @@ export function CardHoverEffectDemo() {
   
   return (
     <div className="max-w-5xl mx-auto px-8">
-      <HoverEffect items={projects} />
+     {projects.length!=0 && 
+      <HoverEffect items={projects} />}
+
+      {projects.length==0 &&
+     <div>
+     <center className='text-4xl mt-24 font-bold'>
+       Create Your First Build
+       <br />
+       <a href="/create-build">
+
+       <button   className=" w-48 mt-8 px-4 py-4 bg-gradient-to-r from-blue-600  to-purple-600 rounded-xl font-bold text-lg shadow-lg">Create Your Build</button>
+       </a>
+       </center>
+       </div>}
     </div>
   );
 }

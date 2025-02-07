@@ -1,102 +1,75 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Heart, Eye, Share2, MoreHorizontal } from "lucide-react"
-import { use, useState } from "react"
+import { Heart, Eye, Share2, MoreHorizontal, Check, EclipseIcon as Ethereum } from "lucide-react"
+import { useState, useEffect } from "react"
+import Image from "next/image"
 import Web3 from "web3"
-import { CarouselDemo } from "./carouse."
-import { CardHoverEffectDemo } from "./CardHoverEffectDemo"
+import { CardHoverEffectDemo } from "../../CardHoverEffectDemo"
 import ABI from "../../../../ABI.json"
-import { useParams, useRouter, useSearchParams } from "next/navigation"
+import { useParams } from "next/navigation"
 import toast from "react-hot-toast"
+import { CarouselDemo } from "../../carouse."
+import { HackBuildsCardHoverEffect } from "../../HackBuildsCardHoverEffect"
+
 const web3 = new Web3(window.ethereum)
-const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD;
+const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD
 const contract = new web3.eth.Contract(ABI, contractAdd)
-interface build_details {
-  upvotes:number,
-  name:string,
-  techStack:string,
-  desc:string,
-  video_url:string,
-  github_id:string,
-  team:[string]
+
+interface BuildDetails {
+  upvotes: number
+  name: string
+  techStack: string
+  desc: string
+  video_url: string
+  github_id: string
+  team: string[]
 }
+
 export default function NFTDetails() {
-  const searchParams=useParams();
-  const [hack_details, setHack_details] = useState<build_details>({
-    upvotes:0,
-    name:"",
-    techStack:"",
-    desc:"",
-    video_url:"",
-    github_id:"",
-    team:[""]
+  const searchParams = useParams()
+  const [hackDetails, setHackDetails] = useState<BuildDetails>({
+    upvotes: 0,
+    name: "NeoxLifeChain",
+    techStack: "Next React BERN",
+    desc: "NeoxLifeChain is a revolutionary blockchain-based healthcare management system that securely stores and manages patient records, streamlines medical processes, and enhances data interoperability among healthcare providers.",
+    video_url: "",
+    github_id: "",
+    team: ["0x1234...5678", "0x5678...9ABC", "0x9ABC...DEF0"],
   })
-  console.log("My Params are::::",searchParams);
-  const fetchBuild=async ()=>{
-    try{
-      const project_id=Number(searchParams.project_id);
-      const build_data=await contract.methods.fetch_build(project_id).call()
-    }
-    catch(error){
-      toast.error(error)
+
+  useEffect(() => {
+    fetchBuild()
+  }, [])
+
+  const fetchBuild = async () => {
+    try {
+      const project_id = Number(searchParams.project_id)
+      const build_data = await contract.methods.fetch_build(project_id).call()
+      setHackDetails(build_data)
+    } catch (error) {
+      toast.error("Error fetching build details")
     }
   }
-  const upvoteProjects=async ()=>{
+
+  const upvoteProjects = async () => {
     try {
-      console.log("UpVote Projects is Running");
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
       })
       const userAddress = accounts[0]
-      const hack_id=Number(searchParams.hack_id);
-      const project_id=Number(searchParams.project_id);
-      const tx=await contract.methods.upvoteProject(hack_id,project_id).send({
-        from:userAddress,
+      const hack_id = Number(searchParams.hack_id)
+      const project_id = Number(searchParams.project_id)
+      const tx = await contract.methods.upvoteProject(hack_id, project_id).send({
+        from: userAddress,
         value: 2,
         gasLimit: 3000000,
-
       })
-      console.log("My Transaction is::::::",tx);
-      
-    
+      toast.success("Project upvoted successfully!")
     } catch (error) {
-      toast.error(error);
+      toast.error("Error upvoting project")
     }
-    
-    
   }
-  const handleSubmitBuild=async ()=>{
-    try{
-
-      console.log("UpVote Project is Running ");
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      })
-      const userAddress = accounts[0]
-      const hack_id=Number(searchParams.hack_id);
-      const project_id=Number(searchParams.project_id);
-      const tx=await contract.methods.submitbuild(hack_id,project_id).send(
-        {
-          from:userAddress
-        }
-      )
-      console.log("My Transaction is::::::::::",tx);
-      
-      // const router=useRouter();
-      toast.success("Build Registered Successfully.")
-    }
-
-    catch(err){
-      console.log("Error is:::",err);
-      toast.error(err)
-      
-    }
-  
-    
-    
-  }
-  const [isFavorited, setIsFavorited] = useState(false)
 
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
@@ -125,10 +98,12 @@ export default function NFTDetails() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Left Column - Image */}
         <motion.div {...fadeIn} className="rounded-2xl overflow-hidden border border-gray-800">
-          <img
+          <Image
             src="https://i.seadn.io/gae/WzLu2XrkTLS1yZU_AcYp0HHDWYPUhc7lGhwa8Ho39WP2RfJrV0GtaNrmPWK0o5mYbPnV-60VSoYIEYrf9cHS77Vnd_3dYm0h2bW5GA?auto=format&dpr=1&w=1000"
             alt="Clash Of Codes 2.0"
-            className="w-full h-auto"
+            width={1000}
+            height={1000}
+            className="w-full h-auto transition-transform duration-300 hover:scale-105"
           />
         </motion.div>
 
@@ -137,23 +112,19 @@ export default function NFTDetails() {
           {/* Header */}
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold">NeoxLifeChain</h1>
+              <h1 className="text-3xl font-bold">{hackDetails.name}</h1>
               <div className="flex items-center gap-4 text-gray-400 mt-2">
                 <span className="flex items-center gap-1">
                   <Eye size={16} />
                   72 views
                 </span>
                 <span className="flex items-center gap-1">
-                  <Heart size={16} />8 favorites
+                  <Heart size={16} />
+                  {hackDetails.upvotes} upvotes
                 </span>
               </div>
-              <br />
-              <span>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis velit alias quos, dolore laudantium illum unde iusto, ut suscipit consequuntur dolor ex aut facilis itaque minus cupiditate. Asperiores dolor nesciunt dolores corporis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam unde explicabo voluptatem?
-              </span>
             </div>
             <div className="flex gap-2">
-            
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -170,84 +141,71 @@ export default function NFTDetails() {
               </motion.button>
             </div>
           </div>
-          <ul className="list-disc">
-          <h1 className="text-2xl font-bold text-blue-600">Technologies Used</h1>
-          <li className="ml-2">Next Js</li>
-          <li className="ml-2">React Js</li>
-          <li className="ml-2">BERN Stack</li>
-          </ul>
-          {/* Best Offer Section */}
+
+          {/* Description */}
+          <p className="text-gray-300">{hackDetails.desc}</p>
+
+          {/* Technologies Used */}
+          <div>
+            <h2 className="text-2xl font-bold text-blue-600 mb-2">Technologies Used</h2>
+            <div className="flex flex-wrap gap-2">
+              {hackDetails.techStack.split(" ").map((tech, index) => (
+                <span key={index} className="px-3 py-1 bg-gray-800 rounded-full text-sm">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Team Members */}
           <motion.div className="bg-gray-900 rounded-xl p-6 border border-gray-800" {...fadeIn}>
-            <h2 className="text-sm text-gray-400 mb-2">Best offer</h2>
-            <div className="flex items-end justify-between">
-              <div>
-                <p className="text-3xl font-bold">0.002 WETH</p>
-                <p className="text-gray-400">≈ $5.49</p>
-              </div>
-              <motion.button
-                {...glowEffect}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={upvoteProjects}
-                className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-semibold"
-              >
-                Upvote
-              </motion.button>
+            <h2 className="text-xl font-bold mb-4">Team Members</h2>
+            <div className="space-y-4">
+              {hackDetails.team.map((member, index) => (
+                <div key={index} className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Ethereum className="text-blue-500" />
+                    <span>{member}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-green-500">Verified</span>
+                    <Check className="text-green-500" />
+                  </div>
+                </div>
+              ))}
             </div>
           </motion.div>
 
-          {/* Listings Section */}
-          <motion.div className="bg-gray-900 rounded-xl p-6 border border-gray-800" {...fadeIn}>
-            <h2 className="text-xl font-bold mb-4">Listings</h2>
-            <table className="w-full">
-              <thead>
-                <tr className="text-gray-400 text-sm">
-                  <th className="text-left pb-4">Price</th>
-                  <th className="text-left pb-4">USD Price</th>
-                  <th className="text-left pb-4">Quantity</th>
-                  <th className="text-left pb-4">Expiration</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="py-2">0.002 WETH</td>
-                  <td className="py-2">$5.49</td>
-                  <td className="py-2">2</td>
-                  <td className="py-2">in 5 hours</td>
-                </tr>
-                <tr>
-                  <td className="py-2">0.0018 WETH</td>
-                  <td className="py-2">$4.94</td>
-                  <td className="py-2">1</td>
-                  <td className="py-2">in 27 days</td>
-                </tr>
-              </tbody>
-            </table>
-          </motion.div>
-
-          {/* Submit Build Button */}
+          {/* Upvote Button */}
           <motion.button
             {...glowEffect}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            onClick={handleSubmitBuild}
-            className="w-full py-4 bg-gradient-to-r from-blue-600  to-purple-600 rounded-xl font-bold text-lg shadow-lg"
+            onClick={upvoteProjects}
+            className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-semibold relative overflow-hidden"
           >
-           Submit Build
+            <span className="relative z-10">Upvote Project</span>
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 opacity-50"
+              
+              transition={{
+                duration: 3,
+                repeat: Number.POSITIVE_INFINITY,
+                repeatType: "loop",
+              }}
+            />
           </motion.button>
-      
         </motion.div>
       </div>
-      <center>
-      <h1 className="text-white text-5xl mt-10 font-bold">Our Latest 
-        <span className="text-blue-600">
-            
-            {" "}Builds
-            </span> 
-            </h1>
-      </center>
-      <CardHoverEffectDemo></CardHoverEffectDemo>
-      <CarouselDemo></CarouselDemo>
+
+      {/* Latest Builds Section */}
+      <div className="mt-16">
+        <h2 className="text-5xl font-bold text-center mb-8">
+          Our Latest <span className="text-blue-600">Builds</span>
+        </h2>
+        <CardHoverEffectDemo></CardHoverEffectDemo>
+        <CarouselDemo></CarouselDemo>
+      </div>
     </div>
   )
 }

@@ -2,14 +2,13 @@
 
 import { motion } from "framer-motion"
 import { Heart, Eye, Share2, MoreHorizontal } from "lucide-react"
-import { useEffect, useState } from "react"
+import { use, useState } from "react"
 import Web3 from "web3"
 import { CarouselDemo } from "./carouse."
 import { CardHoverEffectDemo } from "./CardHoverEffectDemo"
 import ABI from "../../ABI.json"
+import { useParams, useRouter, useSearchParams } from "next/navigation"
 import toast from "react-hot-toast"
-import { useParams } from "next/navigation"
-import fetchImageUrl from "@/app/components/fetchImageUrl"
 const web3 = new Web3(window.ethereum)
 const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD;
 const contract = new web3.eth.Contract(ABI, contractAdd)
@@ -23,49 +22,78 @@ interface build_details {
   team:[string]
 }
 export default function NFTDetails() {
-  const query=useParams();
-  const [build_details, setBuild_details] = useState<build_details>({
+  const searchParams=useParams();
+  const [hack_details, setHack_details] = useState<build_details>({
     upvotes:0,
     name:"",
     techStack:"",
     desc:"",
-    video_url:"https://i.seadn.io/gae/WzLu2XrkTLS1yZU_AcYp0HHDWYPUhc7lGhwa8Ho39WP2RfJrV0GtaNrmPWK0o5mYbPnV-60VSoYIEYrf9cHS77Vnd_3dYm0h2bW5GA?auto=format&dpr=1&w=1000",
+    video_url:"",
     github_id:"",
     team:[""]
   })
-  const fetch_build=async()=>{
+  console.log("My Params are::::",searchParams);
+  const fetchBuild=async ()=>{
     try{
-      console.log("Fetch Build is Running");
-
-      const build_info=await contract.methods.fetch_build(Number(query.project_id)).call();
-      console.log("my Build Info is::::",build_info);
-      const img_videoUrl=await fetchImageUrl(build_info.video_url);
-      console.log("My Img Video Url is::::",img_videoUrl);
-      
-      setBuild_details({
-        upvotes:build_info.upvotes,
-        name:build_info.name,
-        techStack:build_info.techStack,
-        desc:build_info.desc,
-        video_url:img_videoUrl,
-        github_id:build_info.github_id,
-        team:build_info.team
-      })
+      const project_id=Number(searchParams.project_id);
+      const build_data=await contract.methods.fetch_build(project_id).call()
     }
     catch(error){
-      toast.error("Error Fetching Build")
-      console.log("My Error is::::",error);
-      
+      toast.error(error)
     }
   }
+  const upvoteProjects=async ()=>{
+    try {
+      console.log("UpVote Projects is Running");
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      })
+      const userAddress = accounts[0]
+      const hack_id=Number(searchParams.hack_id);
+      const project_id=Number(searchParams.project_id);
+      const tx=await contract.methods.upvoteProject(hack_id,project_id).send({
+        from:userAddress,
+        value: 2,
+        gasLimit: 3000000,
+
+      })
+      console.log("My Transaction is::::::",tx);
+      
+    
+    } catch (error) {
+      toast.error(error);
+    }
+    
+    
+  }
+  const handleSubmitBuild=async ()=>{
+    try{
+
+      console.log("UpVote Project is Running ");
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      })
+      const userAddress = accounts[0]
+      const hack_id=Number(searchParams.hack_id);
+      const project_id=Number(searchParams.project_id);
+      const tx=await contract.methods.submitbuild(hack_id,project_id).send(
+        {
+          from:userAddress
+        }
+      )
+      console.log("My Transaction is::::::::::",tx);
+      
+      // const router=useRouter();
+      toast.success("Build Registered Successfully.")
+    }
+
+    catch(err){
+      console.log("Error is:::",err);
+      toast.error(err)
+      
+    }
   
-  useEffect(() => {
-    fetch_build();
-  }, [])
-  
-  const upvoteProject=async ()=>{
-    console.log("UpVote Project is Running ");
-    // const tx=await contract.
+    
     
   }
   const [isFavorited, setIsFavorited] = useState(false)
@@ -98,7 +126,7 @@ export default function NFTDetails() {
         {/* Left Column - Image */}
         <motion.div {...fadeIn} className="rounded-2xl overflow-hidden border border-gray-800">
           <img
-            src={build_details.video_url || ""}
+            src="https://i.seadn.io/gae/WzLu2XrkTLS1yZU_AcYp0HHDWYPUhc7lGhwa8Ho39WP2RfJrV0GtaNrmPWK0o5mYbPnV-60VSoYIEYrf9cHS77Vnd_3dYm0h2bW5GA?auto=format&dpr=1&w=1000"
             alt="Clash Of Codes 2.0"
             className="w-full h-auto"
           />
@@ -109,11 +137,11 @@ export default function NFTDetails() {
           {/* Header */}
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold">{build_details.name}</h1>
+              <h1 className="text-2xl font-bold">NeoxLifeChain</h1>
               <div className="flex items-center gap-4 text-gray-400 mt-2">
                 <span className="flex items-center gap-1">
                   <Eye size={16} />
-                  {build_details.upvotes} upvotes
+                  72 views
                 </span>
                 <span className="flex items-center gap-1">
                   <Heart size={16} />8 favorites
@@ -121,7 +149,7 @@ export default function NFTDetails() {
               </div>
               <br />
               <span>
-               {build_details.desc}
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis velit alias quos, dolore laudantium illum unde iusto, ut suscipit consequuntur dolor ex aut facilis itaque minus cupiditate. Asperiores dolor nesciunt dolores corporis! Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam unde explicabo voluptatem?
               </span>
             </div>
             <div className="flex gap-2">
@@ -144,11 +172,9 @@ export default function NFTDetails() {
           </div>
           <ul className="list-disc">
           <h1 className="text-2xl font-bold text-blue-600">Technologies Used</h1>
-          {build_details.techStack.split(" ").map((stack)=>{
-            
-          return <li key={stack} className="ml-2">{stack}</li>
-          })}
-          
+          <li className="ml-2">Next Js</li>
+          <li className="ml-2">React Js</li>
+          <li className="ml-2">BERN Stack</li>
           </ul>
           {/* Best Offer Section */}
           <motion.div className="bg-gray-900 rounded-xl p-6 border border-gray-800" {...fadeIn}>
@@ -162,6 +188,7 @@ export default function NFTDetails() {
                 {...glowEffect}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
+                onClick={upvoteProjects}
                 className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-semibold"
               >
                 Upvote
@@ -199,14 +226,7 @@ export default function NFTDetails() {
           </motion.div>
 
           {/* Submit Build Button */}
-          <motion.button
-            {...glowEffect}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full py-4 bg-gradient-to-r from-blue-600  to-purple-600 rounded-xl font-bold text-lg shadow-lg"
-          >
-           Upvote Project
-          </motion.button>
+          
       
         </motion.div>
       </div>

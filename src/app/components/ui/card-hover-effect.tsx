@@ -31,7 +31,7 @@ export const HoverEffect = ({
       {items.map((item, idx) => (
         <div
           onClick={()=>{
-            router.push(`${params.hack_id}/submitBuild/${item.build_id}`)
+            router.push(`${params.hack_id}/project_id/${item.build_id}`)
           }}
           key={item?.build_id}
           className="relative group  block p-2 h-full w-full cursor-pointer"

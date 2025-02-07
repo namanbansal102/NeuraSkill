@@ -1,0 +1,82 @@
+"use client";
+import React from "react";
+import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
+import sampleArcs from "./SampleArcs";
+import { CompanyScroll } from "./CompanyScroll";
+const World = dynamic(() => import("./globe").then((m) => m.World), {
+  ssr: false,
+});
+
+export function GlobeDemo() {
+  const globeConfig = {
+    pointSize: 4,
+    globeColor: "#062056",
+    showAtmosphere: true,
+    atmosphereColor: "#FFFFFF",
+    atmosphereAltitude: 0.1,
+    emissive: "#062056",
+    emissiveIntensity: 0.1,
+    shininess: 0.9,
+    polygonColor: "rgba(255,255,255,0.7)",
+    ambientLight: "#38bdf8",
+    directionalLeftLight: "#ffffff",
+    directionalTopLight: "#ffffff",
+    pointLight: "#ffffff",
+    arcTime: 1000,
+    arcLength: 0.9,
+    rings: 1,
+    maxRings: 3,
+    initialPosition: { lat: 22.3193, lng: 114.1694 },
+    autoRotate: true,
+    autoRotateSpeed: 0.5,
+  };
+  const colors = ["#06b6d4", "#3b82f6", "#6366f1"];
+ 
+
+  return (
+    <div className="flex flex-row items-center justify-center py-16 h-screen md:h-auto dark:bg-black bg-white relative w-full">
+      <div className="max-w-7xl mx-auto w-full relative overflow-hidden h-full md:h-[40rem] px-4">
+      <motion.div
+          initial={{
+            opacity: 0,
+            y: 20,
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 1,
+          }}
+          className="space-y-8"
+        >
+          <h1 className="text-center text-4xl md:text-6xl font-bold bg-gradient-to-r from-purple-500  via-blue-500 to-blue-300 text-transparent bg-clip-text py-7 mt-5">
+            <span>Together We Rise In</span>
+          <p className="text-center mt-4 text-base md:text-lg font-normal text-neutral-700 dark:text-neutral-200 max-w-2xl mx-auto">
+            Over <span className="font-bold text-3xl">118,057</span> <span className="font-bold">
+              developers {" "}
+              </span>
+                are building their web3 career with FREE
+            bootcamps and courses in top ecosystems, turning their skills into income.
+          </p>
+          </h1>
+          <div className="flex justify-center">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-7 py-1 rounded-lg bg-gradient-to-r from-blue-700  bg-purple-600 text-white font-medium hover:bg-purple-700 transition-colors font-bold"
+            >
+              Let's Rise In!
+            </motion.button>
+          </div>
+        </motion.div>
+        <div className="absolute w-full bottom-0 inset-x-0 h-40 bg-gradient-to-b pointer-events-none select-none from-transparent dark:to-black to-white z-40 " />
+        <div className="absolute w-full -bottom-64 h-72 md:h-full z-10 cursor-pointer ">
+          <World  data={sampleArcs} globeConfig={globeConfig} />
+          <CompanyScroll ></CompanyScroll>
+        </div>
+      </div>
+    </div>
+  );
+}
