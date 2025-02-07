@@ -3,11 +3,18 @@ import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@he
 import {Badge, Avatar} from "@heroui/react";
 import { GlobeDemo } from "./components/HomePageComponents/GlobeDemo";
 import { CoverDemo } from "./components/HomePageComponents/SecSection/SecondSectionDemo";
+import { WobbleCardDemo } from "./components/HomePageComponents/ThirdSection/WobbleCardDemo";
+import { InfiniteMovingCards } from "./components/HomePageComponents/FourthSection/infinite-moving-cards";
+import { InfiniteMovingCardsDemo } from "./components/HomePageComponents/FourthSection/InfiniteCardsDemo";
 export default function Home() {
   return (
    <div className="bg-black">
   <GlobeDemo> </GlobeDemo>
+  <div className="h-5"></div>
   <CoverDemo></CoverDemo>
+  <div className="h-5"></div>
+  <WobbleCardDemo></WobbleCardDemo>
+  <InfiniteMovingCardsDemo></InfiniteMovingCardsDemo>
    </div>
   );
 }
