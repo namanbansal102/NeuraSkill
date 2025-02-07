@@ -2,13 +2,74 @@
 
 import { motion } from "framer-motion"
 import { Heart, Eye, Share2, MoreHorizontal } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import Web3 from "web3"
+import ABI from "../../ABI.json"
 import { CarouselDemo } from "./carouse."
 import { CardHoverEffectDemo } from "./CardHoverEffectDemo"
-
+import { useParams, useRouter, useSearchParams } from "next/navigation"
+import fetchImageUrl from "@/app/components/fetchImageUrl"
+import toast from "react-hot-toast"
+const web3 = new Web3(window.ethereum)
+const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD;
+const contract = new web3.eth.Contract(ABI, contractAdd)
+interface hack_details {
+  title:string,
+  img_url:string,
+  desc:string,
+  prizePool:number,
+  nAwards:number,
+  st_date:string,
+  end_date:string,
+  mode:string,
+  prize_pool_array:[number]
+}
 export default function NFTDetails() {
   const [isFavorited, setIsFavorited] = useState(false)
+  const router=useRouter();
+  const [hack_details, setHack_details] = useState<hack_details>({
+    title:"",
+    img_url:"",
+    desc:"",
+    prizePool:0,
+    nAwards:0,
+    st_date:"",
+    end_date:"",
+    mode:"Online",
+    prize_pool_array:[0]
+  })
+  const query=useParams();
+  const fetch_hack=async()=>{
+    try{
+      console.log("Fetch Build is Running");
 
+      const hack_info=await contract.methods.fetch_hackathon(Number(query.hack_id)).call();
+      console.log("my Build Info is::::",hack_info);
+      const img_videoUrl=await fetchImageUrl(hack_info.img_url);
+      console.log("My Img Video Url is::::",img_videoUrl);
+      
+      setHack_details({
+        title:hack_info.title,
+        img_url:img_videoUrl,
+        desc:hack_info.desc,
+        prizePool:hack_info.prizePool,
+        nAwards:hack_info.nAwards,
+        st_date:hack_info.st_date,
+        end_date:hack_info.end_date,
+        mode:hack_info.mode,
+        prize_pool_array:hack_info.prize_pool_array
+      })
+    }
+    catch(error){
+      toast.error("Error Fetching Build")
+      console.log("My Error is::::",error);
+      
+    }
+  }
+  useEffect(() => {
+    fetch_hack();
+  }, [])
+  
   const fadeIn = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -48,7 +109,8 @@ export default function NFTDetails() {
           {/* Header */}
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold">Lunic Moon Gang #14</h1>
+              <h1 className="text-2xl font-bold">{hack_details.title}</h1>
+              <span>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi aut harum laborum nam perspiciatis voluptatem, assumenda voluptas unde recusandae amet pariatur aspernatur ullam fugit consectetur nisi molestias aperiam deleniti vel. Ducimus, at!</span>
               <div className="flex items-center gap-4 text-gray-400 mt-2">
                 <span className="flex items-center gap-1">
                   <Eye size={16} />
@@ -130,6 +192,7 @@ export default function NFTDetails() {
             {...glowEffect}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
+           
             className="w-full py-4 bg-gradient-to-r from-blue-600  to-purple-600 rounded-xl font-bold text-lg shadow-lg"
           >
             Submit Build
@@ -138,6 +201,9 @@ export default function NFTDetails() {
             {...glowEffect}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
+            onClick={()=>{
+              router.push('/create-build')
+            }}
             className="w-full py-4 bg-gradient-to-r from-blue-600  to-purple-600 rounded-xl font-bold text-lg shadow-lg"
           >
             Create Build

@@ -20,7 +20,6 @@ export default function DropsPage() {
   const [hackathons_arr, setHackathons_arr] = useState([]);
   const router=useRouter();
   const fetch_hackathons=async ()=>{
-    
     try{
       console.log("Fetch hacakthons calling");
 

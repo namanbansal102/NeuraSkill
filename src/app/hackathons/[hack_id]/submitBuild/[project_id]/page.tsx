@@ -70,6 +70,10 @@ export default function NFTDetails() {
     try{
 
       console.log("UpVote Project is Running ");
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      })
+      const userAddress = accounts[0]
       const hack_id=Number(searchParams.hack_id);
       const project_id=Number(searchParams.project_id);
       const tx=await contract.methods.submitbuild(hack_id,project_id).send(
