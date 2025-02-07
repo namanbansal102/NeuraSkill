@@ -51,7 +51,7 @@ export function GlobeDemo() {
           }}
           className="space-y-8"
         >
-          <h1 className="text-center text-4xl md:text-6xl font-bold bg-gradient-to-r from-purple-500  via-blue-500 to-blue-300 text-transparent bg-clip-text py-7 mt-5">
+          <h1 className="text-center  md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#A259FF] to-[#1B8EFF] text-4xl  py-7 mt-5">
             <span>Together We Rise In</span>
           <p className="text-center mt-4 text-base md:text-lg font-normal text-neutral-700 dark:text-neutral-200 max-w-2xl mx-auto">
             Over <span className="font-bold text-3xl">118,057</span> <span className="font-bold">
@@ -60,21 +60,15 @@ export function GlobeDemo() {
                 are building their web3 career with FREE
             bootcamps and courses in top ecosystems, turning their skills into income.
           </p>
+          <button className="font-bold text-sm bg-gradient-to-r text-white px-3 bg-gradient-to-r from-[#A259FF] to-[#1B8EFF] py-1 rounded-md">Let's Rise In!</button>
           </h1>
           <div className="flex justify-center">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-7 py-1 rounded-lg bg-gradient-to-r from-blue-700  bg-purple-600 text-white font-medium hover:bg-purple-700 transition-colors font-bold"
-            >
-              Let's Rise In!
-            </motion.button>
+          <CompanyScroll ></CompanyScroll>
           </div>
         </motion.div>
-        <div className="absolute w-full bottom-0 inset-x-0 h-40 bg-gradient-to-b pointer-events-none select-none from-transparent dark:to-black to-white z-40 " />
-        <div className="absolute w-full -bottom-64 h-72 md:h-full z-10 cursor-pointer ">
+        <div className="absolute w-full bottom-0 inset-x-0 h-40 bg-gradient-to-b pointer-events-none select-none from-transparent dark:to-black to-white z-40 " />  
+        <div className="absolute w-full -bottom-48 h-72 md:h-full z-10 cursor-pointer ">
           <World  data={sampleArcs} globeConfig={globeConfig} />
-          <CompanyScroll ></CompanyScroll>
         </div>
       </div>
     </div>

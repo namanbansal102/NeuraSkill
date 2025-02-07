@@ -4,22 +4,22 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 
 const companies = [
-  { name: "Versatile", logo: "/placeholder.svg?height=40&width=120" },
-  { name: "Circle", logo: "/placeholder.svg?height=40&width=120" },
-  { name: "Paribuhub", logo: "/placeholder.svg?height=40&width=120" },
-  { name: "Edu Chain", logo: "/placeholder.svg?height=40&width=120" },
-  { name: "Aptos", logo: "/placeholder.svg?height=40&width=120" },
+  { name: "Versatile", logo: "https://static-files.risein.com/Homepage-Sui.png" },
+  { name: "Circle", logo: "https://static-files.risein.com/Circle.png" },
+  { name: "Paribuhub", logo: "https://static-files.risein.com/Homepage-SolanaFoundation.png" },
+  { name: "Edu Chain", logo: "https://static-files.risein.com/animoca.png" },
+  { name: "Aptos", logo: "https://static-files.risein.com/Homepage-Sui.png" },
   // Duplicate for seamless loop
-  { name: "Versatile", logo: "/placeholder.svg?height=40&width=120" },
-  { name: "Circle", logo: "/placeholder.svg?height=40&width=120" },
-  { name: "Paribuhub", logo: "/placeholder.svg?height=40&width=120" },
-  { name: "Edu Chain", logo: "/placeholder.svg?height=40&width=120" },
-  { name: "Aptos", logo: "/placeholder.svg?height=40&width=120" },
+  { name: "Versatile", logo: "https://static-files.risein.com/edu-chain.png" },
+  { name: "Circle", logo: "https://static-files.risein.com/Aptos.png" },
+  { name: "Paribuhub", logo: "https://static-files.risein.com/ecosystem-support-program.png" },
+  { name: "Edu Chain", logo: "https://static-files.risein.com/internet.png" },
+  { name: "Aptos", logo: "https://static-files.risein.com/Homepage-Sui.png" },
 ]
 
 export function CompanyScroll() {
   return (
-    <div className="relative w-full overflow-hidden bg-transparent py-10 border-2 border-white">
+    <div className="relative w-full overflow-hidden bg-transparent py-3 ">
       <motion.div
         initial={{ x: 0 }}
         animate={{ x: "-50%" }}
