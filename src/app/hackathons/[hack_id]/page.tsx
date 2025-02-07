@@ -7,6 +7,7 @@ import Web3 from "web3"
 import ABI from "../../ABI.json"
 import { CarouselDemo } from "./carouse."
 import { CardHoverEffectDemo } from "./CardHoverEffectDemo"
+import { HackBuildsCardHoverEffect } from "./HackBuildsCardHoverEffect"
 import { useParams, useRouter } from "next/navigation"
 import fetchImageUrl from "@/app/components/fetchImageUrl"
 import toast from "react-hot-toast"
@@ -184,14 +185,7 @@ export default function NFTDetails() {
 
           {/* Action Buttons */}
           <div className="space-y-4">
-            <motion.button
-              {...glowEffect}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl font-bold text-lg shadow-lg"
-            >
-              Submit Build
-            </motion.button>
+      
             <motion.button
               {...glowEffect}
               whileHover={{ scale: 1.02 }}
@@ -221,6 +215,13 @@ export default function NFTDetails() {
           Submit Your <span className="text-blue-600">Build...</span>
         </h2>
         <CardHoverEffectDemo />
+      </div>
+      <div className="mt-16">
+        <h2 className="text-4xl font-bold text-center mb-8">
+          Our Latest <span className="text-blue-600">Builds...</span>
+        </h2>
+        <HackBuildsCardHoverEffect></HackBuildsCardHoverEffect>
+   
       </div>
 
       {/* Carousel Demo */}

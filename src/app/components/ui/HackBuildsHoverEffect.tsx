@@ -1,7 +1,7 @@
 import { cn } from "../../lib/util";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export const HoverEffect = ({
@@ -18,7 +18,6 @@ export const HoverEffect = ({
 }) => {
   console.log("My Items are::::::",items);
   const router=useRouter();
-  const params=useParams();
   let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
@@ -31,7 +30,7 @@ export const HoverEffect = ({
       {items.map((item, idx) => (
         <div
           onClick={()=>{
-            router.push(`${params.hack_id}/submitBuild/${item.build_id}`)
+            router.push(`submitBuild/${item.build_id}`)
           }}
           key={item?.build_id}
           className="relative group  block p-2 h-full w-full cursor-pointer"
@@ -57,6 +56,7 @@ export const HoverEffect = ({
           </AnimatePresence>
           <Card>
             <CardTitle>{item.title}</CardTitle>
+            <img className="mb-5" src="https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_1280.jpg" alt="" />
             <CardDescription>{item.desc}</CardDescription>
           </Card>
         </div>
@@ -74,7 +74,6 @@ export const Card = ({
 }) => {
   return (
     <div
-    
       className={cn(
         "rounded-2xl h-full w-full p-4 overflow-hidden bg-black border border-transparent dark:border-white/[0.2] group-hover:border-slate-700 relative z-20",
         className
