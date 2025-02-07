@@ -6,6 +6,7 @@ import { CoverDemo } from "./components/HomePageComponents/SecSection/SecondSect
 import { WobbleCardDemo } from "./components/HomePageComponents/ThirdSection/WobbleCardDemo";
 import { InfiniteMovingCards } from "./components/HomePageComponents/FourthSection/infinite-moving-cards";
 import { InfiniteMovingCardsDemo } from "./components/HomePageComponents/FourthSection/InfiniteCardsDemo";
+import { FocusCardsDemo } from "./components/HomePageComponents/FifthSection/FocusCardsDemo";
 export default function Home() {
   return (
    <div className="bg-black">
@@ -14,6 +15,9 @@ export default function Home() {
   <CoverDemo></CoverDemo>
   <div className="h-5"></div>
   <WobbleCardDemo></WobbleCardDemo>
+
+  <div className="h-20"></div>
+  <FocusCardsDemo></FocusCardsDemo>
   <InfiniteMovingCardsDemo></InfiniteMovingCardsDemo>
    </div>
   );
