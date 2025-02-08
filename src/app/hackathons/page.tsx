@@ -38,7 +38,8 @@ export default function DropsPage() {
           prizePool:element[5],
           st_date:element[8],
           desc:element[4],
-          end_date:element[9]
+          end_date:element[9],
+          mode:element["mode"]
         }
         console.log("My Element is:::",obj);
         
@@ -87,14 +88,16 @@ export default function DropsPage() {
 
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {hackathons_arr.map(({hack_id,img_url,mode,prizePool,st_date,end_date,title}) => (
+        {hackathons_arr.map(({hack_id,img_url,mode,prizePool,st_date,end_date,title}:any) => (
           <motion.div
+
             key={hack_id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             whileHover={{ scale: 1.02 }}
-            className="group relative bg-gray-900 rounded-xl overflow-hidden cursor-pointer "
+            
+            className={`group relative bg-gray-900 rounded-xl overflow-hidden cursor-pointer disabled:${mode=="online"||"IRL"?false:true} `}
           >
             {/* Image */}
             <div className="aspect-[4/3] relative overflow-hidden">
@@ -104,12 +107,12 @@ export default function DropsPage() {
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-110"
               />
-              {/* {drop.isOnchain && (
+              
                 <div className="absolute top-4 left-4 bg-blue-600 text-white text-sm px-3 py-1 rounded-full flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-blue-300" />
-                  Onchain Daily
+                  {mode[0].toUpperCase()+mode.substring(1)}
                 </div>
-              )} */}
+            
             </div>
 
             {/* Content */}
