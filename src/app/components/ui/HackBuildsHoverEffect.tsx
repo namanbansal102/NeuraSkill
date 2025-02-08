@@ -1,7 +1,7 @@
 import { cn } from "../../lib/util";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import fetchImageUrl from "../fetchImageUrl";
 
@@ -19,6 +19,7 @@ export const HoverEffect = ({
 }) => {
   console.log("My Items are::::::",items);
   const router=useRouter();
+  const params=useParams();
   let [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
@@ -31,7 +32,7 @@ export const HoverEffect = ({
       {items.map((item, idx) => (
         <div
           onClick={()=>{
-            router.push(`submitBuild/${item.build_id}`)
+            router.push(`${params.hack_id}/viewBuild/${item.build_id}`)
           }}
           key={item?.build_id}
           className="relative group  block p-2 h-full w-full cursor-pointer"

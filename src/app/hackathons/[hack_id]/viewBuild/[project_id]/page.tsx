@@ -289,7 +289,7 @@ export default function NFTDetails() {
       {/* Latest Builds Section */}
       <div className="mt-16">
         <h2 className="text-5xl font-bold text-center mb-8">
-          Your Latest <span className="text-blue-600">Builds</span>
+          Explore More<span className="text-blue-600">Hacks</span>
         </h2>
         <CardHoverEffectDemo></CardHoverEffectDemo>
         <CarouselDemo></CarouselDemo>
