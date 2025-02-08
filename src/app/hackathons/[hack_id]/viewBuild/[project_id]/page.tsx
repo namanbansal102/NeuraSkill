@@ -69,28 +69,6 @@ export default function NFTDetails() {
       toast.error("Error fetching build details")
     }
   }
-  const handleSubmitBuild = async () => {
-    try {
-      console.log("UpVote Project is Running ")
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      })
-      const userAddress = accounts[0]
-      const hack_id = Number(searchParams.hack_id)
-      const project_id = Number(searchParams.project_id)
-      const tx = await contract.methods.submitbuild(hack_id, project_id).send({
-        from: userAddress,
-      })
-      console.log("My Transaction is::::::::::", tx)
-
-      // const router=useRouter();
-      toast.success("Build Registered Successfully.")
-      router.back();
-    } catch (err: any) {
-      console.log("Error is:::", err)
-      toast.error(err)
-    }
-  }
   const upvoteProjects = async () => {
     try {
       const accounts = await window.ethereum.request({
@@ -105,6 +83,7 @@ export default function NFTDetails() {
         gasLimit: 3000000,
       })
       toast.success("Project upvoted successfully!")
+      router.refresh();
     } catch (error) {
       toast.error("Error upvoting project")
     }
@@ -159,10 +138,6 @@ export default function NFTDetails() {
             <div>
               <h1 className="text-3xl font-bold">{hackDetails.name}</h1>
               <div className="flex items-center gap-4 text-gray-400 mt-2">
-                <span className="flex items-center gap-1">
-                  <Eye size={16} />
-                  72 views
-                </span>
                 <span className="flex items-center gap-1">
                   <Heart size={16} />
                   {hackDetails.upvotes} upvotes
@@ -266,23 +241,7 @@ export default function NFTDetails() {
             />
           </motion.button>
           {/* Upvote Button */}
-          <motion.button
-            {...glowEffect}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={handleSubmitBuild}
-            className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-semibold relative overflow-hidden"
-          >
-            <span className="relative z-10">Submit Your Build</span>
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 opacity-50"
-              transition={{
-                duration: 3,
-                repeat: Number.POSITIVE_INFINITY,
-                repeatType: "loop",
-              }}
-            />
-          </motion.button>
+         
         </motion.div>
       </div>
 
@@ -291,7 +250,6 @@ export default function NFTDetails() {
         <h2 className="text-5xl font-bold text-center mb-8">
           Explore More<span className="text-blue-600">Hacks</span>
         </h2>
-        <CardHoverEffectDemo></CardHoverEffectDemo>
         <CarouselDemo></CarouselDemo>
       </div>
     </div>
