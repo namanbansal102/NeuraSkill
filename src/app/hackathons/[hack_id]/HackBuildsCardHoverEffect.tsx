@@ -4,6 +4,8 @@ import ABI from "../../ABI.json"
 import { useRouter } from "next/router";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { link } from "fs";
+import fetchImageUrl from "@/app/components/fetchImageUrl";
 const web3 = new Web3(window.ethereum)
 const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD
 const contract = new web3.eth.Contract(ABI, contractAdd)
@@ -26,6 +28,7 @@ export function HackBuildsCardHoverEffect() {
       arr.push({
         build_id:elem.project_id,
         title:elem.name,
+        link:await fetchImageUrl(elem.video_url),
         desc:elem.desc
       })
     }

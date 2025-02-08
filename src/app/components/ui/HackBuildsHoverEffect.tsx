@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import fetchImageUrl from "../fetchImageUrl";
 
 export const HoverEffect = ({
   items,
@@ -56,7 +57,7 @@ export const HoverEffect = ({
           </AnimatePresence>
           <Card>
             <CardTitle>{item.title}</CardTitle>
-            <img className="mb-5" src="https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_1280.jpg" alt="" />
+            <img className="mb-5" src={item.link} alt="" />
             <CardDescription>{item.desc}</CardDescription>
             <button className="px-7 mt-2 py-1 bg-gradient-to-r from-red-600 to-purple-800 rounded-md font-bold text-lg shadow-lg">Review</button>
           </Card>

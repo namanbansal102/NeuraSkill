@@ -1,17 +1,18 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Heart, Eye, Share2, MoreHorizontal, Check, EclipseIcon as Ethereum } from "lucide-react"
+import { Heart, Eye, Share2, MoreHorizontal, Check, EclipseIcon as Ethereum, Github } from "lucide-react"
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import Web3 from "web3"
 import { CardHoverEffectDemo } from "../../CardHoverEffectDemo"
 import ABI from "../../../../ABI.json"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 import { CarouselDemo } from "../../carouse."
-import { HackBuildsCardHoverEffect } from "../../HackBuildsCardHoverEffect"
 import fetchImageUrl from "@/app/components/fetchImageUrl"
+import Link from "next/link"
+import { Loader } from "../../../../components/ui/loader"
 
 const web3 = new Web3(window.ethereum)
 const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD
@@ -25,11 +26,15 @@ interface BuildDetails {
   video_url: string
   github_id: string
   team: string[]
+  github_url: string
 }
 
 export default function NFTDetails() {
   const searchParams = useParams()
-    const [imgUrl, setImgUrl] = useState("https://images.unsplash.com/photo-1639322537228-f710d846310a?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmxvY2tjaGFpbnxlbnwwfHwwfHx8MA%3D%3D")
+  const router=useRouter();
+  const [imgUrl, setImgUrl] = useState(
+    "https://images.unsplash.com/photo-1639322537228-f710d846310a?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmxvY2tjaGFpbnxlbnwwfHwwfHx8MA%3D%3D",
+  )
   const [hackDetails, setHackDetails] = useState<BuildDetails>({
     upvotes: 0,
     name: "NeoxLifeChain",
@@ -38,56 +43,53 @@ export default function NFTDetails() {
     video_url: "",
     github_id: "",
     team: ["0x1234...5678", "0x5678...9ABC", "0x9ABC...DEF0"],
+    github_url: "",
   })
+  const [imageLoading, setImageLoading] = useState(true)
 
   useEffect(() => {
     fetchBuild()
+    setImageLoading(true)
   }, [])
 
   const fetchBuild = async () => {
     try {
       const project_id = Number(searchParams.project_id)
-      let build_data = await contract.methods.fetch_build(project_id).call();
-      
-      setImgUrl(await fetchImageUrl(build_data.video_url));
-      console.log("My Build Data Running is:::::::",build_data);
-      setHackDetails(build_data)
-      
+      const build_data = await contract.methods.fetch_build(project_id).call()
+
+      setImgUrl(await fetchImageUrl(build_data.video_url))
+      console.log("My Build Data Running is:::::::", build_data)
+      setHackDetails({
+        ...build_data,
+        github_url: build_data.github_id, // Assuming github_id is the GitHub URL
+      })
     } catch (error) {
-      console.log("ERror is :::",error);
-      
+      console.log("ERror is :::", error)
+
       toast.error("Error fetching build details")
     }
   }
-  const handleSubmitBuild=async ()=>{
-    try{
-
-      console.log("UpVote Project is Running ");
+  const handleSubmitBuild = async () => {
+    try {
+      console.log("UpVote Project is Running ")
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
       })
       const userAddress = accounts[0]
-      const hack_id=Number(searchParams.hack_id);
-      const project_id=Number(searchParams.project_id);
-      const tx=await contract.methods.submitbuild(hack_id,project_id).send(
-        {
-          from:userAddress
-        }
-      )
-      console.log("My Transaction is::::::::::",tx);
-      
+      const hack_id = Number(searchParams.hack_id)
+      const project_id = Number(searchParams.project_id)
+      const tx = await contract.methods.submitbuild(hack_id, project_id).send({
+        from: userAddress,
+      })
+      console.log("My Transaction is::::::::::", tx)
+
       // const router=useRouter();
       toast.success("Build Registered Successfully.")
-    }
-
-    catch(err:any){
-      console.log("Error is:::",err);
+      router.back();
+    } catch (err: any) {
+      console.log("Error is:::", err)
       toast.error(err)
-      
     }
-  
-    
-    
   }
   const upvoteProjects = async () => {
     try {
@@ -134,13 +136,19 @@ export default function NFTDetails() {
     <div className="min-h-screen bg-[#0a0a0a] text-white p-6 mt-16">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Left Column - Image */}
-        <motion.div {...fadeIn} className="rounded-2xl overflow-hidden border border-gray-800">
+        <motion.div {...fadeIn} className="rounded-2xl overflow-hidden border border-gray-800 relative">
+          {imageLoading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
+              <Loader className="w-8 h-8 text-blue-500" />
+            </div>
+          )}
           <Image
-            src={imgUrl}
-            alt="Clash Of Codes 2.0"
+            src={imgUrl || "/placeholder.svg"}
+            alt={hackDetails.name}
             width={1000}
             height={1000}
-            className="w-full h-auto transition-transform duration-300 hover:scale-105"
+            className="w-full h-auto transition-all duration-300 hover:scale-95 hover:opacity-80"
+            onLoadingComplete={() => setImageLoading(false)}
           />
         </motion.div>
 
@@ -193,7 +201,34 @@ export default function NFTDetails() {
               ))}
             </div>
           </div>
-          
+
+          {/* Project Links */}
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold text-blue-600">Project Links</h2>
+            <div className="flex flex-wrap gap-4">
+              <Link href={hackDetails.github_url} target="_blank" rel="noopener noreferrer">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700"
+                >
+                  <Github size={20} />
+                  <span>GitHub Repository</span>
+                </motion.button>
+              </Link>
+              <Link href={hackDetails.video_url} target="_blank" rel="noopener noreferrer">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center gap-2 px-4 py-2 bg-gray-800 rounded-lg hover:bg-gray-700"
+                >
+                  <Eye size={20} />
+                  <span>Watch Demo Video</span>
+                </motion.button>
+              </Link>
+            </div>
+          </div>
+
           {/* GitHub Div */}
           {/* Team Members */}
           <motion.div className="bg-gray-900 rounded-xl p-6 border border-gray-800" {...fadeIn}>
@@ -225,7 +260,6 @@ export default function NFTDetails() {
             <span className="relative z-10">Submit Your Build</span>
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 opacity-50"
-              
               transition={{
                 duration: 3,
                 repeat: Number.POSITIVE_INFINITY,
