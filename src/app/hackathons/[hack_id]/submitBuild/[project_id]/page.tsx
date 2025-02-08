@@ -11,6 +11,7 @@ import { useParams } from "next/navigation"
 import toast from "react-hot-toast"
 import { CarouselDemo } from "../../carouse."
 import { HackBuildsCardHoverEffect } from "../../HackBuildsCardHoverEffect"
+import fetchImageUrl from "@/app/components/fetchImageUrl"
 
 const web3 = new Web3(window.ethereum)
 const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD
@@ -28,6 +29,7 @@ interface BuildDetails {
 
 export default function NFTDetails() {
   const searchParams = useParams()
+    const [imgUrl, setImgUrl] = useState("https://images.unsplash.com/photo-1639322537228-f710d846310a?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmxvY2tjaGFpbnxlbnwwfHwwfHx8MA%3D%3D")
   const [hackDetails, setHackDetails] = useState<BuildDetails>({
     upvotes: 0,
     name: "NeoxLifeChain",
@@ -45,13 +47,48 @@ export default function NFTDetails() {
   const fetchBuild = async () => {
     try {
       const project_id = Number(searchParams.project_id)
-      const build_data = await contract.methods.fetch_build(project_id).call()
+      let build_data = await contract.methods.fetch_build(project_id).call();
+      
+      setImgUrl(await fetchImageUrl(build_data.video_url));
+      console.log("My Build Data Running is:::::::",build_data);
       setHackDetails(build_data)
+      
     } catch (error) {
+      console.log("ERror is :::",error);
+      
       toast.error("Error fetching build details")
     }
   }
+  const handleSubmitBuild=async ()=>{
+    try{
 
+      console.log("UpVote Project is Running ");
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      })
+      const userAddress = accounts[0]
+      const hack_id=Number(searchParams.hack_id);
+      const project_id=Number(searchParams.project_id);
+      const tx=await contract.methods.submitbuild(hack_id,project_id).send(
+        {
+          from:userAddress
+        }
+      )
+      console.log("My Transaction is::::::::::",tx);
+      
+      // const router=useRouter();
+      toast.success("Build Registered Successfully.")
+    }
+
+    catch(err:any){
+      console.log("Error is:::",err);
+      toast.error(err)
+      
+    }
+  
+    
+    
+  }
   const upvoteProjects = async () => {
     try {
       const accounts = await window.ethereum.request({
@@ -99,7 +136,7 @@ export default function NFTDetails() {
         {/* Left Column - Image */}
         <motion.div {...fadeIn} className="rounded-2xl overflow-hidden border border-gray-800">
           <Image
-            src="https://i.seadn.io/gae/WzLu2XrkTLS1yZU_AcYp0HHDWYPUhc7lGhwa8Ho39WP2RfJrV0GtaNrmPWK0o5mYbPnV-60VSoYIEYrf9cHS77Vnd_3dYm0h2bW5GA?auto=format&dpr=1&w=1000"
+            src={imgUrl}
             alt="Clash Of Codes 2.0"
             width={1000}
             height={1000}
@@ -156,7 +193,8 @@ export default function NFTDetails() {
               ))}
             </div>
           </div>
-
+          
+          {/* GitHub Div */}
           {/* Team Members */}
           <motion.div className="bg-gray-900 rounded-xl p-6 border border-gray-800" {...fadeIn}>
             <h2 className="text-xl font-bold mb-4">Team Members</h2>
@@ -181,10 +219,10 @@ export default function NFTDetails() {
             {...glowEffect}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            onClick={upvoteProjects}
+            onClick={handleSubmitBuild}
             className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-semibold relative overflow-hidden"
           >
-            <span className="relative z-10">Upvote Project</span>
+            <span className="relative z-10">Submit Your Build</span>
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 opacity-50"
               
@@ -201,7 +239,7 @@ export default function NFTDetails() {
       {/* Latest Builds Section */}
       <div className="mt-16">
         <h2 className="text-5xl font-bold text-center mb-8">
-          Our Latest <span className="text-blue-600">Builds</span>
+          Your Latest <span className="text-blue-600">Builds</span>
         </h2>
         <CardHoverEffectDemo></CardHoverEffectDemo>
         <CarouselDemo></CarouselDemo>

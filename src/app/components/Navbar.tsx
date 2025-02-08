@@ -20,7 +20,7 @@ const navItems: NavItem[] = [
     name: "Hacks",
     href: "/hackathons",
     dropdown: [
-      { name: "View Hacks", href: "/hacks/featured" },
+      { name: "View Hacks", href: "/hackathons" },
       { name: "Create Hacks", href: "/create-hack" },
       { name: "Latest", href: "/hacks/latest" },
     ],
