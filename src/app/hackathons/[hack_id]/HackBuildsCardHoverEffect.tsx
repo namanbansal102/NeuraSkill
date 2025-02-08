@@ -42,7 +42,17 @@ export function HackBuildsCardHoverEffect() {
   
   return (
     <div className="max-w-5xl mx-auto px-8">
-      <HoverEffect items={projects} />
+      {projects.length!=0 && 
+            <HoverEffect items={projects} />}
+      
+            {projects.length==0 &&
+           <div>
+           <center className='text-4xl mt-5 font-bold '>
+             No Builds Registered Yet......
+             <br />
+             
+             </center>
+             </div>}
     </div>
   );
 }

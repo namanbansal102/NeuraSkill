@@ -530,6 +530,76 @@
 	},
 	{
 		"inputs": [],
+		"name": "get_latest_hack",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "hack_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "hack_owner",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "img_url",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "desc",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "prizePool",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "nAwards",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "prize_pool_array",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "string",
+						"name": "st_date",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "end_date",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "mode",
+						"type": "string"
+					}
+				],
+				"internalType": "struct compete.hacakthon",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "getallbuilds",
 		"outputs": [
 			{

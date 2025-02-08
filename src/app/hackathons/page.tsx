@@ -30,11 +30,11 @@ export default function DropsPage() {
       console.log("My Hackathons Fetched Are::::",fetch_hackathon);
       for (let i = 0; i < fetch_hackathon.length; i++) {
         let element = fetch_hackathon[i];
-        // let url=await fetchImageUrl(fetch_hackathon[i].img_url);;
+        let url=await fetchImageUrl(fetch_hackathon[i].img_url);;
         let obj={
           hack_id:element[0],
           title:element[2],
-          imgUrl:element[3],
+          img_url:url,
           prizePool:element[5],
           st_date:element[8],
           desc:element[4],
@@ -99,7 +99,7 @@ export default function DropsPage() {
             {/* Image */}
             <div className="aspect-[4/3] relative overflow-hidden">
               <Image
-                src={ "/placeholder.svg"}
+                src={img_url ||"/placeholder.svg"}
                 alt={title}
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-110"

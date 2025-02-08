@@ -1,9 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 :root {
-  --background: #ffffff;
   --foreground: #171717;
 }
 
@@ -11,13 +9,13 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    background-color: black;
   }
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  background-color: black;
 }
 ::-webkit-scrollbar {
   width: 10px; /* Width of the scrollbar */
@@ -40,4 +38,13 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #1f2a48; /* Slightly lighter shade on hover */
+} 
+.gradient-text {
+  background: linear-gradient(90deg, #9413df 0%, #b498ff 50%, #afd2ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.get-white{
+  color: white
 }

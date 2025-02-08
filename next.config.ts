@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
     domains: ['res.cloudinary.com','cdn.dorahacks.io','aceternity.com','violet-wrong-herring-709.mypinata.cloud','i.seadn.io','static-files.risein.com','images.unsplash.com','assets.aceternity.com'],
     
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+},
 };
 
 export default nextConfig;

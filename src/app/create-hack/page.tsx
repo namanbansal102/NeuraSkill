@@ -240,7 +240,7 @@ export default function CreateNFT() {
               </motion.div>
 
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-                <label className="block mb-2">External Link</label>
+                <label className="block mb-2">Demo Link</label>
                 <input
                   type="text"
                   value={formData.externalLink}

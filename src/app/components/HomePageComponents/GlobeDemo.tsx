@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import sampleArcs from "./SampleArcs";
 import { CompanyScroll } from "./CompanyScroll";
+import { TypeAnimation } from "react-type-animation";
+import { TypewriterEffectSmoothDemo } from "./homePageTypeWriteEffect";
 const World = dynamic(() => import("./globe").then((m) => m.World), {
   ssr: false,
 });
@@ -51,17 +53,17 @@ export function GlobeDemo() {
           }}
           className="space-y-8"
         >
-          <h1 className="text-center  md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#A259FF] to-[#1B8EFF] text-4xl  py-7 mt-5">
-            <span>Together We Rise In</span>
-          <p className="text-center mt-4 text-base md:text-lg font-normal text-neutral-700 dark:text-neutral-200 max-w-2xl mx-auto">
+          <div className="text-center  md:text-6xl font-bold  text-4xl  py-7 mt-5 text-white">
+         Together We Rise in Web3.
+          <p className="text-center get-white mt-1 text-base md:text-lg font-normal  dark:text-neutral-200 max-w-2xl mx-auto text-white">
             Over <span className="font-bold text-3xl">118,057</span> <span className="font-bold">
               developers {" "}
               </span>
                 are building their web3 career with FREE
             bootcamps and courses in top ecosystems, turning their skills into income.
           </p>
-          <button className="font-bold text-sm bg-gradient-to-r text-white px-3 bg-gradient-to-r from-[#A259FF] to-[#1B8EFF] py-1 rounded-md">Let's Rise In!</button>
-          </h1>
+          <button className="font-bold text-sm  text-white px-3 bg-gradient-to-r from-[#A259FF] to-[#1B8EFF] py-1 rounded-md">Let's Rise In!</button>
+          </div>
           <div className="flex justify-center">
           <CompanyScroll ></CompanyScroll>
           </div>

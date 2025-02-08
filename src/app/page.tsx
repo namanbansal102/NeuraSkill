@@ -6,14 +6,15 @@ import { CoverDemo } from "./components/HomePageComponents/SecSection/SecondSect
 import { WobbleCardDemo } from "./components/HomePageComponents/ThirdSection/WobbleCardDemo";
 import { InfiniteMovingCards } from "./components/HomePageComponents/FourthSection/infinite-moving-cards";
 import { InfiniteMovingCardsDemo } from "./components/HomePageComponents/FourthSection/InfiniteCardsDemo";
-import { FocusCardsDemo } from "./components/HomePageComponents/FifthSection/FocusCardsDemo";
+import { FocusCardsDemo } from "./components/HomePageComponents/FifthSection/FocusCardsDemo";0
 export default function Home() {
   return (
-   <div className="bg-black">
+
+   <div className="bg-black ">
   <GlobeDemo> </GlobeDemo>
-  <div className="h-5"></div>
+  <div className="h-7"></div>
   <CoverDemo></CoverDemo>
-  <div className="h-5"></div>
+  <div className="h-10"></div>
   <WobbleCardDemo></WobbleCardDemo>
 
   <div className="h-20"></div>
