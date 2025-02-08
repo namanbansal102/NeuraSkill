@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Search, ChevronDown, Wallet } from "lucide-react"
 import { ethers } from "ethers"
 import { useRouter } from "next/navigation"
-
+import logo from "./logo.jpg";
 interface NavItem {
   name: string
   href: string
@@ -101,7 +101,7 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex items-center gap-3">
             <img
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-LphuwRWYxIpkplyJ7Gh0hPDWMo2qcx.png"
+              src={logo.src}
               alt="OpenSea Logo"
               width={40}
               height={40}

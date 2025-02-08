@@ -12,6 +12,7 @@ import { useParams, useRouter } from "next/navigation"
 import fetchImageUrl from "@/app/components/fetchImageUrl"
 import toast from "react-hot-toast"
 import Image from "next/image"
+import { parseAppSegmentConfig } from "next/dist/build/segment-config/app/app-segment-config"
 const web3 = new Web3(window.ethereum)
 const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD
 const contract = new web3.eth.Contract(ABI, contractAdd)
@@ -45,6 +46,28 @@ export default function NFTDetails() {
     mode: "",
   })
   const query = useParams()
+  const handle_end_hackathon=async ()=>{
+    try{
+      toast.error("Warning Want To End Hack!");
+      toast.error("If Ends Unable to Reverse The Operation.")
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      })
+      const userAddress = accounts[0]
+      const tx=await contract.methods.end_hackathon(Number(query.hack_id),Number(query.build_id)).send(
+        {
+          from:userAddress
+        }
+      )
+    }
+    catch(error){
+      toast.error("ERROR")
+      console.log(error);
+      
+    }
+  }
+
+
   const fetch_hack = async () => {
     try {
       console.log("Fetch Build is Running")
