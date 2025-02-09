@@ -259,7 +259,7 @@ export default function NFTDetails() {
               className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 opacity-50"
               transition={{
                 duration: 3,
-                repeat: Number.POSITIVE_INFINITY,
+                repeat: Infinity,
                 repeatType: "loop",
               }}
             />

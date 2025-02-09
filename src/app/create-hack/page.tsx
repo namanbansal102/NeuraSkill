@@ -16,7 +16,9 @@ const pinata = new PinataSDK({
 const web3 = new Web3(window.ethereum)
 const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD;
 
-const contract = new web3.eth.Contract(ABI , contractAdd)
+import { AbiItem } from 'web3-utils';
+const formattedABI: AbiItem[] = JSON.parse(JSON.stringify(ABI));
+const contract = new web3.eth.Contract(formattedABI, contractAdd)
 console.log("My Contract is::::::::0",contract);
 
 interface Trait {
@@ -143,9 +145,13 @@ export default function CreateNFT() {
       }
       console.log("My Prize pool wei is:::",prizePoolWei);
       console.log("My Prize pool wei is:::",prizePoolArray);
-      
-      const imageUrl = URL.createObjectURL(file)
-      const pinataHash=await pinata.upload.file(file);
+      let imageUrl="";
+      let pinataHash={cid:""};
+      if (file!=null) {
+        
+        imageUrl = URL.createObjectURL(file)
+        pinataHash=await pinata.upload.file(file);
+      }
       // console.log("My Pinata hash is:::::::",pinataHash.cid);
       
       // Call contract function
