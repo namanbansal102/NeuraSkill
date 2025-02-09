@@ -59,7 +59,7 @@ export const HoverEffect = ({
           <Card>
             <CardTitle>{item.title}</CardTitle>
             <img className="mb-5" src={item.link} alt="" />
-            <CardDescription>{item.desc}</CardDescription>
+            <CardDescription>{item.desc.substring(0,200)}...</CardDescription>
             <button className="px-7 mt-2 py-1 bg-gradient-to-r from-red-600 to-purple-800 rounded-md font-bold text-lg shadow-lg">Review</button>
           </Card>
         </div>

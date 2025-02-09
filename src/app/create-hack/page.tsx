@@ -126,19 +126,21 @@ export default function CreateNFT() {
       // Convert prize amounts to wei
       console.log("My formdata prize pool is::::",formData.prizePool);
       
-      const prizePoolWei = Number(web3.utils.toWei(formData.prizePool, "ether"))
-      const prizePoolArray = prizes.map((prize) =>Number(web3.utils.toWei(prize.amount, "ether")))
+      const prizePoolWei = web3.utils.toWei(formData.prizePool.toString(), "ether");
+      const prizePoolArray = prizes.map((prize) =>web3.utils.toWei(prize.amount.toString(), "ether"))
       console.log("My FormData is::::::",formData);
       console.log(prizePoolWei);
       console.log(prizePoolArray);
       console.log(typeof formData.totalPrizes);
-      // Calculate total prize pool
-      // const totalPrizePool = prizePoolArray.reduce((a, b) => web3.utils.toBN(a).add(web3.utils.toBN(b)), web3.utils.toBN(0))
-
-      // // Verify total matches prize pool
-      // if (totalPrizePool.toString() !== web3.utils.toBN(prizePoolWei).toString()) {
-      //   throw new Error("Total of individual prizes must equal the prize pool")
-      // }
+      const totalPrizePool = prizePoolArray.reduce(
+        (a:any, b:any) => web3.utils.toBN(a).add(web3.utils.toBN(b)), 
+        web3.utils.toBN("0")
+      );
+      
+      // Verify total matches prize pool
+      if (!totalPrizePool.eq(web3.utils.toBN(prizePoolWei))) {
+        throw new Error("Total of individual prizes must equal the prize pool");
+      }
       console.log("My Prize pool wei is:::",prizePoolWei);
       console.log("My Prize pool wei is:::",prizePoolArray);
       
@@ -156,7 +158,7 @@ export default function CreateNFT() {
           formData.startDate,
           formData.endDate,
           formData.mode,
-          formData.totalPrizes,
+          Number(formData.totalPrizes),
           prizePoolArray
         )
         .send({

@@ -46,22 +46,28 @@ export default function NFTDetails() {
     mode: "",
   })
   const query = useParams()
+  console.log("My Hack is:::::",query.hack_id);
+  
   const handle_end_hackathon=async ()=>{
     try{
-      toast.error("Warning Want To End Hack!");
-      toast.error("If Ends Unable to Reverse The Operation.")
+
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
       })
       const userAddress = accounts[0]
-      const tx=await contract.methods.end_hackathon(Number(query.hack_id),Number(query.build_id)).send(
+      const tx=await contract.methods.end_hackathon(Number(query.hack_id)).send(
         {
-          from:userAddress
+          from:userAddress,
+          gasLimit: 3000000,
         }
       )
+      console.log("My Tanscation in End Hackathon is::::::",tx);
+      
+      toast.success("Hackathon Ended Successfully");
+      toast.success("Money Successfully Debited");
     }
-    catch(error){
-      toast.error("ERROR")
+    catch(error:any){
+      toast.error("ERROR",error)
       console.log(error);
       
     }
@@ -222,6 +228,7 @@ export default function NFTDetails() {
             </motion.button>
             <motion.button
               {...glowEffect}
+              onClick={handle_end_hackathon}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="w-full py-4 bg-gradient-to-r from-red-600 to-purple-800 rounded-xl font-bold text-lg shadow-lg"

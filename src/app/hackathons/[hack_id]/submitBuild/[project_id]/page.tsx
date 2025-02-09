@@ -160,10 +160,6 @@ export default function NFTDetails() {
               <h1 className="text-3xl font-bold">{hackDetails.name}</h1>
               <div className="flex items-center gap-4 text-gray-400 mt-2">
                 <span className="flex items-center gap-1">
-                  <Eye size={16} />
-                  72 views
-                </span>
-                <span className="flex items-center gap-1">
                   <Heart size={16} />
                   {hackDetails.upvotes} upvotes
                 </span>
@@ -248,23 +244,6 @@ export default function NFTDetails() {
               ))}
             </div>
           </motion.div>
-          <motion.button
-            {...glowEffect}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={upvoteProjects}
-            className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg font-semibold relative overflow-hidden"
-          >
-            <span className="relative z-10">Upvote Project (2 Wei)</span>
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 opacity-50"
-              transition={{
-                duration: 3,
-                repeat: Number.POSITIVE_INFINITY,
-                repeatType: "loop",
-              }}
-            />
-          </motion.button>
           {/* Upvote Button */}
           <motion.button
             {...glowEffect}

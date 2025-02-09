@@ -57,7 +57,7 @@ export const HoverEffect = ({
           </AnimatePresence>
           <Card>
             <CardTitle>{item.title}</CardTitle>
-            <CardDescription>{item.desc}</CardDescription>
+            <CardDescription>{item.desc.substring(0,400)}...</CardDescription>
           </Card>
         </div>
       ))}
