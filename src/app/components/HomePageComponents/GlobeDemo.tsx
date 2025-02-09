@@ -62,7 +62,9 @@ export function GlobeDemo() {
                 are building their web3 career with FREE
             bootcamps and courses in top ecosystems, turning their skills into income.
           </p>
-          <button className="font-bold text-sm  text-white px-3 bg-gradient-to-r from-[#A259FF] to-[#1B8EFF] py-1 rounded-md">Let's Rise In!</button>
+          <a href="/hackathons">
+          <button className="font-bold text-sm  text-white px-3 bg-gradient-to-r from-[#A259FF] to-[#1B8EFF] py-1 rounded-md">Let's Explore</button>
+          </a>
           </div>
           <div className="flex justify-center">
           <CompanyScroll ></CompanyScroll>
