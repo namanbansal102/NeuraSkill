@@ -16,7 +16,9 @@ import { CardHoverEffectDemo } from "@/app/hackathons/[hack_id]/CardHoverEffectD
 
 const web3 = new Web3(window.ethereum)
 const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD
-const contract = new web3.eth.Contract(ABI, contractAdd)
+import { AbiItem } from 'web3-utils';
+const formattedABI: AbiItem[] = JSON.parse(JSON.stringify(ABI));
+const contract = new web3.eth.Contract(formattedABI, contractAdd)
 
 interface BuildDetails {
   upvotes: number
