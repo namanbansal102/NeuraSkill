@@ -7,6 +7,7 @@ interface SlideData {
   title: string;
   button: string;
   src: string;
+  hack_id:number
 }
 
 interface SlideProps {
