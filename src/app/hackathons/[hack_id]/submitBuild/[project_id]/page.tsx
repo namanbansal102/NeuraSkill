@@ -248,7 +248,7 @@ export default function NFTDetails() {
           </motion.div>
           {/* Upvote Button */}
           <motion.button
-            {...glowEffect}
+            
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={handleSubmitBuild}

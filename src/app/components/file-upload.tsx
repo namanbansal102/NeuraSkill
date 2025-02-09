@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Upload, X } from "lucide-react"
+import { Upload, X } from 'lucide-react'
 import { useDropzone } from "react-dropzone"
 
 interface FileUploadProps {
@@ -44,14 +44,24 @@ export function FileUpload({ onFileSelect }: FileUploadProps) {
     maxFiles: 1,
   })
 
+  const dropzoneProps = getRootProps()
+
   return (
     <div className="relative">
       <motion.div
-        {...getRootProps()}
         className={`border-2 border-dashed rounded-xl h-[400px] flex items-center justify-center cursor-pointer
           ${isDragActive ? "border-blue-500 bg-blue-500/10" : "border-gray-600 hover:border-gray-500"}`}
         whileHover={{ scale: 1.01 }}
         whileTap={{ scale: 0.99 }}
+        onClick={dropzoneProps.onClick}
+        onKeyDown={dropzoneProps.onKeyDown}
+        tabIndex={dropzoneProps.tabIndex}
+        onFocus={dropzoneProps.onFocus}
+        onBlur={dropzoneProps.onBlur}
+        onDragEnter={dropzoneProps.onDragEnter}
+        onDragOver={dropzoneProps.onDragOver}
+        onDragLeave={dropzoneProps.onDragLeave}
+        onDrop={dropzoneProps.onDrop}
       >
         <input {...getInputProps()} />
         <AnimatePresence>
@@ -96,4 +106,3 @@ export function FileUpload({ onFileSelect }: FileUploadProps) {
     </div>
   )
 }
-

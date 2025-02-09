@@ -226,7 +226,7 @@ export default function NFTDetails() {
           {/* Action Buttons */}
           {isEnded && <div>
             <motion.button
-              {...glowEffect}
+              
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className={`w-full py-4 bg-gradient-to-r from-red-600 to-purple-800 rounded-xl font-bold text-lg shadow-lg disabled:${isEnded} disabled:cursor-not-allowed`}
@@ -237,7 +237,7 @@ export default function NFTDetails() {
           {!isEnded && <div className={`space-y-4 disabled:true cursor-none`}>
       
             <motion.button
-              {...glowEffect}
+            
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => {
@@ -250,7 +250,7 @@ export default function NFTDetails() {
               Create Build
             </motion.button>
             <motion.button
-              {...glowEffect}
+             
               onClick={handle_end_hackathon}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
