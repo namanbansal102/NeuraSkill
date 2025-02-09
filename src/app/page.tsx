@@ -13,7 +13,7 @@ export default function Home() {
   return (
 
    <div className="bg-black  ">
-  <GlobeWithSparkles> </GlobeWithSparkles>
+  <GlobeWithSparkles/>
   <div className="h-7"></div>
   <CoverDemo></CoverDemo>
   <div className="h-10"></div>
