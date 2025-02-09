@@ -54,7 +54,7 @@ export function GlobeDemo() {
           className="space-y-8"
         >
           <div className="text-center  md:text-6xl font-bold  text-4xl  py-7 mt-5 text-white">
-         Together We Rise in Web3.
+         Together We Build in Web3.
           <p className="text-center get-white mt-1 text-base md:text-lg font-normal  dark:text-neutral-200 max-w-2xl mx-auto text-white">
             Over <span className="font-bold text-3xl">118,057</span> <span className="font-bold">
               developers {" "}

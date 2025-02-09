@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { cn } from "../../../lib/util";
+import { useRouter } from "next/navigation";
 
 export const Card = React.memo(
   ({
@@ -46,23 +47,29 @@ export const Card = React.memo(
 Card.displayName = "Card";
 
 type Card = {
+  hack_id:number;
   title: string;
   src: string;
 };
-
 export function FocusCards({ cards }: { cards: Card[] }) {
+  const router=useRouter();
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto md:px-8 w-full">
+    <div  className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto md:px-8 w-full">
       {cards.map((card, index) => (
+        <div key={card.title} onClick={()=>{
+            router.push(`hackathons/${card.hack_id}`)
+        }} className="cursor-pointer">
+
         <Card
           key={card.title}
           card={card}
           index={index}
           hovered={hovered}
           setHovered={setHovered}
-        />
+          />
+          </div>
       ))}
     </div>
   );

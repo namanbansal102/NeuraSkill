@@ -97,7 +97,7 @@ export default function DropsPage() {
             transition={{ duration: 0.5 }}
             whileHover={{ scale: 1.02 }}
             
-            className={`group relative bg-gray-900 rounded-xl overflow-hidden cursor-pointer disabled:${mode=="online"||"IRL"?false:true} `}
+            className={`group relative bg-gray-900 rounded-xl overflow-hidden cursor-pointer `}
           >
             {/* Image */}
             <div className="aspect-[4/3] relative overflow-hidden">

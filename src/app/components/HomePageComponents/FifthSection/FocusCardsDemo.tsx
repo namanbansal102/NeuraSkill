@@ -1,32 +1,50 @@
+"use client"
+import toast from "react-hot-toast";
 import { FocusCards } from "./focus-cards";
-
+import { useEffect, useState } from "react";
+import Web3 from "web3"
+import ABI from "../../../ABI.json"
+import fetchImageUrl from "../../fetchImageUrl";
+const web3 = new Web3(window.ethereum)
+const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD
+const contract = new web3.eth.Contract(ABI, contractAdd)
 export function FocusCardsDemo() {
-  const cards = [
-    {
-      title: "Forest Adventure",
-      src: "https://images.unsplash.com/photo-1518710843675-2540dd79065c?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      title: "Valley of life",
-      src: "https://images.unsplash.com/photo-1600271772470-bd22a42787b3?q=80&w=3072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      title: "Sala behta hi jayega",
-      src: "https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&w=3070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      title: "Camping is for pros",
-      src: "https://images.unsplash.com/photo-1486915309851-b0cc1f8a0084?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      title: "The road not taken",
-      src: "https://images.unsplash.com/photo-1507041957456-9c397ce39c97?q=80&w=3456&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      title: "The First Rule",
-      src: "https://assets.aceternity.com/the-first-rule.png",
-    },
-  ];
+  const [hackathons_arr, setHackathons_arr] = useState([]);
+  const fetch_hackathons=async ()=>{
+    try{
+      console.log("Fetch hacakthons calling");
 
-  return <FocusCards cards={cards} />;
+      let fetch_hackathon=await contract.methods.allHackathons().call();
+      // console.log("my fetch hacakthon is::::",fetch_hackathon[0])  ;
+      
+      let arr:any=[];
+      console.log("My Hackathons Fetched Are::::",fetch_hackathon);
+      for (let i = 0; i < fetch_hackathon.length; i++) {
+        let element = fetch_hackathon[i];
+
+        let url=await fetchImageUrl(fetch_hackathon[i].img_url);;
+        let obj={
+          hack_id:element[0],
+          title:element[2],
+          src:url,
+        }
+        arr.push(obj);
+      }
+      setHackathons_arr(arr);
+    }
+    catch(error){
+      console.log(error);
+      
+      toast.error("Error Fetching Hackathons");
+    }
+  
+  }
+  useEffect(() => {
+    console.log("use Effect Running ");
+    
+    fetch_hackathons();
+    console.log("After Function Calling");
+    
+  }, [])
+  return <FocusCards cards={hackathons_arr} />;
 }
