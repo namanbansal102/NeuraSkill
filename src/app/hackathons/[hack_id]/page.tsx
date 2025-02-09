@@ -13,6 +13,7 @@ import fetchImageUrl from "@/app/components/fetchImageUrl"
 import toast from "react-hot-toast"
 import Image from "next/image"
 import { parseAppSegmentConfig } from "next/dist/build/segment-config/app/app-segment-config"
+import { WinnerBuildsCardHoverEffect } from "./WinnersList/HackBuildsCardHoverEffect"
 const web3 = new Web3(window.ethereum)
 const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD
 const contract = new web3.eth.Contract(ABI, contractAdd)
@@ -32,6 +33,8 @@ interface hack_details {
 export default function NFTDetails() {
   const [isFavorited, setIsFavorited] = useState(false)
   const router = useRouter()
+  const [isEnded, setIsEnded] = useState<Boolean>(false);
+  const [winners_data, setWinners_data] = useState([])
   const [hack_details, setHack_details] = useState<hack_details>({
     hack_id: "",
     hack_owner: "",
@@ -47,7 +50,7 @@ export default function NFTDetails() {
   })
   const query = useParams()
   console.log("My Hack is:::::",query.hack_id);
-  
+ 
   const handle_end_hackathon=async ()=>{
     try{
 
@@ -65,6 +68,7 @@ export default function NFTDetails() {
       
       toast.success("Hackathon Ended Successfully");
       toast.success("Money Successfully Debited");
+      router.refresh();
     }
     catch(error:any){
       toast.error("ERROR",error)
@@ -96,6 +100,11 @@ export default function NFTDetails() {
         end_date: hack_info[9],
         mode: hack_info[10],
       })
+      console.log("My Hack Mode is:::::",hack_info[10]);
+      console.log("My Comparison in String is::::",(hack_info[10][0]=='E'));
+      
+      setIsEnded(true?hack_info[10][0]=='E':false);
+      
     } catch (error) {
       toast.error("Error Fetching Build")
       console.log("My Error is::::", error)
@@ -213,16 +222,28 @@ export default function NFTDetails() {
           </motion.div>
 
           {/* Action Buttons */}
-          <div className="space-y-4">
+          {isEnded && <div>
+            <motion.button
+              {...glowEffect}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className={`w-full py-4 bg-gradient-to-r from-red-600 to-purple-800 rounded-xl font-bold text-lg shadow-lg disabled:${isEnded} disabled:cursor-not-allowed`}
+            >
+              Hackathon Already Ended
+            </motion.button>
+            </div>}
+          {!isEnded && <div className={`space-y-4 disabled:true cursor-none`}>
       
             <motion.button
               {...glowEffect}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => {
+                console.log("Value Of Is Ended is::::::",isEnded);
+                
                 router.push("/create-build")
               }}
-              className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl font-bold text-lg shadow-lg"
+              className={`w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl font-bold text-lg shadow-lg `}
             >
               Create Build
             </motion.button>
@@ -231,13 +252,17 @@ export default function NFTDetails() {
               onClick={handle_end_hackathon}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full py-4 bg-gradient-to-r from-red-600 to-purple-800 rounded-xl font-bold text-lg shadow-lg"
+              className={`w-full py-4 bg-gradient-to-r from-red-600 to-purple-800 rounded-xl font-bold text-lg shadow-lg disabled:${isEnded} disabled:cursor-not-allowed`}
             >
               End Hackathon
             </motion.button>
-          </div>
+          </div>}
         </motion.div>
       </div>
+      {isEnded && <div>
+        <WinnerBuildsCardHoverEffect></WinnerBuildsCardHoverEffect>
+        </div>}
+      {!isEnded && <div>
 
       {/* Latest Builds Section */}
       <div className="mt-16">
@@ -258,6 +283,7 @@ export default function NFTDetails() {
       <div className="mt-16">
         <CarouselDemo />
       </div>
+      </div>}
     </div>
   )
 }

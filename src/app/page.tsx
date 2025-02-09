@@ -20,7 +20,11 @@ export default function Home() {
   <div className="h-20"></div>
   <center>
 
-  <h1 className="text-white text-5xl font-extrabold">Upcoming Hackathons</h1>
+  <h1 className="text-white text-5xl font-extrabold">Upcoming 
+    <span className="text-blue-500">
+      Hackathons
+      </span>
+      </h1>
   </center>
   <br /><br />
   <FocusCardsDemo></FocusCardsDemo>

@@ -99,10 +99,12 @@ export default function Navbar() {
       <div className="max-w-[2560px] mx-auto">
         <div className="flex items-center gap-8 px-4 h-[72px]">
           {/* Logo */}
-          <div className="flex items-center gap-3">
+          <div onClick={()=>{
+            router.push('/')
+          }} className="flex items-center gap-3 cursor-pointer">
             <img
               src={logo.src}
-              alt="OpenSea Logo"
+              alt="NeuraSkill Logo"
               width={40}
               height={40}
               className="rounded-full"

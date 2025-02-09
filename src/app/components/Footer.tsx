@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Ship, Instagram, Linkedin, Twitter, Github } from "lucide-react"
+import { Ship, Instagram, Linkedin, Twitter, Github,Bitcoin } from "lucide-react"
 import Link from "next/link"
 
 const footerSections = {
@@ -67,8 +67,8 @@ export default function Footer() {
         {/* Logo Section */}
         <motion.div variants={itemVariants} className="lg:col-span-1">
           <Link href="/" className="flex items-center gap-2 mb-4">
-            <Ship className="w-8 h-8" />
-            <span className="text-xl font-bold">OpenSea</span>
+            <Bitcoin className="w-8 h-8" />
+            <span className="text-xl font-bold">NeuraSkill</span>
           </Link>
           <p className="text-gray-400 mb-6">
             The world's first and largest digital marketplace for crypto collectibles and non-fungible tokens (NFTs).
@@ -111,7 +111,7 @@ export default function Footer() {
         variants={itemVariants}
         className="max-w-7xl mx-auto mt-16 pt-8 border-t border-gray-800 text-center text-gray-400"
       >
-        <p>© 2024 OpenSea. All rights reserved</p>
+        <p>© 2024 NeuraSkill. All rights reserved</p>
       </motion.div>
     </footer>
   )

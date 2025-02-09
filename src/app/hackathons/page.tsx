@@ -45,6 +45,7 @@ export default function DropsPage() {
         
         arr.push(obj);
       }
+      arr.reverse();
       setHackathons_arr(arr);
     }
     catch(error){

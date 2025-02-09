@@ -7,7 +7,7 @@ export function InfiniteMovingCardsDemo() {
   return (
     <div className="h-[30rem] rounded-md flex flex-col antialiased bg-white dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
       <br />
-      <center className="font-bold text-5xl p-3">Get Latest <span className="text-blue-600">
+      <center className="font-bold text-white text-5xl p-3">Get Latest <span className="text-blue-600">
 
       Updates
       </span>
