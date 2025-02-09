@@ -12,7 +12,7 @@ import LastBrand from "./components/HomePageComponents/LastSection/trust-brand";
 export default function Home() {
   return (
 
-   <div className="bg-black ">
+   <div className="bg-black  ">
   <GlobeWithSparkles> </GlobeWithSparkles>
   <div className="h-7"></div>
   <CoverDemo></CoverDemo>

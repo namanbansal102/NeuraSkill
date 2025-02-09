@@ -13,9 +13,10 @@ function GlobeWithSparkles() {
             Get Access
           </span>
           <h1 className='text-8xl  font-semibold bg-gradient-to-b from-[#edeffd] to-[#7b9cda] bg-clip-text text-transparent leading-[100%] tracking-tighter'>
-            Design with a Global
+          Empower with Blockchain
             <br />
-            Perspective, Innovate with Ease.
+            Elevate with AI.
+            
           </h1>
 
         </article>

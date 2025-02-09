@@ -6,7 +6,9 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 const web3 = new Web3(window.ethereum)
 const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD
-const contract = new web3.eth.Contract(ABI, contractAdd)
+import { AbiItem } from 'web3-utils';
+const formattedABI: AbiItem[] = JSON.parse(JSON.stringify(ABI));
+const contract = new web3.eth.Contract(formattedABI, contractAdd)
 export function CardHoverEffectDemo() {
   const params=useParams();
   const [projects, setProjects] = useState([])

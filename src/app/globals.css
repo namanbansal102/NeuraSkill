@@ -16,6 +16,7 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: black;
+  overflow-x: hidden;
 }
 ::-webkit-scrollbar {
   width: 10px; /* Width of the scrollbar */
