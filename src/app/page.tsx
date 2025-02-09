@@ -7,6 +7,7 @@ import { InfiniteMovingCards } from "./components/HomePageComponents/FourthSecti
 import { InfiniteMovingCardsDemo } from "./components/HomePageComponents/FourthSection/InfiniteCardsDemo";
 import { FocusCardsDemo } from "./components/HomePageComponents/FifthSection/FocusCardsDemo";import Earth from "./components/HomePageComponents/earth";
 import GlobeWithSparkles from "./components/HomePageComponents/layout-globe";
+import LastBrand from "./components/HomePageComponents/LastSection/trust-brand";
 0
 export default function Home() {
   return (
@@ -30,6 +31,7 @@ export default function Home() {
   <br /><br />
   <FocusCardsDemo></FocusCardsDemo>
   <InfiniteMovingCardsDemo></InfiniteMovingCardsDemo>
+    <LastBrand></LastBrand>
    </div>
   );
 }
