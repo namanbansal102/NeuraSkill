@@ -199,7 +199,7 @@ export default function CreateNFT() {
             <div className="space-y-6">
               <div>
                 <label className="block mb-2">
-                  Collection <span className="text-red-500">*</span>
+                  Collection <span className="text-red-500">(Feature To Be Implemented Soon)</span>
                 </label>
                 <motion.button
                   whileHover={{ scale: 1.01 }}
@@ -207,7 +207,7 @@ export default function CreateNFT() {
                   className="w-full flex items-center gap-2 px-4 py-3 bg-white/5 border border-gray-800 rounded-lg hover:bg-white/10 transition-colors"
                 >
                   <span className="text-lg">+</span>
-                  Create a new collection
+                  Create a new collection 
                 </motion.button>
               </div>......
               {/* Form Fields */}

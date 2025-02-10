@@ -36,7 +36,7 @@ export default function DropsPage() {
           hack_id:element[0],
           title:element[2],
           img_url:url,
-          prizePool:element[5],
+          prizePool:web3.utils.fromWei(element[5], "ether"),
           st_date:element[8],
           desc:element[4],
           end_date:element[9],
@@ -128,7 +128,7 @@ export default function DropsPage() {
                 </div>
                 <div className="text-right">
                   <p className="text-sm text-gray-400">Prize</p>
-                  <p className="font-medium">{prizePool}</p>
+                  <p className="font-medium">{prizePool} ETH</p>
                 </div>
               </div>
             </div>

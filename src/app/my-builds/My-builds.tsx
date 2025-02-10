@@ -11,22 +11,29 @@ import {
   IconTableColumn,
 } from "@tabler/icons-react";
 import fetchImageUrl from "../components/fetchImageUrl";
+import { useRouter } from "next/navigation";
 
 export function  BentoGridDemo({props}:any) {
     console.log("my Props are::::",props);
   
-    
+    const router=useRouter();
     
   return (
-    <BentoGrid className="max-w-4xl mx-auto bg-[#04111d] mb-10">
+    <BentoGrid className="max-w-4xl mx-auto bg-[#04111d] mb-24">
       {props.map(({name,project_id,desc,github_id,video_url,techStack}:any) => (
+        <div key={project_id} onClick={()=>{
+          router.push(`/builds/${project_id}`)
+        }}>
+
         <BentoGridItem
           key={project_id}
+          
           title={name}
           description={desc}
           header={github_id}
           icon={video_url}
-        />
+          />
+          </div>
       ))}
     </BentoGrid>
   );

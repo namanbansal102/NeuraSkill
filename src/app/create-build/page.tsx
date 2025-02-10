@@ -156,7 +156,7 @@ export default function CreateNFT() {
             <div className="space-y-6">
               <div>
                 <label className="block mb-2">
-                  Collection <span className="text-red-500">*</span>
+                  Collection <span className="text-red-500">(Feature To Be Implemented Soon)</span>
                 </label>
                 <motion.button
                   whileHover={{ scale: 1.01 }}

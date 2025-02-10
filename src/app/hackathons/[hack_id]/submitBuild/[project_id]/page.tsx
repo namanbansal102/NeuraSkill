@@ -13,11 +13,12 @@ import { CarouselDemo } from "../../carouse."
 import fetchImageUrl from "@/app/components/fetchImageUrl"
 import Link from "next/link"
 import { Loader } from "../../../../components/ui/loader"
+import { AIReviewModal } from "./AiReviewModel"
 
 const web3 = new Web3(window.ethereum)
 const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD
-import { AbiItem } from 'web3-utils';
-const formattedABI: AbiItem[] = JSON.parse(JSON.stringify(ABI));
+import type { AbiItem } from "web3-utils"
+const formattedABI: AbiItem[] = JSON.parse(JSON.stringify(ABI))
 const contract = new web3.eth.Contract(formattedABI, contractAdd)
 
 interface BuildDetails {
@@ -33,7 +34,7 @@ interface BuildDetails {
 
 export default function NFTDetails() {
   const searchParams = useParams()
-  const router=useRouter();
+  const router = useRouter()
   const [imgUrl, setImgUrl] = useState(
     "https://images.unsplash.com/photo-1639322537228-f710d846310a?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmxvY2tjaGFpbnxlbnwwfHwwfHx8MA%3D%3D",
   )
@@ -48,6 +49,9 @@ export default function NFTDetails() {
     github_url: "",
   })
   const [imageLoading, setImageLoading] = useState(true)
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false)
+  const [reviewScore, setReviewScore] = useState(0)
+  const [reviewLoading, setReviewLoading] = useState(false)
 
   useEffect(() => {
     fetchBuild()
@@ -87,11 +91,16 @@ export default function NFTDetails() {
       // const router=useRouter();
       toast.success("Build Registered Successfully.")
       // open a review box if user yes then project review by AI
-      const AIScore=await handleReviewByAI();
+      setReviewLoading(true)
+      let AIScore = await handleReviewByAI()
+      setReviewLoading(false)
       toast.success("Your Project is Review By Our AI")
-      upvoteProjects(Number(AIScore))
+      console.log("Hoorahy My Number is:::::::::",Number(AIScore));
+      console.log("Hoorahy My Number is:::::::::",AIScore);
+      console.log("Hoorahy My Number is:::::::::",reviewScore);
+      await upvoteProjects(reviewScore)
       toast.success("Reviewed By Our AI Model.")
-      router.back();
+      // router.back()
     } catch (err: any) {
       console.log("Error is:::", err)
       toast.error(err)
@@ -105,47 +114,47 @@ export default function NFTDetails() {
       const userAddress = accounts[0]
       const hack_id = Number(searchParams.hack_id)
       const project_id = Number(searchParams.project_id)
-      const tx = await contract.methods.upvoteProject_score(hack_id, project_id,Number(score)).send({
+      const tx = await contract.methods.upvoteProject_score(hack_id, project_id, score).send({
         from: userAddress,
         value: 2,
         gasLimit: 3000000,
       })
       toast.success("Project upvoted successfully!")
     } catch (error) {
+      console.log("Error is:::::",error);
+      
       toast.error("Error upvoting project")
     }
   }
-  const handleReviewByAI=async ()=>{
-    try{
+  const handleReviewByAI = async () => {
+    try {
       await fetch("https://gemini-service-d82v.onrender.com/upvote-project", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          "build_name":hackDetails.name,
-          "build_tech_stack":hackDetails.techStack,
-          "build_desc":hackDetails.desc
+          build_name: hackDetails.name,
+          build_tech_stack: hackDetails.techStack,
+          build_desc: hackDetails.desc,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            setReviewScore(data.msg)
+            setIsReviewModalOpen(true)
+            return data.msg
+          } else {
+            return 0
+          }
         })
-    })
-    .then(response => response.json())
-    .then(data => {
-      if(data.success==true){
-        console.log("Review By AI is True",data);
-        return data.msg;
-      }
-      else{
-        return 0;
-      }
-    })
-    .catch(error => {
-      console.error("Error:", error);
-      return 0;
-
-    });
-    }
-    catch(error){
-      return 0;
+        .catch((error) => {
+          console.error("Error:", error)
+          return 0
+        })
+    } catch (error) {
+      return 0
     }
   }
 
@@ -285,7 +294,6 @@ export default function NFTDetails() {
           </motion.div>
           {/* Upvote Button */}
           <motion.button
-            
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={handleSubmitBuild}
@@ -296,7 +304,7 @@ export default function NFTDetails() {
               className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 opacity-50"
               transition={{
                 duration: 3,
-                repeat: Infinity,
+                repeat: Number.POSITIVE_INFINITY,
                 repeatType: "loop",
               }}
             />
@@ -312,6 +320,16 @@ export default function NFTDetails() {
         <CardHoverEffectDemo></CardHoverEffectDemo>
         <CarouselDemo></CarouselDemo>
       </div>
+      {reviewLoading && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-gray-800 p-6 rounded-lg shadow-xl">
+            <Loader className="w-12 h-12 text-blue-500 mb-4" />
+            <p className="text-white text-center">Reviewing your project with AI...</p>
+          </div>
+        </div>
+      )}
+
+      <AIReviewModal isOpen={isReviewModalOpen} onClose={() => setIsReviewModalOpen(false)} score={reviewScore} />
     </div>
   )
 }
