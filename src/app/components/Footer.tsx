@@ -6,8 +6,8 @@ import Link from "next/link"
 
 const footerSections = {
   marketplace: {
-    title: "Marketplace",
-    items: ["Art", "Gaming", "Memberships", "PFPs", "Photography", "Music"],
+    title: "Hackathons",
+    items: ["View", "Gaming", "Memberships", "PFPs", "Photography", "Music"],
   },
   myAccount: {
     title: "My Account",
