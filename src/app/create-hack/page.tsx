@@ -10,6 +10,7 @@ import ABI from "../ABI.json";
 import { AbiItem } from 'web3-utils';
 import { TypewriterEffectSmoothDemo } from "./effect"
 import toast from "react-hot-toast"
+import { useRouter } from "next/navigation";
 const pinata = new PinataSDK({
   pinataJwt: process.env.NEXT_PUBLIC_PINATA_KEY,
   pinataGateway: "example-gateway.mypinata.cloud",
@@ -69,7 +70,7 @@ export default function CreateNFT() {
   const [prizes, setPrizes] = useState<Prize[]>([{ id: "0", amount: "0" }])
   const [formData, setFormData] = useState<FormData>(initialFormData)
   const [isSubmitting, setIsSubmitting] = useState(false)
-  
+  const router=useRouter();
   
   useEffect(() => {
     const totalPrizes = formData.totalPrizes
@@ -180,6 +181,7 @@ export default function CreateNFT() {
         })
 
       toast.success("Hackathon registered successfully!")
+      router.push('/hackathons')
       console.log("Transaction:", tx)
     } catch (err: any) {
       toast.error(err.message || "Error registering hackathon")

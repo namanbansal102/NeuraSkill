@@ -26,6 +26,7 @@ if (typeof window !== "undefined") {
   contract = new web3.eth.Contract(formattedABI, contractAdd)
 }
 
+
 interface Trait {
   id: string
   type: string

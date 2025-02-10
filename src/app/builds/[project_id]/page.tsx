@@ -236,6 +236,15 @@ export default function NFTDetails() {
           </div>
 
           {/* GitHub Div */}
+          <motion.button
+            
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={upvoteProjects}
+            className={`w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl font-bold text-lg shadow-lg `}
+          >
+            Upvote Project
+          </motion.button>
           {/* Team Members */}
           <motion.div className="bg-gray-900 rounded-xl p-6 border border-gray-800" {...fadeIn}>
             <h2 className="text-xl font-bold mb-4">Team Members</h2>
@@ -258,7 +267,7 @@ export default function NFTDetails() {
           {/* Upvote Button */}
         </motion.div>
       </div>
-
+      
       {/* Latest Builds Section */}
       <div className="mt-16">
         <h2 className="text-5xl font-bold text-center mb-8">
