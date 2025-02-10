@@ -10,10 +10,11 @@ import { useRouter } from "next/navigation";
 import fetchImageUrl from "../components/fetchImageUrl";
 import { AbiItem } from 'web3-utils';
 let  contract;
+let web3;
 if (typeof window !== "undefined") {
 
    
-  const web3 = new Web3(window.ethereum)
+  web3 = new Web3(window.ethereum)
   const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD;
   
   const formattedABI: AbiItem[] = JSON.parse(JSON.stringify(ABI));
