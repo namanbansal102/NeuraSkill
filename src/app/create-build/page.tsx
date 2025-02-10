@@ -11,16 +11,21 @@ import { TypewriterEffectSmoothDemo } from "./effect"
 import toast from "react-hot-toast"
 import { FaGithub, FaEthereum } from "react-icons/fa"
 import Image from "next/image"
+import { AbiItem } from 'web3-utils';
 const pinata = new PinataSDK({
   pinataJwt: process.env.NEXT_PUBLIC_PINATA_KEY,
   pinataGateway: "example-gateway.mypinata.cloud",
 });
-const web3 = new Web3(window.ethereum)
-const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD;
+let  contract;
+if (typeof window !== "undefined") {
 
-import { AbiItem } from 'web3-utils';
-const formattedABI: AbiItem[] = JSON.parse(JSON.stringify(ABI));
-const contract = new web3.eth.Contract(formattedABI, contractAdd)
+   
+  const web3 = new Web3(window.ethereum)
+  const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD;
+  
+  const formattedABI: AbiItem[] = JSON.parse(JSON.stringify(ABI));
+  contract = new web3.eth.Contract(formattedABI, contractAdd)
+}
 
 interface Trait {
   id: string

@@ -29,7 +29,7 @@ export default function Home() {
       </h1>
   </center>
   <br /><br />
-  <FocusCardsDemo></FocusCardsDemo>
+   <FocusCardsDemo></FocusCardsDemo> 
   <InfiniteMovingCardsDemo></InfiniteMovingCardsDemo>
     <LastBrand></LastBrand>
    </div>

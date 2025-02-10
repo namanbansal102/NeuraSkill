@@ -1,3 +1,4 @@
+"use client"
 import { HoverEffect } from "../../components/ui/HackBuildsHoverEffect";
 import Web3 from "web3"
 import ABI from "../../ABI.json"

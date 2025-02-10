@@ -10,8 +10,16 @@ import { button } from "@heroui/react";
 const web3 = new Web3(window.ethereum)
 const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD;
 import { AbiItem } from 'web3-utils';
-const formattedABI: AbiItem[] = JSON.parse(JSON.stringify(ABI));
-const contract = new web3.eth.Contract(formattedABI, contractAdd)
+let  contract;
+if (typeof window !== "undefined") {
+
+   
+  const web3 = new Web3(window.ethereum)
+  const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD;
+  
+  const formattedABI: AbiItem[] = JSON.parse(JSON.stringify(ABI));
+  contract = new web3.eth.Contract(formattedABI, contractAdd)
+}
 export function CarouselDemo() {
   const [hackathons_arr, setHackathons_arr] = useState([]);
   const fetch_hackathons=async ()=>{

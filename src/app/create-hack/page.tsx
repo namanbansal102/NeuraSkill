@@ -7,19 +7,23 @@ import Web3 from "web3"
 import { FileUpload } from "../components/file-upload"
 import { TraitInput } from "../components/trait-input"
 import ABI from "../ABI.json";
+import { AbiItem } from 'web3-utils';
 import { TypewriterEffectSmoothDemo } from "./effect"
 import toast from "react-hot-toast"
 const pinata = new PinataSDK({
   pinataJwt: process.env.NEXT_PUBLIC_PINATA_KEY,
   pinataGateway: "example-gateway.mypinata.cloud",
 });
-const web3 = new Web3(window.ethereum)
-const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD;
+let  contract;
+if (typeof window !== "undefined") {
 
-import { AbiItem } from 'web3-utils';
-const formattedABI: AbiItem[] = JSON.parse(JSON.stringify(ABI));
-const contract = new web3.eth.Contract(formattedABI, contractAdd)
-console.log("My Contract is::::::::0",contract);
+   
+  const web3 = new Web3(window.ethereum)
+  const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD;
+  
+  const formattedABI: AbiItem[] = JSON.parse(JSON.stringify(ABI));
+  contract = new web3.eth.Contract(formattedABI, contractAdd)
+}
 
 interface Trait {
   id: string
