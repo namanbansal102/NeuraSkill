@@ -7,7 +7,7 @@
             address payable[]  upvoters;// this are the address of upvoters 
             uint upvotes;
         }
-     struct hacakthon {
+    struct hacakthon {
         uint hack_id;
         address hack_owner;
         string title;
@@ -43,7 +43,6 @@
     hacakthon[] public hackathons_arr;// we have created a hacakthon array
     mapping (uint=> uint[]) hack_map;// this contains the hackathon id
     build[] public build_arr;
-
         function registerHackathon(string memory _title,string memory _img_url,string memory _desc,uint  _prizePool,string memory _st_date,string memory _end_date,string memory _mode,uint _nAwards,uint[] memory _prizePoolArray)  external payable {
             require(msg.value>=_prizePool,"Must Provide a Prize Pool");
             hackathons_arr.push(hacakthon(hack_id,msg.sender,_title,_img_url,_desc,_prizePool,_nAwards,_prizePoolArray,_st_date,_end_date,_mode));
@@ -102,6 +101,9 @@
         function fetch_hackathon(uint _hack_id) public view returns(hacakthon memory){
             return hackathons_arr[_hack_id];
         }
+        function get_latest_hack() public view returns(hacakthon memory){
+            return  hackathons_arr[hackathons_arr.length-1];
+        }
 
         function get_hack_builds(uint _hack_id)public view  returns (build[] memory) {
             uint len=hack_map[_hack_id].length;
@@ -117,6 +119,19 @@
                 if (pairs_array[i].project_id==_project_id) {
                 require(msg.value>=1,"Must Send Ether 1");
                     hack_upvotes_map[_hack_id][i].upvotes++;
+                    emit deposit(msg.sender, msg.value);
+                    hack_upvotes_map[_hack_id][i].upvoters.push(payable(msg.sender));
+                    break;
+                }
+            }// update my array globally
+            build_arr[_project_id].upvotes++;
+        }
+        function upvoteProject_score(uint _hack_id,uint _project_id,uint _score) external payable {
+            pair[] storage pairs_array=hack_upvotes_map[_hack_id];
+            for (uint256 i = 0; i < pairs_array.length; i++) {
+                if (pairs_array[i].project_id==_project_id) {
+                require(msg.value>=1,"Must Send Ether 1");
+                    hack_upvotes_map[_hack_id][i].upvotes+=_score;
                     emit deposit(msg.sender, msg.value);
                     hack_upvotes_map[_hack_id][i].upvoters.push(payable(msg.sender));
                     break;
@@ -167,7 +182,7 @@
             // we have gooten all the project ids for the particular hacakthon now we have to distribute all the prizes
             for (uint i = 0; i < winners.length; i++) {
                 uint winner_project_id=winners[i].project_id;
-                build_arr[winner_project_id].upvotes+=5;
+                build_arr[winner_project_id].upvotes+=5;// for winning the project
                 address payable  build_owner=build_arr[winner_project_id].build_owner;
                 build_owner.transfer(prize_pool_array[i]);
                 emit transferPrize(build_owner, prize_pool_array[i]);
@@ -175,12 +190,12 @@
             
             // now  my prize is distributed to all the winners
             // after that some amount is distributed to all the investors in my project
-            for (uint i = 0; i < winners.length; i++) {
+            for (uint i = 0; i < winners.length; i++) { 
                 address payable[] memory winner_project_investors=winners[i].upvoters;
                 for (uint j = 0; j < winner_project_investors.length; j++) {
                     address payable investor_address=winner_project_investors[j];
-                    investor_address.transfer(1);
-                   emit  transferFund(investor_address, 1);
+                    investor_address.transfer(2);
+                   emit  transferFund(investor_address, 2);
                 }
             }
     // now marking the hacakthon end as true

@@ -84,16 +84,20 @@ export default function NFTDetails() {
         from: userAddress,
       })
       console.log("My Transaction is::::::::::", tx)
-
       // const router=useRouter();
       toast.success("Build Registered Successfully.")
+      // open a review box if user yes then project review by AI
+      const AIScore=await handleReviewByAI();
+      toast.success("Your Project is Review By Our AI")
+      upvoteProjects(Number(AIScore))
+      toast.success("Reviewed By Our AI Model.")
       router.back();
     } catch (err: any) {
       console.log("Error is:::", err)
       toast.error(err)
     }
   }
-  const upvoteProjects = async () => {
+  const upvoteProjects = async (score) => {
     try {
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
@@ -101,7 +105,7 @@ export default function NFTDetails() {
       const userAddress = accounts[0]
       const hack_id = Number(searchParams.hack_id)
       const project_id = Number(searchParams.project_id)
-      const tx = await contract.methods.upvoteProject(hack_id, project_id).send({
+      const tx = await contract.methods.upvoteProject_score(hack_id, project_id,Number(score)).send({
         from: userAddress,
         value: 2,
         gasLimit: 3000000,
@@ -109,6 +113,39 @@ export default function NFTDetails() {
       toast.success("Project upvoted successfully!")
     } catch (error) {
       toast.error("Error upvoting project")
+    }
+  }
+  const handleReviewByAI=async ()=>{
+    try{
+      await fetch("https://gemini-service-d82v.onrender.com/upvote-project", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          "build_name":hackDetails.name,
+          "build_tech_stack":hackDetails.techStack,
+          "build_desc":hackDetails.desc
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if(data.success==true){
+        console.log("Review By AI is True",data);
+        return data.msg;
+      }
+      else{
+        return 0;
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+      return 0;
+
+    });
+    }
+    catch(error){
+      return 0;
     }
   }
 
