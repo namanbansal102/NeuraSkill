@@ -16,7 +16,7 @@ const scrollingCompanies = [...companies, ...companies]
 
 export function CompanyScroll() {
   return (
-    <div className="relative w-full overflow-hidden bg-transparent py-3">
+    <div className="absloute w-full overflow-hidden bg-transparent  top">
       <motion.div
         initial={{ x: 0 }}
         animate={{ x: "-100%" }} // Move fully left

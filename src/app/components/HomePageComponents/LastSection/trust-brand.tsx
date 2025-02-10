@@ -12,7 +12,7 @@ function LastBrand() {
 
             <br />
 
-            <span>Used by the leaders.</span>
+            <span>Specialized by AI.</span>
           </div>
           <div className='mt-14 grid grid-cols-4'>
             <svg viewBox='0 0 180 56' fill='currentColor' className='w-full'>
