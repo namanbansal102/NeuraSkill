@@ -7,14 +7,13 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { link } from "fs";
 import fetchImageUrl from "@/app/components/fetchImageUrl";
-const web3 = new Web3(window.ethereum)
-const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD
 import { AbiItem } from 'web3-utils';
 let  contract;
+let web3;
 if (typeof window !== "undefined") {
 
    
-  const web3 = new Web3(window.ethereum)
+  web3 = new Web3(window.ethereum)
   const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD;
   
   const formattedABI: AbiItem[] = JSON.parse(JSON.stringify(ABI));
