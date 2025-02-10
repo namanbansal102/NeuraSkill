@@ -19,8 +19,6 @@ const pinata = new PinataSDK({
 let  contract;
 let web3;
 if (typeof window !== "undefined") {
-
-   
   web3 = new Web3(window.ethereum)
   const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD;
   
