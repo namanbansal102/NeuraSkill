@@ -39,7 +39,7 @@ const navItems: NavItem[] = [
     href: "/about",
     dropdown: [
       { name: "About", href: "/about" },
-      { name: "Terms&Cond", href: "/termsAndConditions" },
+      { name: "Terms & Cond.", href: "/termsAndConditions" },
     ],
   },
 ]

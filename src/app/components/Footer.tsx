@@ -1,43 +1,41 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Ship, Instagram, Linkedin, Twitter, Github,Bitcoin } from "lucide-react"
+import { Bitcoin, Instagram, Linkedin, Twitter, Github } from "lucide-react"
 import Link from "next/link"
 
 const footerSections = {
   marketplace: {
     title: "Hackathons",
-    items: ["View", "Gaming", "Memberships", "PFPs", "Photography", "Music"],
-  },
-  myAccount: {
-    title: "My Account",
-    items: ["Profile", "Favorites", "Watchlist", "Studio", "OpenSea Pro", "Settings"],
-  },
-  resources: {
-    title: "Resources",
     items: [
-      "Blog",
-      "Learn",
-      "Help center",
-      "Community standards",
-      "Taxes",
-      "Partners",
-      "Developer platform",
-      "Platform status",
+      { name: "View Hacks", href: "/hackathons" },
+      { name: "Create Hacks", href: "/create-hack" },
+      { name: "Latest Hacks", href: "/hackathons/0" },
     ],
   },
-  company: {
-    title: "Company",
-    items: ["About", "Careers", "Ventures"],
+  myAccount: {
+    title: "Builds",
+    items: [
+      { name: "My Builds", href: "/my-builds" },
+      { name: "Create Build", href: "/create-build" },
+      { name: "Submit Build", href: "/hackathons/0" },
+    ],
   },
-  
+  resources: {
+    title: "About",
+    items: [
+      { name: "About", href: "/about" },
+      { name: "Terms & Conditions", href: "/termsAndConditions" },
+      { name: "User Profile", href: "/userProfile" },
+    ],
+  },
 }
 
 const socialLinks = [
   { icon: Instagram, href: "#" },
   { icon: Twitter, href: "#" },
   { icon: Linkedin, href: "#" },
-  { icon: Github, href: "#" },
+  { icon: Github, href: "https://github.com/namanbansal102/NeuraSkill" },
 ]
 
 export default function Footer() {
@@ -71,8 +69,7 @@ export default function Footer() {
             <span className="text-xl font-bold">NeuraSkill</span>
           </Link>
           <p className="text-gray-400 mb-6">
-            The world's first and largest digital marketplace for crypto collectibles and non-fungible tokens (NFTs).
-            Buy, sell, and discover exclusive digital items.
+          NeurAKill is a revolutionary blockchain-based hackathon management platform built on the Flow chain
           </p>
           <div className="flex gap-4">
             {socialLinks.map((social, index) => (
@@ -96,8 +93,8 @@ export default function Footer() {
             <ul className="space-y-2">
               {section.items.map((item, index) => (
                 <motion.li key={index} whileHover={{ x: 5 }} transition={{ type: "spring", stiffness: 300 }}>
-                  <Link href="#" className="text-gray-400 hover:text-white transition-colors">
-                    {item}
+                  <Link href={item.href} className="text-gray-400 hover:text-white transition-colors">
+                    {item.name}
                   </Link>
                 </motion.li>
               ))}
@@ -111,7 +108,7 @@ export default function Footer() {
         variants={itemVariants}
         className="max-w-7xl mx-auto mt-16 pt-8 border-t border-gray-800 text-center text-gray-400"
       >
-        <p>© 2024 NeuraSkill. All rights reserved</p>
+        <p>© 2025 NeuraSkill. All rights reserved</p>
       </motion.div>
     </footer>
   )
