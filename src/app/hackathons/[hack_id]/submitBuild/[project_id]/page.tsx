@@ -107,9 +107,10 @@ export default function NFTDetails() {
       console.log("Hoorahy My Number is:::::::::",reviewScore);
       await upvoteProjects(reviewScore)
       toast.success("Reviewed By Our AI Model.")
-      // router.back()
+      router.back()
     } catch (err: any) {
       console.log("Error is:::", err)
+
       toast.error(err)
     }
   }

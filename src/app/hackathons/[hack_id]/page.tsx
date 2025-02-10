@@ -78,7 +78,7 @@ export default function NFTDetails() {
       
       toast.success("Hackathon Ended Successfully");
       toast.success("Money Successfully Debited");
-      router.refresh();
+      router.push('/hackathons');
     }
     catch(error:any){
       toast.error("ERROR",error)
