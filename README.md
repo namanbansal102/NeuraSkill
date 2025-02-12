@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧠 NeuraSkill
 
-## Getting Started
+<div align="center">
+  <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-eo4h9rJJQNAEN3yeAIVDfviiRPTGgP.png" alt="NeuraSkill Banner" width="100%" />
+  
+  ### Empower with Blockchain. Elevate with AI.
+  
+  [![Live Demo](https://img.shields.io/badge/Live-Demo-blue?style=for-the-badge)](https://neura-skill.vercel.app/)
+  [![Smart Contract](https://img.shields.io/badge/Smart%20Contract-Flow-blue?style=for-the-badge)](https://flowscan.org/contract/0x587Bb1bcFF2954FE09C962599f4B976383772350)
+</div>
 
-First, run the development server:
+## 🌟 Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+NeuraSkill is a revolutionary blockchain-based hackathon management system that combines the power of blockchain technology with artificial intelligence to create a transparent, secure, and automated platform for organizing and participating in hackathons.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ⚡ Key Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 🏗️ Core Features
+- **Decentralized Hackathon Hosting** - Create and manage hackathons on the blockchain
+- **Smart Build Submission System** - Submit and showcase projects with permanent blockchain storage
+- **ETH-Powered Voting** - Secure upvoting mechanism with 1 ETH deduction
+- **AI-Driven Evaluation** - Automated project scoring and assessment
+- **Instant Prize Distribution** - Smart contract-based automatic rewards
+- **Multi-Chain Support** - Currently on Flow, expanding to Ethereum, Solana, and Sui
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🔥 New Features & Improvements
 
-## Learn More
+- **Cross-Chain Bridging** - Seamless transfer of assets between supported blockchains
+- **NFT Certificates** - Mint achievement certificates for hackathon participants
+- **Reputation System** - Build and maintain developer reputation scores
+- **Team Formation Hub** - Find teammates based on skills and interests
+- **Project Analytics** - In-depth metrics and insights for submissions
+- **Community Governance** - DAO-based platform decision making
 
-To learn more about Next.js, take a look at the following resources:
+## 🔗 Smart Contracts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Flow Contract**: `0x587Bb1bcFF2954FE09C962599f4B976383772350`
+- **Features**:
+  - Hackathon Creation & Management
+  - Build Submission & Storage
+  - Voting Mechanism
+  - Prize Distribution
+  - Multi-chain Integration (Coming Soon)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛠️ Technology Stack
 
-## Deploy on Vercel
+- **Blockchain**: Flow (Primary), Ethereum, Solana, Sui (Upcoming)
+- **Frontend**: Next.js, React
+- **Smart Contracts**: Cadence (Flow)
+- **AI Integration**: TensorFlow, OpenAI
+- **Storage**: IPFS, Flow Storage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🚀 Getting Started
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Visit [NeuraSkill](https://neura-skill.vercel.app/)
+2. Connect your wallet (MetaMask or Flow supported)
+3. Create or join a hackathon
+4. Submit your project or start voting
+
+## 👥 Community & Support
+
+- [Discord](https://discord.gg/neuraskill)
+- [Twitter](https://twitter.com/neuraskill)
+- [Documentation](https://docs.neuraskill.io)
+
+## 🔮 Future Roadmap
+
+- [ ] Launch on Ethereum Mainnet
+- [ ] Implement Cross-Chain Operations
+- [ ] Release Mobile Application
+- [ ] Integrate Advanced AI Features
+- [ ] Expand Community Governance
+- [ ] Launch NeuraSkill Token
+
+## 🤝 Contributing
+
+We welcome contributions! Please check our [Contributing Guidelines](CONTRIBUTING.md) for details.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## ⭐ Inspiration
+
+Inspired by DoraHacks, NeuraSkill takes the concept further with AI integration, multi-chain support, and enhanced automation features.
+
+---
+
+<div align="center">
+  Made with 💜 by the NeuraSkill Team
+</div>
