@@ -7,11 +7,9 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { link } from "fs";
 import fetchImageUrl from "@/app/components/fetchImageUrl";
+import fetchContract from "@/app/components/fetchContract";
 const web3 = new Web3(window.ethereum)
-const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD
-import { AbiItem } from 'web3-utils';
-const formattedABI: AbiItem[] = JSON.parse(JSON.stringify(ABI));
-const contract = new web3.eth.Contract(formattedABI, contractAdd)
+const contract = fetchContract()
 export function HackBuildsCardHoverEffect() {
   const params=useParams();
   console.log("My Params are :::::::::",params);

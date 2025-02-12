@@ -16,15 +16,10 @@ import { Loader } from "../../../../components/ui/loader"
 
 let web3
 import { AbiItem } from 'web3-utils';
-let  contract;
-if (typeof window !== "undefined") {
-
-   
+import fetchContract from "@/app/components/fetchContract"
+let  contract=fetchContract();
+if (typeof window !== "undefined") { 
   web3 = new Web3(window.ethereum)
-  const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD;
-  
-  const formattedABI: AbiItem[] = JSON.parse(JSON.stringify(ABI));
-  contract = new web3.eth.Contract(formattedABI, contractAdd)
 }
 
 interface BuildDetails {

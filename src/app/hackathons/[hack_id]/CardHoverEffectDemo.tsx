@@ -8,16 +8,8 @@ import { useEffect, useState } from "react";
 const web3 = new Web3(window.ethereum)
 const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD
 import { AbiItem } from 'web3-utils';
-let  contract;
-if (typeof window !== "undefined") {
-
-   
-  const web3 = new Web3(window.ethereum)
-  const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD;
-  
-  const formattedABI: AbiItem[] = JSON.parse(JSON.stringify(ABI));
-  contract = new web3.eth.Contract(formattedABI, contractAdd)
-}
+import fetchContract from "@/app/components/fetchContract";
+let  contract=fetchContract();
 export function CardHoverEffectDemo() {
   const params=useParams();
   const [projects, setProjects] = useState([])

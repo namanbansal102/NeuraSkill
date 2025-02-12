@@ -11,20 +11,15 @@ import { AbiItem } from 'web3-utils';
 import { TypewriterEffectSmoothDemo } from "./effect"
 import toast from "react-hot-toast"
 import { useRouter } from "next/navigation";
+import fetchContract from "../components/fetchContract";
 const pinata = new PinataSDK({
   pinataJwt: process.env.NEXT_PUBLIC_PINATA_KEY,
   pinataGateway: "example-gateway.mypinata.cloud",
 });
-let  contract;
+let  contract=fetchContract();
 let web3;
-if (typeof window !== "undefined") {
-
-   
+if (typeof window !== "undefined") {   
 web3 = new Web3(window.ethereum)
-  const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD;
-  
-  const formattedABI: AbiItem[] = JSON.parse(JSON.stringify(ABI));
-  contract = new web3.eth.Contract(formattedABI, contractAdd)
 }
 
 interface Trait {

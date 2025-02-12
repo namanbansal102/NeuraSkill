@@ -5,16 +5,11 @@ import Web3 from "web3"
 import ABI from "../ABI.json";
 import { TypewriterEffectSmoothDemo } from './effect'
 import { AbiItem } from 'web3-utils';
-let  contract;
+import fetchContract from '../components/fetchContract';
+let  contract=fetchContract();
 let web3;
 if (typeof window !== "undefined") {
-
-   
-  web3 = new Web3(window.ethereum)
-  const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD;
-  
-  const formattedABI: AbiItem[] = JSON.parse(JSON.stringify(ABI));
-  contract = new web3.eth.Contract(formattedABI, contractAdd)
+   web3 = new Web3(window.ethereum)
 }
 const page = () => {
   const [build_data, setBuild_data] = useState([])

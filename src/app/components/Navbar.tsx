@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Search, ChevronDown, Wallet } from "lucide-react"
+import { Search, ChevronDown } from "lucide-react"
 import { ethers } from "ethers"
 import { useRouter } from "next/navigation"
-import logo from "./logo.jpg";
+import Image from "next/image"
+import logo from "./logo.jpg"
+
 interface NavItem {
   name: string
   href: string
@@ -14,6 +16,27 @@ interface NavItem {
     href: string
   }[]
 }
+
+interface Chain {
+  name: string
+  image: string
+  contractAddress: string
+}
+
+const chains: Chain[] = [
+  {
+    name: "Flow Testnet",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwQNIRV--sVJ7okbop62acNlkNIMh7NPQH3w&s",
+    contractAddress: "0x587Bb1bcFF2954FE09C962599f4B976383772350",
+  },
+  { name: "Kaia Testnet", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd-6FrG6gbCKUuiP54fDQysErNbld4T75FTQ&s", contractAddress: "0x5183B2683d31902137ed91bF0154A3459Ec97DA6" },
+  { name: "Telos TestNet", image: "https://www.cryptoninjas.net/wp-content/uploads/telos-EVM-cryptoninjas.jpg", contractAddress: "POLYGON_CONTRACT_ADDRESS" },
+  {
+    name: "Neox TestNet",
+    image: "https://styles.redditmedia.com/t5_2qky3/styles/communityIcon_7q5tl1amo1t31.png",
+    contractAddress: "0x79771cD2d78875faDfbe2D42DB2b018E8b77c6EF",
+  },
+]
 
 const navItems: NavItem[] = [
   {
@@ -51,8 +74,10 @@ export default function Navbar() {
   const [searchQuery, setSearchQuery] = useState("")
   const [searchResults, setSearchResults] = useState<string[]>([])
   const [isScrolled, setIsScrolled] = useState(false)
-  const router=useRouter();
-  // Handle scroll effect
+  const [selectedChain, setSelectedChain] = useState<Chain>(chains[0])
+  const [isChainDropdownOpen, setIsChainDropdownOpen] = useState(false)
+  const router = useRouter()
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0)
@@ -61,7 +86,13 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Connect wallet function
+  useEffect(() => {
+    const savedChain = localStorage.getItem("selectedChain")
+    if (savedChain) {
+      setSelectedChain(JSON.parse(savedChain))
+    }
+  }, [])
+
   const connectWallet = async () => {
     if (typeof window.ethereum !== "undefined") {
       try {
@@ -79,14 +110,19 @@ export default function Navbar() {
     }
   }
 
-  // Search function
   const handleSearch = (query: string) => {
     setSearchQuery(query)
-    // Mock search results - replace with your actual search logic
     const mockResults = ["Popular NFT #1", "Top Collection", "Trending Artist"].filter((item) =>
       item.toLowerCase().includes(query.toLowerCase()),
     )
     setSearchResults(query ? mockResults : [])
+  }
+
+  const handleChainSelect = (chain: Chain) => {
+    setSelectedChain(chain)
+    localStorage.setItem("selectedChain", JSON.stringify(chain))
+    localStorage.setItem("CONTRACT_ADD", chain.contractAddress)
+    setIsChainDropdownOpen(false)
   }
 
   return (
@@ -98,11 +134,9 @@ export default function Navbar() {
       <div className="max-w-[2560px] mx-auto">
         <div className="flex items-center gap-8 px-4 h-[72px]">
           {/* Logo */}
-          <div onClick={()=>{
-            router.push('/')
-          }} className="flex items-center gap-3 cursor-pointer">
-            <img
-              src={logo.src}
+          <div onClick={() => router.push("/")} className="flex items-center gap-3 cursor-pointer">
+            <Image
+              src={logo.src || "/placeholder.svg"}
               alt="NeuraSkill Logo"
               width={40}
               height={40}
@@ -187,9 +221,10 @@ export default function Navbar() {
           {/* Right Section */}
           <div className="flex items-center gap-4">
             {isWalletConnected ? (
-              <div onClick={()=>{
-                router.push('/userProfile')
-              }}  className="flex items-center gap-2 bg-black/30 backdrop-blur-sm text-white px-4 py-2 rounded-lg cursor-pointer border border-white/10">
+              <div
+                onClick={() => router.push("/userProfile")}
+                className="flex items-center gap-2 bg-black/30 backdrop-blur-sm text-white px-4 py-2 rounded-lg cursor-pointer border border-white/10"
+              >
                 <div className="relative">
                   <div className="w-2 h-2 rounded-full bg-green-500 absolute -top-1 -right-1 animate-pulse" />
                   <div className="w-5 h-5 rounded-full bg-white/20" />
@@ -199,15 +234,47 @@ export default function Navbar() {
                 </span>
               </div>
             ) : (
-              <button  onClick={connectWallet} className="p-[3px] relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
-              <div className="px-3 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white 1 hover:scale-[102%]">
-                Connnect Wallet
+              <div className="relative">
+                <button onClick={connectWallet} className="p-[3px] relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
+                  <div className="px-3 py-2 bg-black rounded-[6px] relative group transition duration-200 text-white hover:scale-[102%] flex items-center gap-2">
+                    <span>Connect Wallet</span>
+                    <ChevronDown
+                      className="w-4 h-4 cursor-pointer"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setIsChainDropdownOpen(!isChainDropdownOpen)
+                      }}
+                    />
+                  </div>
+                </button>
+                <AnimatePresence>
+                  {isChainDropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute top-full right-0 mt-2 w-48 bg-black/30 backdrop-blur-md rounded-lg shadow-lg py-2 border border-white/10"
+                    >
+                      {chains.map((chain) => (
+                        <div
+                          key={chain.name}
+                          className="flex items-center gap-2 px-4 py-2 text-white hover:bg-white/10 transition-colors cursor-pointer"
+                          onClick={() => handleChainSelect(chain)}
+                        >
+                          <Image src={chain.image || "/placeholder.svg"} alt={chain.name} width={24} height={24} />
+                          <span>{chain.name}</span>
+                          {selectedChain.name === chain.name && (
+                            <div className="ml-auto w-2 h-2 bg-green-500 rounded-full" />
+                          )}
+                        </div>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-            </button>
             )}
-
-          
           </div>
         </div>
       </div>

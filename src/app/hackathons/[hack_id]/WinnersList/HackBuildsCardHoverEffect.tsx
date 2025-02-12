@@ -8,16 +8,11 @@ import { useEffect, useState } from "react";
 import { link } from "fs";
 import fetchImageUrl from "@/app/components/fetchImageUrl";
 import { AbiItem } from 'web3-utils';
-let  contract;
+import fetchContract from "@/app/components/fetchContract";
+let  contract=fetchContract();
 let web3;
-if (typeof window !== "undefined") {
-
-   
+if (typeof window !== "undefined") { 
   web3 = new Web3(window.ethereum)
-  const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD;
-  
-  const formattedABI: AbiItem[] = JSON.parse(JSON.stringify(ABI));
-  contract = new web3.eth.Contract(formattedABI, contractAdd)
 }
 export function WinnerBuildsCardHoverEffect() {
   const params=useParams();
