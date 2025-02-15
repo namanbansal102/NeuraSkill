@@ -21,20 +21,43 @@ interface Chain {
   name: string
   image: string
   contractAddress: string
+  chainId: string
+  rpcUrl: string
+  blockExplorerUrl: string
 }
 
 const chains: Chain[] = [
   {
     name: "Flow Testnet",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwQNIRV--sVJ7okbop62acNlkNIMh7NPQH3w&s",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwQNIRV--sVJ7okbop62acNlkNIMh7NPQH3w&s",  
     contractAddress: "0x587Bb1bcFF2954FE09C962599f4B976383772350",
+    chainId: "0x221", // Replace with actual Flow Testnet chain ID
+    rpcUrl: "https://testnet.evm.nodes.onflow.org", // Replace with actual RPC URL
+    blockExplorerUrl: "https://evm-testnet.flowscan.io", // Replace with actual block explorer URL
   },
-  { name: "Kaia Testnet", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd-6FrG6gbCKUuiP54fDQysErNbld4T75FTQ&s", contractAddress: "0x5183B2683d31902137ed91bF0154A3459Ec97DA6" },
-  { name: "Telos TestNet", image: "https://www.cryptoninjas.net/wp-content/uploads/telos-EVM-cryptoninjas.jpg", contractAddress: "POLYGON_CONTRACT_ADDRESS" },
   {
-    name: "Neox TestNet",
-    image: "https://styles.redditmedia.com/t5_2qky3/styles/communityIcon_7q5tl1amo1t31.png",
-    contractAddress: "0x79771cD2d78875faDfbe2D42DB2b018E8b77c6EF",
+    name: "Kaia Testnet",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd-6FrG6gbCKUuiP54fDQysErNbld4T75FTQ&s",
+    contractAddress: "0x5183B2683d31902137ed91bF0154A3459Ec97DA6",
+    chainId: "0x3E9", // Replace with actual Kaia Testnet chain ID
+    rpcUrl: "https://public-en-kairos.node.kaia.io", // Replace with actual RPC URL
+    blockExplorerUrl: "https://kairos.kaiascope.com", // Replace with actual block explorer URL
+  },
+  {
+    name: "Creator TestNet",
+    image: "https://creatorchain.io/logo-text.svg",
+    contractAddress: "0xDd8370d9E4E23719A4CdF6217a9179088E3fC1db",
+    chainId: "0x10469", // Replace with actual Creator TestNet chain ID
+    rpcUrl: "https://rpc.creatorchain.io", // Replace with actual RPC URL
+    blockExplorerUrl: "https://explorer.creatorchain.io", // Replace with actual block explorer URL
+  },
+  {
+    name: "Ancient 8 TestNet",
+    image: "https://public.rootdata.com/images/b6/1721184366692.jpg",
+    contractAddress: "0xDd8370d9E4E23719A4CdF6217a9179088E3fC1db",
+    chainId: "0x1AD1BA8", // Replace with actual Telos TestNet chain ID
+    rpcUrl: "https://28122024.rpc.thirdweb.com", // Replace with actual RPC URL
+    blockExplorerUrl: "https://scanv2-testnet.ancient8.gg", // Replace with actual block explorer URL
   },
 ]
 
@@ -118,11 +141,51 @@ export default function Navbar() {
     setSearchResults(query ? mockResults : [])
   }
 
-  const handleChainSelect = (chain: Chain) => {
+  const switchChain = async (chain: Chain) => {
+    if (typeof window.ethereum !== "undefined") {
+      try {
+        // Try to switch to the chain
+        await window.ethereum.request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: chain.chainId }],
+        })
+      } catch (switchError: any) {
+        // This error code indicates that the chain has not been added to MetaMask.
+        if (switchError.code === 4902) {
+          try {
+            await window.ethereum.request({
+              method: "wallet_addEthereumChain",
+              params: [
+                {
+                  chainId: chain.chainId,
+                  chainName: chain.name,
+                  nativeCurrency: {
+                    name: "Native Token",
+                    symbol: "ETH", // Replace with the actual symbol
+                    decimals: 18,
+                  },
+                  rpcUrls: [chain.rpcUrl], // You need to add this to your Chain interface
+                  blockExplorerUrls: [chain.blockExplorerUrl], // You need to add this to your Chain interface
+                },
+              ],
+            })
+          } catch (addError) {
+            console.error("Error adding chain:", addError)
+          }
+        } else {
+          console.error("Error switching chain:", switchError)
+        }
+      }
+    }
+  }
+
+  const handleChainSelect = async (chain: Chain) => {
     setSelectedChain(chain)
     localStorage.setItem("selectedChain", JSON.stringify(chain))
     localStorage.setItem("CONTRACT_ADD", chain.contractAddress)
     setIsChainDropdownOpen(false)
+
+    await switchChain(chain)
   }
 
   return (
@@ -240,7 +303,7 @@ export default function Navbar() {
                   <div className="px-3 py-2 bg-black rounded-[6px] relative group transition duration-200 text-white hover:scale-[102%] flex items-center gap-2">
                     <span>Connect Wallet</span>
                     <ChevronDown
-                      className="w-4 h-4 cursor-pointer"
+                      className="w-7 h-7 cursor-pointer  p-1"
                       onClick={(e) => {
                         e.stopPropagation()
                         setIsChainDropdownOpen(!isChainDropdownOpen)

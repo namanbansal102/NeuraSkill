@@ -53,7 +53,7 @@ export default function DropsPage() {
     catch(error){
       console.log(error);
       
-      toast.error("Error Fetching Hackathons");
+      // toast.error("Error Fetching Hackathons");
     }
   
   }

@@ -43,7 +43,7 @@ export function FocusCardsDemo() {
     catch(error){
       console.log(error);
       
-      toast.error("Error Fetching Hackathons");
+      // toast.error("Error Fetching Hackathons");
     }
   
   }
