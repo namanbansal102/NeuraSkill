@@ -142,7 +142,7 @@ export default function NFTDetails() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white p-6 mt-16">
+    <div className="min-h-screen bg-[#0a0a0a] text-white p-6 pt-16">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Left Column - Image */}
         <motion.div {...fadeIn} className="rounded-2xl overflow-hidden border border-gray-800 relative">

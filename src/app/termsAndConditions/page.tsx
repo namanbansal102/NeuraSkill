@@ -7,7 +7,7 @@ import Link from "next/link"
 
 export default function TermsAndConditions() {
   return (
-    <div className="min-h-screen bg-gradient-to-br mt-16 text-white p-8">
+    <div className="min-h-screen bg-gradient-to-br pt-24 text-white p-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

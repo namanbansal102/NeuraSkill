@@ -51,7 +51,10 @@ export default function RootLayout({
     },
   }}
 />
+
           <Navbar></Navbar>
+
+
         {children}
           </Providers>
           <Footer></Footer>

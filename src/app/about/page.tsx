@@ -8,7 +8,7 @@ import { Sparkles } from "../components/HomePageComponents/sparkles"
 
 export default function AboutUs() {
   return (
-    <div className="min-h-screen mt-20 text-white p-8  z-50">
+    <div className="min-h-screen pt-20 text-white p-8  z-50">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

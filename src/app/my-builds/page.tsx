@@ -28,7 +28,7 @@ const page = () => {
   }, [])
   
   return (
-    <div className='mt-16 pt-5'>
+    <div className='pt-24 pt-5'>
       <TypewriterEffectSmoothDemo></TypewriterEffectSmoothDemo>
       {build_data.length!=0 &&
       <BentoGridDemo props={build_data}></BentoGridDemo>

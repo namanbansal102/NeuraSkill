@@ -66,7 +66,7 @@ export default function DropsPage() {
   }, [])
   
   return (
-    <div className="min-h-screen bg-[#04111d] text-white p-8 mt-16">
+    <div className="min-h-screen bg-[#04111d] text-white p-8 pt-24">
       <h1 className="text-5xl font-bold mb-8">Our Hacakthons</h1>
 
       {/* Tabs */}
