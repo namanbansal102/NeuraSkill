@@ -34,7 +34,7 @@ NeuraSkill is a revolutionary blockchain-based hackathon management system that 
 
 ## 🔗 Smart Contracts
 
-- **Flow Contract**: `0x587Bb1bcFF2954FE09C962599f4B976383772350`
+- **Creator Contract**: `0xDd8370d9E4E23719A4CdF6217a9179088E3fC1db`
 - **Features**:
   - Hackathon Creation & Management
   - Build Submission & Storage
