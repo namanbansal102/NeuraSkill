@@ -38,7 +38,7 @@ const chains: Chain[] = [
   {
     name: "CrossFI Testnet",
     image: "https://pbs.twimg.com/profile_images/1719733805483790336/9rtdiMS-_400x400.jpg",
-    contractAddress: "0xDd8370d9E4E23719A4CdF6217a9179088E3fC1db",
+    contractAddress: "0xc86Cb197cE4866e6a0cF68D7da323b6F502DB547",
     chainId: "0x103D", // Replace with actual Kaia Testnet chain ID
     rpcUrl: "https://rpc.testnet.ms", // Replace with actual RPC URL
     blockExplorerUrl: "https://test.xfiscan.com", // Replace with actual block explorer URL
