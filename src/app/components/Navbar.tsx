@@ -36,6 +36,14 @@ const chains: Chain[] = [
     blockExplorerUrl: "https://evm-testnet.flowscan.io", // Replace with actual block explorer URL
   },
   {
+    name: "CrossFI Testnet",
+    image: "https://pbs.twimg.com/profile_images/1719733805483790336/9rtdiMS-_400x400.jpg",
+    contractAddress: "0xDd8370d9E4E23719A4CdF6217a9179088E3fC1db",
+    chainId: "0x103D", // Replace with actual Kaia Testnet chain ID
+    rpcUrl: "https://rpc.testnet.ms", // Replace with actual RPC URL
+    blockExplorerUrl: "https://test.xfiscan.com", // Replace with actual block explorer URL
+  },
+  {
     name: "Kaia Testnet",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd-6FrG6gbCKUuiP54fDQysErNbld4T75FTQ&s",
     contractAddress: "0x5183B2683d31902137ed91bF0154A3459Ec97DA6",
