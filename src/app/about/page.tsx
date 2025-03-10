@@ -20,7 +20,7 @@ export default function AboutUs() {
         <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 mb-8 shadow-xl">
           <h2 className="text-3xl font-semibold mb-4">Our Mission</h2>
           <p className="text-lg mb-4">
-            NeurAKill is a revolutionary blockchain-based hackathon management platform built on the Flow chain. We aim
+            NeuraSKill is a revolutionary blockchain-based hackathon management platform build. We aim
             to transform the way hackathons are conducted, making them more transparent, fair, and rewarding for all
             participants.
           </p>

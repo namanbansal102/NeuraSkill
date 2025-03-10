@@ -44,7 +44,7 @@ NeuraSkill is a revolutionary blockchain-based hackathon management system that 
 
 ## 🛠️ Technology Stack
 
-- **Blockchain**: Flow (Primary), Ethereum, Solana, Sui (Upcoming)
+- **Blockchain**: Flow ,CrossFI, Arbitrum, Ethereum, Solana, Sui (Upcoming)
 - **Frontend**: Next.js, React
 - **Smart Contracts**: Cadence (Flow)
 - **AI Integration**: TensorFlow, OpenAI
