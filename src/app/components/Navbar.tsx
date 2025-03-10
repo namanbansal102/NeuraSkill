@@ -36,6 +36,14 @@ const chains: Chain[] = [
     blockExplorerUrl: "https://evm-testnet.flowscan.io", // Replace with actual block explorer URL
   },
   {
+    name: "Arbitrum Testnet",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyflpuaM1GZXcYzmBlcqnOmJilMMq34-4mVw&s",  
+    contractAddress: "0xDd8370d9E4E23719A4CdF6217a9179088E3fC1db",
+    chainId: "0x66EEE", // Replace with actual Flow Testnet chain ID
+    rpcUrl: "https://sepolia-rollup.arbitrum.io/rpc", // Replace with actual RPC URL
+    blockExplorerUrl: "https://arbitrum-sepolia.blockscout.com/", // Replace with actual block explorer URL
+  },
+  {
     name: "CrossFI Testnet",
     image: "https://pbs.twimg.com/profile_images/1719733805483790336/9rtdiMS-_400x400.jpg",
     contractAddress: "0xc86Cb197cE4866e6a0cF68D7da323b6F502DB547",
