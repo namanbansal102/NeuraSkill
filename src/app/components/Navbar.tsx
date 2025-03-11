@@ -54,7 +54,7 @@ const chains: Chain[] = [
   {
     name: "Lukso Testnet",
     image: "https://pbs.twimg.com/profile_images/1866711035387789313/mpF2QNlQ_400x400.jpg",
-    contractAddress: "0x5183B2683d31902137ed91bF0154A3459Ec97DA6",
+    contractAddress: "0x58e1450A4847b7a26DFacb32adc50B15ace148D7",
     chainId: "0x1069", // Replace with actual Kaia Testnet chain ID
     rpcUrl: "rpc.testnet.lukso.network", // Replace with actual RPC URL
     blockExplorerUrl: "explorer.execution.testnet.lukso.network", // Replace with actual block explorer URL
