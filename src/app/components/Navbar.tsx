@@ -84,6 +84,14 @@ const chains: Chain[] = [
     blockExplorerUrl: "https://seitrace.com", // Replace with actual block explorer URL
   },
   {
+    name: "RootStock TestNet",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6ZfyTYUjw8Y7aF4KSXcBWGZUh72hudzgfHQ&s",
+    contractAddress: "0x79771cD2d78875faDfbe2D42DB2b018E8b77c6EF",
+    chainId: "0x1F", // Replace with actual Creator TestNet chain ID
+    rpcUrl: "https://public-node.testnet.rsk.co", // Replace with actual RPC URL
+    blockExplorerUrl: "https://public-node.testnet.rsk.co", // Replace with actual block explorer URL
+  },
+  {
     name: "Ancient 8 TestNet",
     image: "https://public.rootdata.com/images/b6/1721184366692.jpg",
     contractAddress: "0xDd8370d9E4E23719A4CdF6217a9179088E3fC1db",
