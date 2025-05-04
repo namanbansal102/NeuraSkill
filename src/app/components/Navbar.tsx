@@ -36,12 +36,12 @@ const chains: Chain[] = [
     blockExplorerUrl: "https://evm-testnet.flowscan.io", // Replace with actual block explorer URL
   },
   {
-    name: "Arbitrum Testnet",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyflpuaM1GZXcYzmBlcqnOmJilMMq34-4mVw&s",  
-    contractAddress: "0xDd8370d9E4E23719A4CdF6217a9179088E3fC1db",
-    chainId: "0x66EEE", // Replace with actual Flow Testnet chain ID
-    rpcUrl: "https://sepolia-rollup.arbitrum.io/rpc", // Replace with actual RPC URL
-    blockExplorerUrl: "https://arbitrum-sepolia.blockscout.com/", // Replace with actual block explorer URL
+    name: "Pharos Devnet",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJyN9XBV7Nha3CAq_wdMsPgVrhQH_Iq69WBg&s",  
+    contractAddress: "0x31915Fee07AFAdF9E38633DB5A76dcA1f25B5e93",
+    chainId: "0xC352", // Replace with actual Flow Testnet chain ID
+    rpcUrl: "https://devnet.dplabs-internal.com", // Replace with actual RPC URL
+    blockExplorerUrl: "https://pharosscan.xyz", // Replace with actual block explorer URL
   },
   {
     name: "CrossFI Testnet",
@@ -51,14 +51,7 @@ const chains: Chain[] = [
     rpcUrl: "https://rpc.testnet.ms", // Replace with actual RPC URL
     blockExplorerUrl: "https://test.xfiscan.com", // Replace with actual block explorer URL
   },
-  {
-    name: "Lukso Testnet",
-    image: "https://pbs.twimg.com/profile_images/1866711035387789313/mpF2QNlQ_400x400.jpg",
-    contractAddress: "0x58e1450A4847b7a26DFacb32adc50B15ace148D7",
-    chainId: "0x1069", // Replace with actual Kaia Testnet chain ID
-    rpcUrl: "rpc.testnet.lukso.network", // Replace with actual RPC URL
-    blockExplorerUrl: "explorer.execution.testnet.lukso.network", // Replace with actual block explorer URL
-  },
+
   {
     name: "Kaia Testnet",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd-6FrG6gbCKUuiP54fDQysErNbld4T75FTQ&s",
@@ -67,14 +60,7 @@ const chains: Chain[] = [
     rpcUrl: "https://public-en-kairos.node.kaia.io", // Replace with actual RPC URL
     blockExplorerUrl: "https://kairos.kaiascope.com", // Replace with actual block explorer URL
   },
-  {
-    name: "Creator TestNet",
-    image: "https://creatorchain.io/logo-text.svg",
-    contractAddress: "0xDd8370d9E4E23719A4CdF6217a9179088E3fC1db",
-    chainId: "0x10469", // Replace with actual Creator TestNet chain ID
-    rpcUrl: "https://rpc.creatorchain.io", // Replace with actual RPC URL
-    blockExplorerUrl: "https://explorer.creatorchain.io", // Replace with actual block explorer URL
-  },
+
   {
     name: "Sei TestNet",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6fwxNLN1-so5tXQr4z_Z-VcgryIoKU2iaFw&s",
@@ -91,14 +77,8 @@ const chains: Chain[] = [
     rpcUrl: "https://public-node.testnet.rsk.co", // Replace with actual RPC URL
     blockExplorerUrl: "https://public-node.testnet.rsk.co", // Replace with actual block explorer URL
   },
-  {
-    name: "Ancient 8 TestNet",
-    image: "https://public.rootdata.com/images/b6/1721184366692.jpg",
-    contractAddress: "0xDd8370d9E4E23719A4CdF6217a9179088E3fC1db",
-    chainId: "0x1AD1BA8", // Replace with actual Telos TestNet chain ID
-    rpcUrl: "https://28122024.rpc.thirdweb.com", // Replace with actual RPC URL
-    blockExplorerUrl: "https://scanv2-testnet.ancient8.gg", // Replace with actual block explorer URL
-  },
+
+  
 ]
 
 const navItems: NavItem[] = [
