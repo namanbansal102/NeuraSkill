@@ -318,19 +318,23 @@ export default function Navbar() {
               </div>
             ) : (
               <div className="relative">
+                <div className="flex text-white items-center justify-center">
+
                 <button onClick={connectWallet} className="p-[3px] relative">
                   <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
                   <div className="px-3 py-2 bg-black rounded-[6px] relative group transition duration-200 text-white hover:scale-[102%] flex items-center gap-2">
                     <span>Connect Wallet</span>
-                    <ChevronDown
-                      className="w-7 h-7 cursor-pointer  p-1"
+                   
+                  </div>
+                </button>
+                 <ChevronDown
+                      className="w-7 h-7 cursor-pointer  hover:border-2 hover:rounded-lg "
                       onClick={(e) => {
                         e.stopPropagation()
                         setIsChainDropdownOpen(!isChainDropdownOpen)
                       }}
-                    />
-                  </div>
-                </button>
+                      />
+                      </div>
                 <AnimatePresence>
                   {isChainDropdownOpen && (
                     <motion.div
