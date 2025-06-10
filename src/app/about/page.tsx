@@ -40,7 +40,7 @@ export default function AboutUs() {
             Cutting-edge AI technology assists in reviewing and evaluating submitted projects.
           </FeatureCard>
           <FeatureCard icon={<Zap className="w-8 h-8" />} title="Automatic Rewards">
-            Seamless distribution of rewards to winners' MetaMask wallets in ETH.
+            Seamless distribution of rewards to winners' MetaMask wallets in XRP.
           </FeatureCard>
           <FeatureCard icon={<DollarSign className="w-8 h-8" />} title="Transparent Funding">
             Blockchain-based transactions ensure full transparency in prize distribution.

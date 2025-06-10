@@ -30,7 +30,7 @@ const chains: Chain[] = [
   {
     name: "Root Porcini",
     image: "https://pbs.twimg.com/profile_images/1658639949246386176/6T1Tapl__400x400.jpg",  
-    contractAddress: "0xD224fc1cE7c109C9B99814F4bc96d995Df1E6Af9",
+    contractAddress: "0xB7a8307A474A2227050c34212Ef84783ece5876f",
     chainId: "0x1DF8", // Replace with actual Flow Testnet chain ID
     rpcUrl: "https://porcini.rootnet.app/archive", // Replace with actual RPC URL
     blockExplorerUrl: "https://porcini.rootscan.io", // Replace with actual block explorer URL
