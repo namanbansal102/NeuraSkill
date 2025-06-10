@@ -28,55 +28,13 @@ interface Chain {
 
 const chains: Chain[] = [
   {
-    name: "Flow Testnet",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwQNIRV--sVJ7okbop62acNlkNIMh7NPQH3w&s",  
-    contractAddress: "0x587Bb1bcFF2954FE09C962599f4B976383772350",
-    chainId: "0x221", // Replace with actual Flow Testnet chain ID
-    rpcUrl: "https://testnet.evm.nodes.onflow.org", // Replace with actual RPC URL
-    blockExplorerUrl: "https://evm-testnet.flowscan.io", // Replace with actual block explorer URL
-  },
-  {
-    name: "Pharos Devnet",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJyN9XBV7Nha3CAq_wdMsPgVrhQH_Iq69WBg&s",  
-    contractAddress: "0x31915Fee07AFAdF9E38633DB5A76dcA1f25B5e93",
-    chainId: "0xC352", // Replace with actual Flow Testnet chain ID
-    rpcUrl: "https://devnet.dplabs-internal.com", // Replace with actual RPC URL
-    blockExplorerUrl: "https://pharosscan.xyz", // Replace with actual block explorer URL
-  },
-  {
-    name: "CrossFI Testnet",
-    image: "https://pbs.twimg.com/profile_images/1719733805483790336/9rtdiMS-_400x400.jpg",
-    contractAddress: "0xc86Cb197cE4866e6a0cF68D7da323b6F502DB547",
-    chainId: "0x103D", // Replace with actual Kaia Testnet chain ID
-    rpcUrl: "https://rpc.testnet.ms", // Replace with actual RPC URL
-    blockExplorerUrl: "https://test.xfiscan.com", // Replace with actual block explorer URL
-  },
-
-  {
-    name: "Kaia Testnet",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSd-6FrG6gbCKUuiP54fDQysErNbld4T75FTQ&s",
-    contractAddress: "0x5183B2683d31902137ed91bF0154A3459Ec97DA6",
-    chainId: "0x3E9", // Replace with actual Kaia Testnet chain ID
-    rpcUrl: "https://public-en-kairos.node.kaia.io", // Replace with actual RPC URL
-    blockExplorerUrl: "https://kairos.kaiascope.com", // Replace with actual block explorer URL
-  },
-
-  {
-    name: "Sei TestNet",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6fwxNLN1-so5tXQr4z_Z-VcgryIoKU2iaFw&s",
-    contractAddress: "0x31915Fee07AFAdF9E38633DB5A76dcA1f25B5e93",
-    chainId: "0x530", // Replace with actual Creator TestNet chain ID
-    rpcUrl: "https://evm-rpc-testnet.sei-apis.com", // Replace with actual RPC URL
-    blockExplorerUrl: "https://seitrace.com", // Replace with actual block explorer URL
-  },
-  {
-    name: "RootStock TestNet",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6ZfyTYUjw8Y7aF4KSXcBWGZUh72hudzgfHQ&s",
-    contractAddress: "0x79771cD2d78875faDfbe2D42DB2b018E8b77c6EF",
-    chainId: "0x1F", // Replace with actual Creator TestNet chain ID
-    rpcUrl: "https://public-node.testnet.rsk.co", // Replace with actual RPC URL
-    blockExplorerUrl: "https://public-node.testnet.rsk.co", // Replace with actual block explorer URL
-  },
+    name: "Root Porcini",
+    image: "https://pbs.twimg.com/profile_images/1658639949246386176/6T1Tapl__400x400.jpg",  
+    contractAddress: "0xD224fc1cE7c109C9B99814F4bc96d995Df1E6Af9",
+    chainId: "0x1DF8", // Replace with actual Flow Testnet chain ID
+    rpcUrl: "https://porcini.rootnet.app/archive", // Replace with actual RPC URL
+    blockExplorerUrl: "https://porcini.rootscan.io", // Replace with actual block explorer URL
+  }
 
   
 ]
