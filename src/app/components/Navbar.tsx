@@ -30,7 +30,7 @@ const chains: Chain[] = [
   {
     name: "Root Porcini",
     image: "https://pbs.twimg.com/profile_images/1658639949246386176/6T1Tapl__400x400.jpg",  
-    contractAddress: "0xB7a8307A474A2227050c34212Ef84783ece5876f",
+    contractAddress: "0x96F439337a2Af4Ff32E867DDf6961cd0B950d6e6",
     chainId: "0x1DF8", // Replace with actual Flow Testnet chain ID
     rpcUrl: "https://porcini.rootnet.app/archive", // Replace with actual RPC URL
     blockExplorerUrl: "https://porcini.rootscan.io", // Replace with actual block explorer URL
@@ -91,6 +91,10 @@ export default function Navbar() {
     const savedChain = localStorage.getItem("selectedChain")
     if (savedChain) {
       setSelectedChain(JSON.parse(savedChain))
+    } else {
+      // Automatically store default chain if not present
+      localStorage.setItem("selectedChain", JSON.stringify(chains[0]))
+      localStorage.setItem("CONTRACT_ADD", chains[0].contractAddress)
     }
   }, [])
 
