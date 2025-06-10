@@ -2,90 +2,97 @@
 
 <div align="center">
   <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-eo4h9rJJQNAEN3yeAIVDfviiRPTGgP.png" alt="NeuraSkill Banner" width="100%" />
-  
+
   ### Empower with Blockchain. Elevate with AI.
-  
+
   [![Live Demo](https://img.shields.io/badge/Live-Demo-blue?style=for-the-badge)](https://neura-skill.vercel.app/)
-  [![Smart Contract](https://img.shields.io/badge/Smart%20Contract-Flow-blue?style=for-the-badge)](https://flowscan.org/contract/0x587Bb1bcFF2954FE09C962599f4B976383772350)
+  [![Smart Contract](https://img.shields.io/badge/Smart%20Contract-Explorer-blue?style=for-the-badge)](https://rootscan.io/address/0x96F439337a2Af4Ff32E867DDf6961cd0B950d6e6)
 </div>
+
+---
 
 ## 🌟 Overview
 
-NeuraSkill is a revolutionary blockchain-based hackathon management system that combines the power of blockchain technology with artificial intelligence to create a transparent, secure, and automated platform for organizing and participating in hackathons.
+**NeuraSkill** is a blockchain‑native hackathon management platform on **The Root Network (TRN)**.  
+By fusing smart‑contract automation with AI‑driven evaluation, NeuraSkill delivers a tamper‑proof, transparent, and lightning‑fast experience for organizers, judges, and builders alike.
+
+---
 
 ## ⚡ Key Features
 
 ### 🏗️ Core Features
-- **Decentralized Hackathon Hosting** - Create and manage hackathons on the blockchain
-- **Smart Build Submission System** - Submit and showcase projects with permanent blockchain storage
-- **ETH-Powered Voting** - Secure upvoting mechanism with 1 ETH deduction
-- **AI-Driven Evaluation** - Automated project scoring and assessment
-- **Instant Prize Distribution** - Smart contract-based automatic rewards
-- **Multi-Chain Support** - Currently on Flow, expanding to Ethereum, Solana, and Sui
+| Feature | Description |
+|---------|-------------|
+| **Decentralized Hackathon Hosting** | Create and manage events directly on TRN smart contracts, ensuring full transparency. |
+| **Smart Build Submission** | Projects are uploaded to IPFS; their hashes are recorded immutably on‑chain. |
+| **Token‑Backed Voting** | Upvoting requires locking ROOT (or any token accepted by the fee proxy), discouraging spam and Sybil attacks. |
+| **AI‑Driven Evaluation** | Machine‑learning models score submissions on code quality, innovation, and impact. |
+| **Instant Prize Distribution** | Rewards are released automatically to winners’ TRN addresses the moment judging concludes. |
 
-### 🔥 New Features & Improvements
+### 🔥 Platform Extensions
+- **NFT Certificates** – Mintable proof‑of‑participation and victory, tradeable in any TRN NFT marketplace.  
+- **Developer Reputation** – On‑chain score that aggregates wins, submissions, and community feedback.  
+- **Team Formation Hub** – Skill‑tag matching helps hackers discover ideal teammates before events.  
+- **Analytics Dashboard** – Real‑time stats on submissions, votes, AI scores, and gas fees.  
+- **DAO Governance** – Token‑weighted proposals decide future feature rollouts and fee parameters.
 
-- **Cross-Chain Bridging** - Seamless transfer of assets between supported blockchains
-- **NFT Certificates** - Mint achievement certificates for hackathon participants
-- **Reputation System** - Build and maintain developer reputation scores
-- **Team Formation Hub** - Find teammates based on skills and interests
-- **Project Analytics** - In-depth metrics and insights for submissions
-- **Community Governance** - DAO-based platform decision making
+---
 
-## 🔗 Smart Contracts
+## 🔗 Smart Contract Suite
 
-- **Creator Contract**: `0xDd8370d9E4E23719A4CdF6217a9179088E3fC1db`
-- **Features**:
-  - Hackathon Creation & Management
-  - Build Submission & Storage
-  - Voting Mechanism
-  - Prize Distribution
-  - Multi-chain Integration (Coming Soon)
+| Contract | Address (TRN) | Purpose |
+|----------|----------------|---------|
+| **NeuraSkillCore** | `0x96F439337a2Af4Ff32E867DDf6961cd0B950d6e6` | Event creation, build registry, voting, and prize logic. |
+
+All contracts are written in **Solidity** for TRN’s EVM‑compatible runtime.
+
+---
 
 ## 🛠️ Technology Stack
 
-- **Blockchain**: Flow ,CrossFI, Arbitrum, Ethereum, Solana, Sui (Upcoming)
-- **Frontend**: Next.js, React
-- **Smart Contracts**: Cadence (Flow)
-- **AI Integration**: TensorFlow, OpenAI
-- **Storage**: IPFS, Flow Storage
+| Layer | Tech |
+|-------|------|
+| **Blockchain** | The Root Network (TRN) |
+| **Smart Contracts** | Solidity |
+| **Frontend** | Next.js · React |
+| **AI Services** | TensorFlow · OpenAI APIs |
+| **Storage** | IPFS for project artifacts & metadata |
+
+---
 
 ## 🚀 Getting Started
 
-1. Visit [NeuraSkill](https://neura-skill.vercel.app/)
-2. Connect your wallet (MetaMask or Flow supported)
-3. Create or join a hackathon
-4. Submit your project or start voting
+1. **Visit the app:** <https://neura-skill.vercel.app/>  
+2. **Add TRN to MetaMask** (RPC details in docs) and connect your wallet.  
+3. **Create or join** a hackathon.  
+4. **Submit** your project or **vote** on others.  
+5. **Claim rewards** automatically if you place in the top ranks!
+
+---
 
 ## 👥 Community & Support
+- **Discord:** <https://discord.gg/neuraskill>  
+- **Twitter:** <https://twitter.com/neuraskill>  
+- **Docs:** <https://docs.neuraskill.io>
 
-- [Discord](https://discord.gg/neuraskill)
-- [Twitter](https://twitter.com/neuraskill)
-- [Documentation](https://docs.neuraskill.io)
+---
 
-## 🔮 Future Roadmap
+## 🔮 Roadmap
+- [ ] Launch main‑net prize pools  
+- [ ] Mobile‑first interface  
+- [ ] Deeper AI analytics (code similarity graphs, risk scoring)  
+- [ ] Expanded DAO modules (dynamic fee curves, quadratic voting)  
 
-- [ ] Launch on Ethereum Mainnet
-- [ ] Implement Cross-Chain Operations
-- [ ] Release Mobile Application
-- [ ] Integrate Advanced AI Features
-- [ ] Expand Community Governance
-- [ ] Launch NeuraSkill Token
+---
 
 ## 🤝 Contributing
-
-We welcome contributions! Please check our [Contributing Guidelines](CONTRIBUTING.md) for details.
+We welcome PRs and issues! Please read our **[Contributing Guidelines](CONTRIBUTING.md)** to get started.
 
 ## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## ⭐ Inspiration
-
-Inspired by DoraHacks, NeuraSkill takes the concept further with AI integration, multi-chain support, and enhanced automation features.
+Distributed under the **MIT License**. See **[LICENSE](LICENSE)** for details.
 
 ---
 
 <div align="center">
-  Made with 💜 by the NeuraSkill Team
+  Made with 💜 on The Root Network by the NeuraSkill Team
 </div>
