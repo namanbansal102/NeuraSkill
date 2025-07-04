@@ -221,7 +221,7 @@ export default function NFTDetails() {
             </table>
             <div className="mt-4 text-right">
               <p className="text-lg font-semibold">
-                Total Prize Pool: {Web3.utils.fromWei(hack_details.prizePool, "ether")} ETH
+                Total Prize Pool: {Web3.utils.fromWei(hack_details.prizePool, "ether")} FLOW
               </p>
             </div>
           </motion.div>
