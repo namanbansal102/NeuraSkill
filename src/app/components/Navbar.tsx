@@ -29,7 +29,7 @@ interface Chain {
 const chains: Chain[] = [
   {
     name: "Flow EVM Testnet",
-    image: "https://avatars.githubusercontent.com/u/62387156?s=280&v=4",  
+    image: "https://pbs.twimg.com/profile_images/1928495609608286209/uhYIxY6U_400x400.jpg",  
     contractAddress:  "0xbc29335737795E7E6839882D1aF663e21Db0E736",
     chainId: "0x221", // 545 in decimal (Flow EVM Testnet)
     rpcUrl: "https://testnet.evm.nodes.onflow.org",
