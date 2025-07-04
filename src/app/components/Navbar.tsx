@@ -30,7 +30,7 @@ const chains: Chain[] = [
   {
     name: "Flow EVM Testnet",
     image: "https://pbs.twimg.com/profile_images/1928495609608286209/uhYIxY6U_400x400.jpg",  
-    contractAddress:  "0xbc29335737795E7E6839882D1aF663e21Db0E736",
+    contractAddress:  "0xEaDA1B761DB3E8E69EEF0aaAb7265FdAa3779a7d",
     chainId: "0x221", // 545 in decimal (Flow EVM Testnet)
     rpcUrl: "https://testnet.evm.nodes.onflow.org",
     blockExplorerUrl: "https://evm-testnet.flowscan.io",

@@ -6,14 +6,14 @@
   ### Empower with Blockchain. Elevate with AI.
 
   [![Live Demo](https://img.shields.io/badge/Live-Demo-blue?style=for-the-badge)](https://neura-skill.vercel.app/)
-  [![Smart Contract](https://img.shields.io/badge/Smart%20Contract-Explorer-blue?style=for-the-badge)](https://rootscan.io/address/0x96F439337a2Af4Ff32E867DDf6961cd0B950d6e6)
+  [![Smart Contract](https://img.shields.io/badge/Smart%20Contract-Explorer-blue?style=for-the-badge)](https://Flowscan.io/address/0x96F439337a2Af4Ff32E867DDf6961cd0B950d6e6)
 </div>
 
 ---
 
 ## 🌟 Overview
 
-**NeuraSkill** is a blockchain‑native hackathon management platform on **The Root Network (TRN)**.  
+**NeuraSkill** is a blockchain‑native hackathon management platform on **The Flow Network (TRN)**.  
 By fusing smart‑contract automation with AI‑driven evaluation, NeuraSkill delivers a tamper‑proof, transparent, and lightning‑fast experience for organizers, judges, and builders alike.
 
 ---
@@ -25,7 +25,7 @@ By fusing smart‑contract automation with AI‑driven evaluation, NeuraSkill de
 |---------|-------------|
 | **Decentralized Hackathon Hosting** | Create and manage events directly on TRN smart contracts, ensuring full transparency. |
 | **Smart Build Submission** | Projects are uploaded to IPFS; their hashes are recorded immutably on‑chain. |
-| **Token‑Backed Voting** | Upvoting requires locking ROOT (or any token accepted by the fee proxy), discouraging spam and Sybil attacks. |
+| **Token‑Backed Voting** | Upvoting requires locking Flow (or any token accepted by the fee proxy), discouraging spam and Sybil attacks. |
 | **AI‑Driven Evaluation** | Machine‑learning models score submissions on code quality, innovation, and impact. |
 | **Instant Prize Distribution** | Rewards are released automatically to winners’ TRN addresses the moment judging concludes. |
 
@@ -52,7 +52,7 @@ All contracts are written in **Solidity** for TRN’s EVM‑compatible runtime.
 
 | Layer | Tech |
 |-------|------|
-| **Blockchain** | The Root Network (TRN) |
+| **Blockchain** | The Flow Network (TRN) |
 | **Smart Contracts** | Solidity |
 | **Frontend** | Next.js · React |
 | **AI Services** | TensorFlow · OpenAI APIs |
@@ -94,5 +94,5 @@ Distributed under the **MIT License**. See **[LICENSE](LICENSE)** for details.
 ---
 
 <div align="center">
-  Made with 💜 on The Root Network by the NeuraSkill Team
+  Made with 💜 on The Flow Network by the NeuraSkill Team
 </div>
