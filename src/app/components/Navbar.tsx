@@ -28,13 +28,13 @@ interface Chain {
 
 const chains: Chain[] = [
   {
-    name: "Root Porcini",
-    image: "https://pbs.twimg.com/profile_images/1658639949246386176/6T1Tapl__400x400.jpg",  
-    contractAddress: "0x96F439337a2Af4Ff32E867DDf6961cd0B950d6e6",
-    chainId: "0x1DF8", // Replace with actual Flow Testnet chain ID
-    rpcUrl: "https://porcini.rootnet.app/archive", // Replace with actual RPC URL
-    blockExplorerUrl: "https://porcini.rootscan.io", // Replace with actual block explorer URL
-  }
+    name: "Flow EVM Testnet",
+    image: "https://avatars.githubusercontent.com/u/62387156?s=280&v=4",  
+    contractAddress:  "0xbc29335737795E7E6839882D1aF663e21Db0E736",
+    chainId: "0x221", // 545 in decimal (Flow EVM Testnet)
+    rpcUrl: "https://testnet.evm.nodes.onflow.org",
+    blockExplorerUrl: "https://evm-testnet.flowscan.io",
+  },
 
   
 ]
