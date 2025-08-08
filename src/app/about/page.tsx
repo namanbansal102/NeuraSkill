@@ -15,7 +15,7 @@ export default function AboutUs() {
         transition={{ duration: 0.5 }}
         className="max-w-4xl mx-auto"
       >
-        <h1 className="text-5xl font-bold mb-8 text-center">About NeurAKill</h1>
+        <h1 className="text-5xl font-bold mb-8 text-center">About NeuraSKill</h1>
 
         <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 mb-8 shadow-xl">
           <h2 className="text-3xl font-semibold mb-4">Our Mission</h2>
@@ -40,7 +40,7 @@ export default function AboutUs() {
             Cutting-edge AI technology assists in reviewing and evaluating submitted projects.
           </FeatureCard>
           <FeatureCard icon={<Zap className="w-8 h-8" />} title="Automatic Rewards">
-            Seamless distribution of rewards to winners' MetaMask wallets in XRP.
+            Seamless distribution of rewards to winners' MetaMask wallets in HBAR.
           </FeatureCard>
           <FeatureCard icon={<DollarSign className="w-8 h-8" />} title="Transparent Funding">
             Blockchain-based transactions ensure full transparency in prize distribution.

@@ -42,7 +42,7 @@ const testimonials = [
   },
   {
     quote:
-      "With open-source transparency, NeuraSkill eliminates biases in project selection, ensuring fair competition through AI-powered ranking and FLOW-based voting.",
+      "With open-source transparency, NeuraSkill eliminates biases in project selection, ensuring fair competition through AI-powered ranking and hbar-based voting.",
     name: "Nick Szabo",
     title: "Smart Contracts Pioneer",
   },

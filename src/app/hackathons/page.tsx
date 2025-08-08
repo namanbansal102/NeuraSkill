@@ -129,7 +129,7 @@ export default function DropsPage() {
                 </div>
                 <div className="text-right">
                   <p className="text-sm text-gray-400">Prize</p>
-                  <p className="font-medium">{prizePool} FLOW</p>
+                  <p className="font-medium">{prizePool} HBAR</p>
                 </div>
               </div>
             </div>

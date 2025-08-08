@@ -22,19 +22,19 @@ export default function TermsAndConditions() {
             General Terms
           </h2>
           <p className="text-lg mb-4">
-            Welcome to NeurAKill. By using our platform, you agree to comply with and be bound by the following terms
+            Welcome to NeuraSKill. By using our platform, you agree to comply with and be bound by the following terms
             and conditions.
           </p>
         </div>
 
         <div className="grid gap-8 mb-8">
           <TermSection icon={<Trash2 className="w-8 h-8" />} title="Immutability of Builds">
-            Once a build is submitted to a hackathon on NeurAKill, it cannot be deleted. This ensures the integrity and
+            Once a build is submitted to a hackathon on NeuraSKill, it cannot be deleted. This ensures the integrity and
             fairness of the competition. Please ensure your submissions are final before uploading.
           </TermSection>
 
           <TermSection icon={<Brain className="w-8 h-8" />} title="AI-Powered Fairness">
-            NeurAKill utilizes the Gemini Flash experimental model for project evaluation. This cutting-edge AI
+            NeuraSKill utilizes the Gemini Flash experimental model for project evaluation. This cutting-edge AI
             technology ensures fair and unbiased assessment of all submitted projects.
           </TermSection>
 
@@ -50,14 +50,14 @@ export default function TermsAndConditions() {
           </TermSection>
 
           <TermSection icon={<Lock className="w-8 h-8" />} title="Fund Management">
-            For projects that do not win but receive upvotes, any associated funds will remain in the NeurAKill smart
+            For projects that do not win but receive upvotes, any associated funds will remain in the NeuraSKill smart
             contract. These funds are not redistributed and are used to maintain the platform's integrity and
             sustainability.
           </TermSection>
 
           <TermSection icon={<Scale className="w-8 h-8" />} title="Legal Compliance">
             Users are responsible for ensuring their submissions comply with all applicable laws and regulations.
-            NeurAKill reserves the right to remove any content that violates these terms or any applicable laws.
+            NeuraSKill reserves the right to remove any content that violates these terms or any applicable laws.
           </TermSection>
         </div>
 

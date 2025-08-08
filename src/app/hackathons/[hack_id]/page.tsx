@@ -214,14 +214,14 @@ export default function NFTDetails() {
                       <Trophy size={16} className="mr-2" />
                       {index === 0 ? "1st" : index === 1 ? "2nd" : `${index + 1}th`} Prize
                     </td>
-                    <td className="py-2">{Web3.utils.fromWei(prize, "ether")} XRP</td>
+                    <td className="py-2">{Web3.utils.fromWei(prize, "ether")}HBAR</td>
                   </tr>
                 ))}
               </tbody>
             </table>
             <div className="mt-4 text-right">
               <p className="text-lg font-semibold">
-                Total Prize Pool: {Web3.utils.fromWei(hack_details.prizePool, "ether")} FLOW
+                Total Prize Pool: {Web3.utils.fromWei(hack_details.prizePool, "ether")} HBAR
               </p>
             </div>
           </motion.div>

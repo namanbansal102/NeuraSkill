@@ -69,7 +69,7 @@ export default function Footer() {
             <span className="text-xl font-bold">NeuraSkill</span>
           </Link>
           <p className="text-gray-400 mb-6">
-          NeurAKill is a revolutionary blockchain-based hackathon management platform built on the Flow chain
+          NeuraSKill is a revolutionary blockchain-based hackathon management platform built on the Hedera chain
           </p>
           <div className="flex gap-4">
             {socialLinks.map((social, index) => (
