@@ -30,7 +30,7 @@ const chains: Chain[] = [
   {
     name: "Hedera TestNet",
     image: "https://hedera.com/assets/images/HH-logo-Black.jpg",  
-    contractAddress:  "0x04D27bFf5e2106d39703016f71a5CbEdEFcb2914",
+    contractAddress:  "0x40c035C2D108D5BD7DE540275c64F7cec651210f",
     chainId: "0x128", 
     rpcUrl: "https://testnet.hashio.io/api",
     blockExplorerUrl: "https://hashscan.io/testnet",
