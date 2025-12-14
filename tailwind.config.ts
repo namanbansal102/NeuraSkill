@@ -1,16 +1,15 @@
 import type { Config } from "tailwindcss";
-const svgToDataUri = require("mini-svg-data-uri");
-const { default: flattenColorPalette } = require("tailwindcss/lib/util/flattenColorPalette");
-const { heroui } = require("@heroui/react");
+import svgToDataUri from "mini-svg-data-uri";
+import flattenColorPalette from "tailwindcss/lib/util/flattenColorPalette";
+import { heroui } from "@heroui/react";
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+const config: any = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.{ts,tsx}",
-    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}"
+    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: "class",
   theme: {
@@ -38,9 +37,11 @@ module.exports = {
     function ({ matchUtilities, theme }: any) {
       matchUtilities(
         {
-          "bg-dot-thick": (value: any) => ({
+          "bg-dot-thick": (value: string) => ({
             backgroundImage: `url("${svgToDataUri(
-              `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='16' height='16' fill='none'><circle fill='${value}' cx='10' cy='10' r='2.5'></circle></svg>`
+              `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='16' height='16' fill='none'>
+                <circle fill='${value}' cx='10' cy='10' r='2.5'></circle>
+              </svg>`
             )}")`,
           }),
         },
@@ -48,12 +49,14 @@ module.exports = {
       );
     },
   ],
-} satisfies Config;
+};
 
-// This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
+export default config;
+
+// Plugin: expose Tailwind colors as CSS variables
 function addVariablesForColors({ addBase, theme }: any) {
-  let allColors = flattenColorPalette(theme("colors"));
-  let newVars = Object.fromEntries(
+  const allColors = flattenColorPalette(theme("colors"));
+  const newVars = Object.fromEntries(
     Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
   );
 
