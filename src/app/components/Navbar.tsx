@@ -30,7 +30,7 @@ const chains: Chain[] = [
   {
     name: "QIE Testnet",
     image: "https://www.qie.digital/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ficon.65097613.png&w=1920&q=75",  
-    contractAddress:  "0xB7a8307A474A2227050c34212Ef84783ece5876f",
+    contractAddress:  "0xE816844F5798553A65142d2D4a35f730E537334E",
     chainId: "0x7BF", 
     rpcUrl: "https://rpc1testnet.qie.digital/",
     blockExplorerUrl: "https://testnet.qie.digital/",
