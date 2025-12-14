@@ -235,7 +235,7 @@ export default function CreateNFT() {
                   value={formData.prizePool}
                   onChange={(e) => handleInputChange("prizePool", e.target.value)}
                   className="w-full bg-white/5 border border-gray-800 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Enter total prize pool in HBAR"
+                  placeholder="Enter total prize pool in QIE"
                 />
               </motion.div>
 

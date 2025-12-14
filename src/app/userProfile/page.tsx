@@ -67,7 +67,7 @@ export default function UserProfile() {
             </p>
             <p>
               <span className="font-semibold">Balance:</span>{" "}
-              {balance ? `${Number.parseFloat(balance).toFixed(4)} HBAR` : "N/A"}
+              {balance ? `${Number.parseFloat(balance).toFixed(4)} QIE` : "N/A"}
             </p>
           </motion.div>
 

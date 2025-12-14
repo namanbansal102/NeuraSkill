@@ -28,12 +28,12 @@ interface Chain {
 
 const chains: Chain[] = [
   {
-    name: "Hedera TestNet",
-    image: "https://hedera.com/assets/images/HH-logo-Black.jpg",  
-    contractAddress:  "0x40c035C2D108D5BD7DE540275c64F7cec651210f",
-    chainId: "0x128", 
+    name: "QIE Testnet",
+    image: "https://www.qie.digital/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ficon.65097613.png&w=1920&q=75",  
+    contractAddress:  "0xB7a8307A474A2227050c34212Ef84783ece5876f",
+    chainId: "0x7BF", 
     rpcUrl: "https://testnet.hashio.io/api",
-    blockExplorerUrl: "https://hashscan.io/testnet",
+    blockExplorerUrl: "https://testnet.qie.digital/",
   },
 
   
