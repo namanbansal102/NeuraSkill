@@ -13,6 +13,7 @@ import fetchImageUrl from "@/app/components/fetchImageUrl"
 import Link from "next/link"
 import { Loader } from "../../components/ui/loader"
 import { CardHoverEffectDemo } from "@/app/hackathons/[hack_id]/CardHoverEffectDemo"
+import { getBotchainFeeOptions } from "@/app/components/fetchContract"
 
 const web3 = new Web3(window.ethereum)
 const contractAdd = process.env.NEXT_PUBLIC_CONTRACT_ADD
@@ -78,10 +79,12 @@ export default function NFTDetails() {
         method: "eth_requestAccounts",
       })
       const userAddress = accounts[0]
+      const feeOptions = await getBotchainFeeOptions(web3)
       const hack_id = Number(searchParams.hack_id)
       const project_id = Number(searchParams.project_id)
       const tx = await contract.methods.submitbuild(hack_id, project_id).send({
         from: userAddress,
+        ...feeOptions,
       })
       console.log("My Transaction is::::::::::", tx)
 
@@ -103,12 +106,14 @@ export default function NFTDetails() {
       console.log(prizePoolWei);
       
       const userAddress = accounts[0]
+      const feeOptions = await getBotchainFeeOptions(web3)
       const hack_id = Number(searchParams.hack_id)
       const project_id = Number(searchParams.project_id)
       const tx = await contract.methods.upvoteProject(hack_id, project_id).send({
         from: userAddress,
         value: '2',
         gasLimit: 3000000,
+        ...feeOptions,
       })
       toast.success("Project upvoted successfully!")
       router.refresh();

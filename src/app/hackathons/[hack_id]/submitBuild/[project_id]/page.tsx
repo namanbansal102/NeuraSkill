@@ -16,7 +16,7 @@ import { Loader } from "../../../../components/ui/loader"
 import { AIReviewModal } from "./AiReviewModel"
 
 import type { AbiItem } from "web3-utils"
-import fetchContract from "@/app/components/fetchContract"
+import fetchContract, { getBotchainFeeOptions } from "@/app/components/fetchContract"
 let  contract=fetchContract();
 let web3;
 if (typeof window !== "undefined") {
@@ -84,10 +84,12 @@ export default function NFTDetails() {
         method: "eth_requestAccounts",
       })
       const userAddress = accounts[0]
+      const feeOptions = await getBotchainFeeOptions(web3)
       const hack_id = Number(searchParams.hack_id)
       const project_id = Number(searchParams.project_id)
       const tx = await contract.methods.submitbuild(hack_id, project_id).send({
         from: userAddress,
+        ...feeOptions,
       })
       console.log("My Transaction is::::::::::", tx)
       // const router=useRouter();
@@ -115,12 +117,14 @@ export default function NFTDetails() {
         method: "eth_requestAccounts",
       })
       const userAddress = accounts[0]
+      const feeOptions = await getBotchainFeeOptions(web3)
       const hack_id = Number(searchParams.hack_id)
       const project_id = Number(searchParams.project_id)
       const tx = await contract.methods.upvoteProject_score(hack_id, project_id, score).send({
         from: userAddress,
         value: 2,
         gasLimit: 3000000,
+        ...feeOptions,
       })
       toast.success("Project upvoted successfully!")
     } catch (error) {

@@ -16,7 +16,7 @@ import { Loader } from "../../../../components/ui/loader"
 
 let web3
 import { AbiItem } from 'web3-utils';
-import fetchContract from "@/app/components/fetchContract"
+import fetchContract, { getBotchainFeeOptions } from "@/app/components/fetchContract"
 let  contract=fetchContract();
 if (typeof window !== "undefined") { 
   web3 = new Web3(window.ethereum)
@@ -79,12 +79,14 @@ export default function NFTDetails() {
         method: "eth_requestAccounts",
       })
       const userAddress = accounts[0]
+      const feeOptions = await getBotchainFeeOptions(web3)
       const hack_id = Number(searchParams.hack_id)
       const project_id = Number(searchParams.project_id)
       const tx = await contract.methods.upvoteProject(hack_id, project_id).send({
         from: userAddress,
         value: 2,
         gasLimit: 3000000,
+        ...feeOptions,
       })
       toast.success("Project upvoted successfully!")
       router.refresh();

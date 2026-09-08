@@ -11,7 +11,7 @@ import { AbiItem } from 'web3-utils';
 import { TypewriterEffectSmoothDemo } from "./effect"
 import toast from "react-hot-toast"
 import { useRouter } from "next/navigation";
-import fetchContract from "../components/fetchContract";
+import fetchContract, { getBotchainFeeOptions } from "../components/fetchContract";
 const pinata = new PinataSDK({
   pinataJwt: process.env.NEXT_PUBLIC_PINATA_KEY,
   pinataGateway: "example-gateway.mypinata.cloud",
@@ -156,6 +156,7 @@ export default function CreateNFT() {
       // console.log("My Pinata hash is:::::::",pinataHash.cid);
       
       // Call contract function
+      const feeOptions = await getBotchainFeeOptions(web3)
       const tx = await contract.methods
         .registerHackathon(
           formData.name,
@@ -173,6 +174,7 @@ export default function CreateNFT() {
            
           value: prizePoolWei,
           gasLimit: 3000000,
+          ...feeOptions,
         })
 
       toast.success("Hackathon registered successfully!")
@@ -235,7 +237,7 @@ export default function CreateNFT() {
                   value={formData.prizePool}
                   onChange={(e) => handleInputChange("prizePool", e.target.value)}
                   className="w-full bg-white/5 border border-gray-800 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Enter total prize pool in XRP"
+                  placeholder="Enter total prize pool in BOT"
                 />
               </motion.div>
 

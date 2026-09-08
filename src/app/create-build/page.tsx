@@ -12,12 +12,11 @@ import toast from "react-hot-toast"
 import { FaGithub, FaEthereum } from "react-icons/fa"
 import Image from "next/image"
 import { AbiItem } from 'web3-utils';
-import fetchContract from "../components/fetchContract";
+import fetchContract, { getBotchainFeeOptions } from "../components/fetchContract";
 const pinata = new PinataSDK({
   pinataJwt: process.env.NEXT_PUBLIC_PINATA_KEY,
   pinataGateway: "example-gateway.mypinata.cloud",
 });
-let  contract=fetchContract();
 let web3;
 if (typeof window !== "undefined") {
   web3 = new Web3(window.ethereum)
@@ -116,6 +115,8 @@ export default function CreateNFT() {
         method: "eth_requestAccounts",
       })
       const userAddress = accounts[0]
+      const contract = fetchContract()
+      const feeOptions = await getBotchainFeeOptions(web3)
       
       const imageUrl = URL.createObjectURL(file)
       const pinataHash=await pinata.upload.file(file);
@@ -131,6 +132,7 @@ export default function CreateNFT() {
         .send({
           from: userAddress,
           gasLimit: 3000000,
+          ...feeOptions,
         })
 
       toast.success("Build Created successfully!")

@@ -15,7 +15,7 @@ import Image from "next/image"
 import { parseAppSegmentConfig } from "next/dist/build/segment-config/app/app-segment-config"
 import { WinnerBuildsCardHoverEffect } from "./WinnersList/HackBuildsCardHoverEffect"
 import { AbiItem } from 'web3-utils';
-import fetchContract from "@/app/components/fetchContract"
+import fetchContract, { getBotchainFeeOptions } from "@/app/components/fetchContract"
 const formattedABI: AbiItem[] = JSON.parse(JSON.stringify(ABI));
 let  contract=fetchContract();
 let web3;
@@ -63,10 +63,12 @@ export default function NFTDetails() {
         method: "eth_requestAccounts",
       })
       const userAddress = accounts[0]
+      const feeOptions = await getBotchainFeeOptions(web3)
       const tx=await contract.methods.end_hackathon(Number(query.hack_id)).send(
         {
           from:userAddress,
           gasLimit: 3000000,
+          ...feeOptions,
         }
       )
       console.log("My Tanscation in End Hackathon is::::::",tx);
@@ -214,14 +216,14 @@ export default function NFTDetails() {
                       <Trophy size={16} className="mr-2" />
                       {index === 0 ? "1st" : index === 1 ? "2nd" : `${index + 1}th`} Prize
                     </td>
-                    <td className="py-2">{Web3.utils.fromWei(prize, "ether")} XRP</td>
+                    <td className="py-2">{Web3.utils.fromWei(prize, "ether")} BOT</td>
                   </tr>
                 ))}
               </tbody>
             </table>
             <div className="mt-4 text-right">
               <p className="text-lg font-semibold">
-                Total Prize Pool: {Web3.utils.fromWei(hack_details.prizePool, "ether")} FLOW
+                Total Prize Pool: {Web3.utils.fromWei(hack_details.prizePool, "ether")} BOT
               </p>
             </div>
           </motion.div>
