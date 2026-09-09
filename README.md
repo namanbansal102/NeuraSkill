@@ -6,14 +6,13 @@
   ### Empower with Blockchain. Elevate with AI.
 
   [![Live Demo](https://img.shields.io/badge/Live-Demo-blue?style=for-the-badge)](https://neura-skill.vercel.app/)
-  [![Smart Contract](https://img.shields.io/badge/Smart%20Contract-Explorer-blue?style=for-the-badge)](https://hashscan.io/#/testnet/contract/0x04D27bFf5e2106d39703016f71a5CbEdEFcb2914)
 </div>
 
 ---
 
 ## 🌟 Overview
 
-**NeuraSkill** is a blockchain-native hackathon management platform on the **QIE Testnet**.  
+**NeuraSkill** is a blockchain-native hackathon management platform on **BotChain Mainnet**.  
 By fusing smart-contract automation with AI-driven evaluation, NeuraSkill delivers a tamper-proof, transparent, and lightning-fast experience for organizers, judges, and builders alike.
 
 ---
@@ -23,14 +22,14 @@ By fusing smart-contract automation with AI-driven evaluation, NeuraSkill delive
 ### 🏗️ Core Features
 | Feature | Description |
 |---------|-------------|
-| **Decentralized Hackathon Hosting** | Create and manage events directly on QIE smart contracts, ensuring full transparency. |
+| **Decentralized Hackathon Hosting** | Create and manage events directly on BotChain smart contracts, ensuring full transparency. |
 | **Smart Build Submission** | Projects are uploaded to IPFS; their hashes are recorded immutably on-chain. |
-| **Token-Backed Voting** | Upvoting requires locking QIE any token accepted by the fee proxy), discouraging spam and Sybil attacks. |
+| **Token-Backed Voting** | Upvoting requires locking tokens accepted by the fee proxy, discouraging spam and Sybil attacks. |
 | **AI-Driven Evaluation** | Machine-learning models score submissions on code quality, innovation, and impact. |
-| **Instant Prize Distribution** | Rewards are released automatically to winners’ QIE addresses the moment judging concludes. |
+| **Instant Prize Distribution** | Rewards are released automatically to winners’ BotChain addresses the moment judging concludes. |
 
 ### 🔥 Platform Extensions
-- **NFT Certificates** – Mintable proof-of-participation and victory, tradeable in any QIE NFT marketplace.  
+- **NFT Certificates** – Mintable proof-of-participation and victory, tradeable in any BotChain NFT marketplace.  
 - **Developer Reputation** – On-chain score that aggregates wins, submissions, and community feedback.  
 - **Team Formation Hub** – Skill-tag matching helps hackers discover ideal teammates before events.  
 - **Analytics Dashboard** – Real-time stats on submissions, votes, AI scores, and gas fees.  
@@ -40,11 +39,11 @@ By fusing smart-contract automation with AI-driven evaluation, NeuraSkill delive
 
 ## 🔗 Smart Contract Suite
 
-| Contract | Address (QIE Testnet) | Purpose |
+| Contract | Address (BotChain Mainnet) | Purpose |
 |----------|---------------------------|---------|
-| **NeuraSkillCore** | `0x04D27bFf5e2106d39703016f71a5CbEdEFcb2914` | Event creation, build registry, voting, and prize logic. |
+| **NeuraSkillCore** | `0x7E1c45B5aE0a8759b3f784E63cCbcE0606975Bdf` | Event creation, build registry, voting, and prize logic. |
 
-All contracts are written in **Solidity** for QIE’s EVM-compatible runtime.
+All contracts are written in **Solidity** for BotChain’s EVM-compatible runtime.
 
 ---
 
@@ -52,7 +51,7 @@ All contracts are written in **Solidity** for QIE’s EVM-compatible runtime.
 
 | Layer | Tech |
 |-------|------|
-| **Blockchain** | QIE Testnet |
+| **Blockchain** | BotChain Mainnet |
 | **Smart Contracts** | Solidity |
 | **Frontend** | Next.js · React |
 | **AI Services** | TensorFlow · OpenAI APIs |
@@ -63,7 +62,7 @@ All contracts are written in **Solidity** for QIE’s EVM-compatible runtime.
 ## 🚀 Getting Started
 
 1. **Visit the app:** <https://neura-skill.vercel.app/>  
-2. **Add QIE Testnet to MetaMask** (RPC details in docs) and connect your wallet.  
+2. **Add BotChain Mainnet to MetaMask** (RPC details in docs) and connect your wallet.  
 3. **Create or join** a hackathon.  
 4. **Submit** your project or **vote** on others.  
 5. **Claim rewards** automatically if you place in the top ranks!
@@ -78,7 +77,7 @@ All contracts are written in **Solidity** for QIE’s EVM-compatible runtime.
 ---
 
 ## 🔮 Roadmap
-- [ ] Launch main-net prize pools on QIE  
+- [ ] Expand mainnet prize pools on BotChain  
 - [ ] Mobile-first interface  
 - [ ] Deeper AI analytics (code similarity graphs, risk scoring)  
 - [ ] Expanded DAO modules (dynamic fee curves, quadratic voting)  
@@ -94,5 +93,5 @@ Distributed under the **MIT License**. See **[LICENSE](LICENSE)** for details.
 ---
 
 <div align="center">
-  Made with 💜 on QIE by the NeuraSkill Team
+  Made with 💜 on BotChain by the NeuraSkill Team
 </div>
