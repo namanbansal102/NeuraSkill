@@ -41,7 +41,7 @@ By fusing smart-contract automation with AI-driven evaluation, NeuraSkill delive
 
 | Contract | Address (BotChain Mainnet) | Purpose |
 |----------|---------------------------|---------|
-| **NeuraSkillCore** | `0x7E1c45B5aE0a8759b3f784E63cCbcE0606975Bdf` | Event creation, build registry, voting, and prize logic. |
+| **NeuraSkillCore** | `0xd21fedFACC94d82722b7f4Ad67927E941B98787A` | Event creation, build registry, voting, and prize logic. |
 
 All contracts are written in **Solidity** for BotChain’s EVM-compatible runtime.
 

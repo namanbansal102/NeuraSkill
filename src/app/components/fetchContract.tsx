@@ -2,7 +2,7 @@ import Web3 from "web3"
 import ABI from "../ABI.json"
 import { AbiItem } from 'web3-utils';
 
-export const BOTCHAIN_CONTRACT_ADDRESS = "0x7E1c45B5aE0a8759b3f784E63cCbcE0606975Bdf"
+export const BOTCHAIN_CONTRACT_ADDRESS = "0xd21fedFACC94d82722b7f4Ad67927E941B98787A"
 
 export const getBotchainFeeOptions = async (web3: any) => {
   const latestBlock = await web3.eth.getBlock("latest")
