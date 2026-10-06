@@ -29,6 +29,14 @@ const footerSections = {
       { name: "User Profile", href: "/userProfile" },
     ],
   },
+    links: {
+    title: "Helpful Links",
+    items: [
+      { name: "X", href: "https://x.com/neuraskill_" },
+      { name: "BotChain Mainnet", href: "https://www.botchain.ai/en/" },
+      { name: "Factory Contract", href: "https://scan.botchain.ai/address/0xd21fedFACC94d82722b7f4Ad67927E941B98787A" },
+    ],
+  },
 }
 
 const socialLinks = [
